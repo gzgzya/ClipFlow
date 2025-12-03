@@ -81,7 +81,7 @@
 
         <!-- 登录按钮 -->
         <view class="login-action">
-          <button class="login-btn" bindtap="onLogin">登录并进入车库</button>
+          <button class="login-btn {{!agreed ? 'disabled' : ''}}" bindtap="onLogin">登录并进入车库</button>
         </view>
       </form>
     </view>

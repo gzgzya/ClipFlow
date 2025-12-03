@@ -88,6 +88,39 @@ Page({
   // 微信登录事件
   onWechatLogin() {
     console.log('微信登录');
+    // 模拟微信登录成功，直接跳转到首页
+    wx.showToast({
+      title: '微信登录成功',
+      icon: 'success'
+    });
+    
+    // 延迟跳转到首页
+    setTimeout(() => {
+      wx.switchTab({
+        url: '/pages/home/home',
+        fail: function(err) {
+          console.error('跳转首页失败', err);
+          // 如果switchTab失败，尝试redirectTo
+          wx.redirectTo({
+            url: '/pages/home/home',
+            fail: function(err2) {
+              console.error('redirectTo也失败了', err2);
+              // 最后尝试navigateTo
+              wx.navigateTo({
+                url: '/pages/home/home',
+                fail: function(err3) {
+                  console.error('所有跳转方法都失败了', err3);
+                  wx.showToast({
+                    title: '跳转失败，请重试',
+                    icon: 'none'
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }, 1000);
   },
 
   // 角色选择事件
@@ -119,6 +152,7 @@ Page({
 
   // 登录事件
   onLogin() {
+    // 检查是否勾选了协议
     if (!this.data.agreed) {
       wx.showToast({
         title: '请先同意用户协议和隐私政策',

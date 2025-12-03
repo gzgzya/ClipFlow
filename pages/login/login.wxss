@@ -340,6 +340,12 @@
   margin-bottom: 16rpx; /* 8px -> 16rpx (mt-1) */
 }
 
+.login-btn.disabled {
+  background-color: #64748b; /* 禁用状态的背景色 */
+  box-shadow: none; /* 移除阴影 */
+  opacity: 0.6; /* 降低透明度 */
+}
+
 /* 底部 */
 .footer {
   margin-top: 24rpx; /* mt-3 (12px) -> 24rpx */
