@@ -23,8 +23,12 @@
       <view class="form-section">
         <text class="form-label">品牌 / 车系</text>
         <view class="form-row">
-          <input class="form-input flex-1" placeholder="品牌，如：宝马" bindinput="onBrandInput" />
-          <input class="form-input flex-1 ml-2" placeholder="车系，如：3系" bindinput="onSeriesInput" />
+          <view class="form-col flex-1">
+            <input class="form-input" placeholder="品牌，如：宝马" bindinput="onBrandInput" />
+          </view>
+          <view class="form-col flex-1">
+            <input class="form-input" placeholder="车系，如：3系" bindinput="onSeriesInput" />
+          </view>
         </view>
       </view>
 
@@ -34,7 +38,7 @@
             <text class="form-label">年款</text>
             <input class="form-input" placeholder="如：2021" bindinput="onYearInput" />
           </view>
-          <view class="form-col flex-1 ml-2">
+          <view class="form-col flex-1">
             <text class="form-label">排量 / 能源</text>
             <input class="form-input" placeholder="2.0T / 混动" bindinput="onEngineInput" />
           </view>
@@ -48,7 +52,7 @@
             <text class="form-label">表显里程</text>
             <input class="form-input" placeholder="如：3.8 万公里" bindinput="onMileageInput" />
           </view>
-          <view class="form-col flex-1 ml-2">
+          <view class="form-col flex-1">
             <text class="form-label">车身颜色</text>
             <input class="form-input" placeholder="如：白色" bindinput="onColorInput" />
           </view>

@@ -88,6 +88,7 @@
 .form-row {
   display: flex;
   align-items: center;
+  gap: 24rpx; /* 添加间距避免元素重叠 */
 }
 
 .form-col {
@@ -103,14 +104,14 @@
 }
 
 .w-24 {
-  width: 192rpx;
+  width: 192rpx; /* 调整宽度以匹配设计稿 */
 }
 
 .form-label {
   display: block;
   margin-bottom: 8rpx;
   color: #94a3b8; /* text-slate-400 */
-  font-size: 24rpx; /* text-[12px] */
+  font-size: 28rpx; /* 与首页搜索框字体大小保持一致 */
 }
 
 .form-sublabel {
@@ -120,12 +121,14 @@
 
 .form-input {
   width: 100%;
-  padding: 16rpx 24rpx;
+  height: 72rpx; /* 与首页搜索框高度保持一致 */
+  padding: 0 24rpx; /* 调整padding以匹配首页搜索框 */
   border-radius: 40rpx; /* rounded-2xl */
   background-color: #1e293b; /* bg-slate-900 */
   border: 1px solid #475569; /* border-slate-700 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* 与首页搜索框字体大小保持一致 */
   color: #f1f5f9; /* text-slate-100 */
+  box-sizing: border-box; /* 确保padding包含在width内 */
 }
 
 .form-input::placeholder {
@@ -137,12 +140,17 @@
 }
 
 .picker-display {
-  padding: 16rpx 24rpx;
+  width: 100%;
+  height: 72rpx; /* 与首页搜索框高度保持一致 */
+  padding: 0 24rpx; /* 调整padding以匹配首页搜索框 */
   border-radius: 40rpx; /* rounded-2xl */
   background-color: #1e293b; /* bg-slate-900 */
   border: 1px solid #475569; /* border-slate-700 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* 与首页搜索框字体大小保持一致 */
   color: #f1f5f9; /* text-slate-100 */
+  box-sizing: border-box; /* 确保padding包含在width内 */
+  display: flex;
+  align-items: center;
 }
 
 .form-textarea {
@@ -151,10 +159,11 @@
   border-radius: 40rpx; /* rounded-2xl */
   background-color: #1e293b; /* bg-slate-900 */
   border: 1px solid #475569; /* border-slate-700 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* 与首页搜索框字体大小保持一致 */
   color: #f1f5f9; /* text-slate-100 */
   height: 120rpx;
   resize: none;
+  box-sizing: border-box; /* 确保padding包含在width内 */
 }
 
 .form-textarea.short {
@@ -277,7 +286,7 @@
 .cta-button {
   width: 100%;
   padding: 20rpx; /* py-2.5 */
-  border-radius: 16rpx; /* rounded-2xl */
+  border-radius: 40rpx; /* rounded-2xl (changed from 16rpx to match design) */
   background-color: #3b82f6; /* bg-blue-600 */
   color: #ffffff;
   font-size: 28rpx; /* text-sm */
