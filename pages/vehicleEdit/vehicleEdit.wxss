@@ -73,38 +73,17 @@
 .content {
   flex: 1;
   background-color: #020617; /* bg-slate-950 */
-  padding: 0 32rpx;
-}
-
-.form {
-  padding-top: 24rpx;
-  padding-bottom: 32rpx;
-}
-
-.form-section {
-  margin-bottom: 24rpx;
+  padding: 0 12rpx; /* 进一步减小内边距从16rpx到12rpx，为输入框留出更多空间 */
 }
 
 .form-row {
   display: flex;
   align-items: center;
-  gap: 24rpx; /* 添加间距避免元素重叠 */
-}
-
-.form-col {
-  /* 基础样式 */
-}
-
-.ml-2 {
-  margin-left: 24rpx; /* space-x-3 */
-}
-
-.flex-1 {
-  flex: 1;
+  gap: 8rpx; /* 进一步减小间距从12rpx到8rpx，为输入框留出更多空间 */
 }
 
 .w-24 {
-  width: 192rpx; /* 调整宽度以匹配设计稿 */
+  width: 120rpx; /* 进一步减小宽度从140rpx到120rpx，为输入框留出更多空间 */
 }
 
 .form-label {
@@ -154,7 +133,7 @@
 }
 
 .form-textarea {
-  width: 100%;
+  width: calc(100% - 12rpx); /* 缩短宽度以匹配上方输入框的右侧对齐 */
   padding: 16rpx 24rpx;
   border-radius: 40rpx; /* rounded-2xl */
   background-color: #1e293b; /* bg-slate-900 */
@@ -164,6 +143,7 @@
   height: 120rpx;
   resize: none;
   box-sizing: border-box; /* 确保padding包含在width内 */
+  margin-left: 12rpx; /* 通过margin调整位置以确保右对齐 */
 }
 
 .form-textarea.short {
