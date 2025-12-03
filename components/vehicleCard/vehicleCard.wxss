@@ -1,8 +1,8 @@
 /* 车辆卡片组件样式 */
 .vehicle-card {
-  border-radius: 48rpx;
-  background-color: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(100, 116, 139, 0.7);
+  border-radius: 60rpx; /* rounded-3xl */
+  background-color: rgba(15, 23, 42, 0.8); /* bg-slate-900/80 */
+  border: 1px solid rgba(100, 116, 139, 0.7); /* border-slate-700/70 */
   overflow: hidden;
 }
 
@@ -11,8 +11,8 @@
 }
 
 .image-container {
-  width: 112rpx;
-  height: 96rpx;
+  width: 112rpx; /* w-28 */
+  height: 96rpx; /* h-24 */
   overflow: hidden;
 }
 
@@ -24,10 +24,10 @@
 
 .info-container {
   flex: 1;
-  padding: 24rpx;
+  padding: 24rpx; /* p-3 */
   display: flex;
   flex-direction: column;
-  gap: 8rpx;
+  gap: 8rpx; /* space-y-1 */
 }
 
 .header {
@@ -37,37 +37,37 @@
 }
 
 .plate {
-  font-size: 24rpx;
-  color: #94a3b8;
+  font-size: 24rpx; /* text-xs */
+  color: #94a3b8; /* text-slate-400 */
 }
 
 .status-tag {
-  font-size: 20rpx;
-  padding: 4rpx 16rpx;
-  border-radius: 32rpx;
+  font-size: 20rpx; /* text-[10px] */
+  padding: 4rpx 16rpx; /* px-2 py-0.5 */
+  border-radius: 32rpx; /* rounded-full */
 }
 
 .status-tag.for-sale {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background-color: rgba(16, 185, 129, 0.15); /* bg-emerald-500/15 */
+  color: #34d399; /* text-emerald-400 */
+  border: 1px solid rgba(16, 185, 129, 0.4); /* border-emerald-500/40 */
 }
 
 .status-tag.sold {
-  background-color: rgba(100, 116, 139, 0.3);
-  color: #cbd5e1;
-  border: 1px solid rgba(100, 116, 139, 0.6);
+  background-color: rgba(100, 116, 139, 0.3); /* bg-slate-600/30 */
+  color: #cbd5e1; /* text-slate-300 */
+  border: 1px solid rgba(100, 116, 139, 0.6); /* border-slate-500/60 */
 }
 
 .model {
-  font-size: 28rpx;
+  font-size: 28rpx; /* text-sm */
   font-weight: 600;
-  color: #f8fafc;
+  color: #f8fafc; /* text-slate-50 */
 }
 
 .features {
-  font-size: 22rpx;
-  color: #94a3b8;
+  font-size: 22rpx; /* text-[11px] */
+  color: #94a3b8; /* text-slate-400 */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -77,52 +77,52 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 8rpx;
+  margin-top: 8rpx; /* mt-1 */
 }
 
 .stats {
   display: flex;
   align-items: center;
-  gap: 16rpx;
+  gap: 16rpx; /* space-x-2 */
 }
 
 .stat-item {
-  font-size: 20rpx;
-  color: #94a3b8;
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-400 */
   display: flex;
   align-items: center;
 }
 
 .stat-icon {
-  margin-right: 4rpx;
-  font-size: 20rpx;
+  margin-right: 4rpx; /* mr-1 */
+  font-size: 20rpx; /* text-[10px] */
 }
 
 .stat-icon.film {
-  color: #60a5fa;
+  color: #60a5fa; /* text-blue-400 */
 }
 
 .stat-icon.clapperboard {
-  color: #34d399;
+  color: #34d399; /* text-emerald-400 */
 }
 
 .stat-icon.paper {
-  color: #fbbf24;
+  color: #fbbf24; /* text-amber-400 */
 }
 
 .action-button {
-  font-size: 22rpx;
-  padding: 8rpx 16rpx;
-  border-radius: 32rpx;
+  font-size: 22rpx; /* text-[11px] */
+  padding: 8rpx 16rpx; /* px-2 py-1 */
+  border-radius: 32rpx; /* rounded-full */
   border: none;
 }
 
 .action-button.continue {
-  background-color: #3b82f6;
-  color: #ffffff;
+  background-color: #3b82f6; /* bg-blue-600 */
+  color: #ffffff; /* text-white */
 }
 
 .action-button.record {
-  background-color: #1e293b;
-  color: #f1f5f9;
+  background-color: #334155; /* bg-slate-700 */
+  color: #f1f5f9; /* text-slate-100 */
 }

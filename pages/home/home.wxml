@@ -6,11 +6,11 @@
     <view class="top-section">
       <view class="search-section">
         <view class="search-container">
-          <text class="search-icon">🔍</text>
+          <icon class="search-icon" type="search" size="24rpx" />
           <input class="search-input" placeholder="搜索车牌、车型或备注" bindinput="onSearchInput" />
         </view>
         <button class="filter-button" bindtap="onFilter">
-          <text class="filter-icon">📊</text>
+          <icon class="filter-icon" type="filter" size="22rpx" />
           <text class="filter-text">筛选</text>
         </button>
       </view>
@@ -39,21 +39,21 @@
         <view class="quick-btn-content">
           <text class="quick-subtitle">快速开始</text>
           <text class="quick-title">新增车辆</text>
-          <text class="quick-desc">创建车档案并开始拍摄</text>
+          <text class="quick-desc">创建车档</text>
         </view>
       </button>
       <button class="quick-btn" bindtap="onImportMedia">
         <view class="quick-btn-content">
           <text class="quick-subtitle">导入素材</text>
-          <text class="quick-title">从相册</text>
-          <text class="quick-desc">自动按车归类</text>
+          <text class="quick-title">从相册导</text>
+          <text class="quick-desc">按车归类</text>
         </view>
       </button>
       <button class="quick-btn" bindtap="onBatchGenerate">
         <view class="quick-btn-content">
           <text class="quick-subtitle">一键生成</text>
           <text class="quick-title">批量成片</text>
-          <text class="quick-desc">空闲时统一处理</text>
+          <text class="quick-desc">统一处理</text>
         </view>
       </button>
     </view>
@@ -66,9 +66,48 @@
 
       <!-- 占位符 -->
       <view class="placeholder-card" bindtap="onLoadMore">
-        <text class="placeholder-icon">+</text>
-        <text class="placeholder-text">下拉加载更多车辆...</text>
+        <icon class="placeholder-icon" type="add" size="24rpx" />
+        <text class="placeholder-text">{{loadingMore ? '正在加载...' : '下拉加载更多车辆...'}}</text>
       </view>
     </view>
   </scroll-view>
+
+  <!-- 筛选弹窗 -->
+  <view class="filter-popup {{showFilterPopup ? 'show' : ''}}">
+    <view class="filter-overlay" bindtap="closeFilterPopup"></view>
+    <view class="filter-content">
+      <view class="filter-header">
+        <text class="filter-title">筛选条件</text>
+        <icon class="filter-close" type="clear" size="32rpx" bindtap="closeFilterPopup" />
+      </view>
+      
+      <view class="filter-group">
+        <text class="filter-group-title">车辆状态</text>
+        <view class="filter-options">
+          <button class="filter-option {{filterStatus === 'all' ? 'active' : ''}}" data-status="all" bindtap="selectFilterStatus">全部</button>
+          <button class="filter-option {{filterStatus === 'available' ? 'active' : ''}}" data-status="available" bindtap="selectFilterStatus">在售</button>
+          <button class="filter-option {{filterStatus === 'sold' ? 'active' : ''}}" data-status="sold" bindtap="selectFilterStatus">已售</button>
+        </view>
+      </view>
+      
+      <view class="filter-group">
+        <text class="filter-group-title">成片数量</text>
+        <view class="filter-options">
+          <button class="filter-option {{filterClips === 'all' ? 'active' : ''}}" data-clips="all" bindtap="selectFilterClips">全部</button>
+          <button class="filter-option {{filterClips === 'has' ? 'active' : ''}}" data-clips="has" bindtap="selectFilterClips">有成片</button>
+          <button class="filter-option {{filterClips === 'none' ? 'active' : ''}}" data-clips="none" bindtap="selectFilterClips">无成片</button>
+        </view>
+      </view>
+      
+      <view class="filter-group">
+        <text class="filter-group-title">排序方式</text>
+        <view class="filter-options">
+          <button class="filter-option {{sortOrder === 'time' ? 'active' : ''}}" data-order="time" bindtap="selectSortOrder">按时间</button>
+          <button class="filter-option {{sortOrder === 'clips' ? 'active' : ''}}" data-order="clips" bindtap="selectSortOrder">按成片数</button>
+        </view>
+      </view>
+      
+      <button class="filter-confirm" bindtap="applyFilters">确定</button>
+    </view>
+  </view>
 </view>

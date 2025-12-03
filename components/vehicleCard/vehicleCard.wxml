@@ -2,35 +2,35 @@
 <view class="vehicle-card">
   <view class="card-content">
     <view class="image-container">
-      <image class="vehicle-image" src="{{vehicle.image}}" mode="aspectFill"></image>
+      <image class="vehicle-image" src="{{processedVehicle.imageUrl}}" mode="aspectFill"></image>
     </view>
     
     <view class="info-container">
       <view class="header">
-        <text class="plate">{{vehicle.plate}}</text>
-        <view class="status-tag {{vehicle.statusClass}}">{{vehicle.status}}</view>
+        <text class="plate">{{processedVehicle.plate}}</text>
+        <view class="status-tag {{processedVehicle.statusClass}}">{{processedVehicle.status}}</view>
       </view>
       
-      <view class="model">{{vehicle.model}}</view>
+      <view class="model">{{processedVehicle.model}}</view>
       
-      <view class="features">{{vehicle.features}}</view>
+      <view class="features">{{processedVehicle.features}}</view>
       
       <view class="stats-and-action">
         <view class="stats">
           <text class="stat-item">
-            <text class="stat-icon film">🎬</text>
-            素材 {{vehicle.materialCount}}
+            <icon class="stat-icon film" type="video" size="20rpx"></icon>
+            素材 {{processedVehicle.materialCount}}
           </text>
           <text class="stat-item">
-            <text class="stat-icon clapperboard">🎬</text>
-            成片 {{vehicle.clipCount}}
+            <icon class="stat-icon clapperboard" type="video_fill" size="20rpx"></icon>
+            成片 {{processedVehicle.clipCount}}
           </text>
           <text class="stat-item">
-            <text class="stat-icon paper">✈️</text>
-            已发 {{vehicle.publishCount}}
+            <icon class="stat-icon paper" type="send" size="20rpx"></icon>
+            已发 {{processedVehicle.publishCount}}
           </text>
         </view>
-        <button class="action-button {{vehicle.actionType}}">{{vehicle.actionText}}</button>
+        <button class="action-button {{processedVehicle.actionType}}">{{processedVehicle.actionText}}</button>
       </view>
     </view>
   </view>
