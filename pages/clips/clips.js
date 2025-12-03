@@ -5,6 +5,7 @@ Page({
     activeTab: 'all',
     activeSort: 'time',
     activePlatform: 'all',
+    showBackButton: false, // 是否显示返回按钮
     
     tabs: [
       { id: 'all', name: '全部' },
@@ -15,9 +16,9 @@ Page({
     
     platforms: [
       { id: 'all', name: '全部平台' },
-      { id: 'douyin', name: '抖音', icon: 'douyin', iconClass: 'douyin' },
-      { id: 'kuaishou', name: '快手', icon: 'kuaishou', iconClass: 'kuaishou' },
-      { id: 'shipinhao', name: '视频号', icon: 'weixin', iconClass: 'weixin' },
+      { id: 'douyin', name: '抖音', icon: 'video_fill', iconClass: 'douyin' },
+      { id: 'kuaishou', name: '快手', icon: 'video_fill', iconClass: 'kuaishou' },
+      { id: 'shipinhao', name: '视频号', icon: 'video_fill', iconClass: 'weixin' },
       { id: 'xiaohongshu', name: '小红书', icon: 'book', iconClass: 'xiaohongshu' }
     ],
     
@@ -35,9 +36,9 @@ Page({
         statusClass: 'published',
         vehiclePlate: '苏A88888',
         platformStatus: [
-          { id: 'douyin', icon: 'douyin', iconClass: 'douyin', textClass: 'published', statusText: '已发 · 播放 1.2 万' },
-          { id: 'kuaishou', icon: 'kuaishou', iconClass: 'kuaishou', textClass: 'published', statusText: '已发 · 播放 8,934' },
-          { id: 'shipinhao', icon: 'weixin', iconClass: 'weixin', textClass: 'pending', statusText: '待发' },
+          { id: 'douyin', icon: 'video_fill', iconClass: 'douyin', textClass: 'published', statusText: '已发 · 播放 1.2 万' },
+          { id: 'kuaishou', icon: 'video_fill', iconClass: 'kuaishou', textClass: 'published', statusText: '已发 · 播放 8,934' },
+          { id: 'shipinhao', icon: 'video_fill', iconClass: 'weixin', textClass: 'pending', statusText: '待发' },
           { id: 'xiaohongshu', icon: 'book', iconClass: 'xiaohongshu', textClass: 'unconfigured', statusText: '未配置' }
         ]
       },
@@ -50,7 +51,7 @@ Page({
         title: '奔驰 C200L ｜ 内饰空间体验',
         time: '待发布',
         description: '重点展示后排空间、乘坐舒适性以及用料做工，适合家用人群参考。',
-        status: '待发布',
+        status: '草稿 · 未分发',
         statusClass: 'pending',
         vehiclePlate: '沪B66666'
       },
@@ -67,15 +68,21 @@ Page({
         statusClass: 'failed',
         vehiclePlate: '多辆车',
         platformStatus: [
-          { id: 'shipinhao', icon: 'weixin', iconClass: 'weixin', textClass: 'pending', statusText: '审核中' },
-          { id: 'douyin', icon: 'douyin', iconClass: 'douyin', textClass: 'failed', statusText: '发布失败 · 标题含敏感词' }
+          { id: 'shipinhao', icon: 'video_fill', iconClass: 'weixin', textClass: 'pending', statusText: '审核中' },
+          { id: 'douyin', icon: 'video_fill', iconClass: 'douyin', textClass: 'failed', statusText: '发布失败 · 标题含敏感词' }
         ]
       }
     ]
   },
 
-  onLoad() {
+  onLoad(options) {
     // 页面加载时执行
+    // 检查是否有来自首页的参数
+    if (options.from === 'home') {
+      this.setData({
+        showBackButton: true
+      });
+    }
   },
 
   onSearchInput(e) {
@@ -86,6 +93,7 @@ Page({
 
   onFilter() {
     // 筛选功能
+    console.log('筛选功能');
   },
 
   onTabChange(e) {
@@ -97,6 +105,7 @@ Page({
 
   onSortChange() {
     // 排序功能
+    console.log('排序功能');
   },
 
   onPlatformChange(e) {
@@ -107,22 +116,53 @@ Page({
   },
 
   onClipClick(e) {
-    const { id } = e.detail;
+    const id = e.currentTarget.dataset.id;
     // 跳转到成片详情页
+    console.log('点击成片卡片:', id);
   },
 
   onClipPublish(e) {
-    const { id } = e.detail;
+    const id = e.currentTarget.dataset.id;
     // 发布成片
+    console.log('发布成片:', id);
   },
 
   onClipCopy(e) {
-    const { id } = e.detail;
+    const id = e.currentTarget.dataset.id;
     // 复制文案
+    console.log('复制文案:', id);
   },
 
   onClipRetry(e) {
-    const { id } = e.detail;
+    const id = e.currentTarget.dataset.id;
     // 重新发布
+    console.log('重新发布:', id);
+  },
+  
+  // 返回上一页
+  onBack() {
+    wx.navigateBack();
+  },
+  
+  onNavToVehicles() {
+    wx.switchTab({
+      url: '/pages/home/home'
+    });
+  },
+  
+  onNavToShoot() {
+    wx.switchTab({
+      url: '/pages/shootHome/shootHome'
+    });
+  },
+  
+  onNavToClips() {
+    // 当前页面，无需跳转
+  },
+  
+  onNavToProfile() {
+    wx.switchTab({
+      url: '/pages/profile/profile'
+    });
   }
 });

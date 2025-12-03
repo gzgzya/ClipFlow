@@ -1,27 +1,5 @@
 <!-- 导入素材页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <view class="status-bar">
-    <text class="status-text">9:41</text>
-    <view class="status-icons">
-      <icon class="status-icon" type="success_no_circle" size="10"></icon>
-      <icon class="status-icon" type="info" size="10"></icon>
-      <icon class="status-icon battery" type="success" size="12"></icon>
-    </view>
-  </view>
-
-  <!-- 顶部导航 -->
-  <view class="nav-bar">
-    <button class="back-button" bindtap="onBack">
-      <icon class="back-icon" type="arrow-left" size="12"></icon>
-    </button>
-    <view class="nav-title">
-      <text class="title-main">导入素材</text>
-      <text class="title-sub">从相册/聊天导入并按车归类</text>
-    </view>
-    <button class="finish-button" bindtap="onFinish">完成</button>
-  </view>
-
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y="true">
     <!-- 导入来源 -->
@@ -34,7 +12,7 @@
       <view class="sources-grid">
         <block wx:for="{{importSources}}" wx:key="id">
           <button class="source-item {{item.color}} {{item.active ? 'active' : ''}}" bindtap="onSelectSource" data-id="{{item.id}}">
-            <icon class="source-icon" type="{{item.icon}}" size="14"></icon>
+            <icon class="source-icon" type="{{item.icon}}" size="28rpx"></icon>
             <text class="source-name">{{item.name}}</text>
           </button>
         </block>
@@ -46,7 +24,7 @@
       <view class="section-header with-button">
         <text class="section-title">按车归类</text>
         <button class="switch-button" bindtap="switchVehicle">
-          <icon class="switch-icon" type="waiting" size="10"></icon>
+          <icon class="switch-icon" type="cart" size="20rpx"></icon>
           <text class="switch-text">切换车辆</text>
         </button>
       </view>
@@ -119,14 +97,14 @@
                   <text class="media-source">来源：{{item.source}} · {{item.time}}</text>
                 </view>
                 <button class="remove-button" bindtap="removeMedia" data-id="{{item.id}}">
-                  <icon type="close" size="10"></icon>
+                  <icon type="close" size="20rpx"></icon>
                 </button>
               </view>
               
               <view class="action-row">
                 <block wx:if="{{item.targetVehicle}}">
                   <view class="target-vehicle">
-                    <icon type="waiting" size="12" class="vehicle-icon"></icon>
+                    <icon type="cart" size="24rpx" class="vehicle-icon"></icon>
                     <text class="vehicle-text">将归属：{{item.targetVehicle}}</text>
                   </view>
                   <button class="modify-button" bindtap="modifyOwnership" data-id="{{item.id}}">{{item.action}}</button>
@@ -134,7 +112,7 @@
                 
                 <block wx:elif="{{item.suggestion}}">
                   <view class="ai-suggestion">
-                    <icon type="magic" size="12" class="suggestion-icon"></icon>
+                    <icon type="magic" size="24rpx" class="suggestion-icon"></icon>
                     <text class="suggestion-text">{{item.suggestion}}</text>
                   </view>
                   <button class="mark-button" bindtap="markAsAlternative" data-id="{{item.id}}">{{item.action}}</button>
@@ -146,7 +124,7 @@
         
         <!-- 更多提示 -->
         <view class="more-tip">
-          <icon class="tip-icon" type="more" size="10"></icon>
+          <icon class="tip-icon" type="more" size="20rpx"></icon>
           <text class="tip-text">还有 3 段素材将一并导入...</text>
         </view>
       </view>

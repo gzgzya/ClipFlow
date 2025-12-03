@@ -10,8 +10,10 @@
           <input class="search-input" placeholder="搜索车牌、车型或备注" bindinput="onSearchInput" />
         </view>
         <button class="filter-button" bindtap="onFilter">
-          <icon class="filter-icon" type="filter" size="22rpx" />
-          <text class="filter-text">筛选</text>
+          <view class="filter-button-content">
+            <icon class="filter-icon" type="filter" size="22rpx" />
+            <text class="filter-text">筛选</text>
+          </view>
         </button>
       </view>
 
@@ -60,9 +62,9 @@
 
     <!-- 车辆列表 -->
     <view class="vehicle-list">
-      <block wx:for="{{vehicleList}}" wx:key="id">
-        <vehicle-card vehicle="{{item}}" bindtap="onVehicleTap"></vehicle-card>
-      </block>
+      <view wx:for="{{vehicleList}}" wx:key="id" class="vehicle-item">
+        <vehicle-card vehicle="{{item}}" bind:actiontap="onVehicleActionTap"></vehicle-card>
+      </view>
 
       <!-- 占位符 -->
       <view class="placeholder-card" bindtap="onLoadMore">

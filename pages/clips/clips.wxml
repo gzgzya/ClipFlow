@@ -1,22 +1,23 @@
 <!-- 成片中心页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <status-bar time="9:41"></status-bar>
-
-  <!-- 顶部导航 -->
-  <nav-bar title="成片中心" subtitle="已生成 {{totalCount}} 条" show-settings="true" bind:settings="onSettings"></nav-bar>
-
+  <!-- 返回按钮 -->
+  <view class="back-button-container" wx:if="{{showBackButton}}">
+    <button class="back-button" bindtap="onBack">
+      <icon class="back-icon" type="arrow-left" size="24rpx"></icon>
+    </button>
+  </view>
+  
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y="true">
     <!-- 搜索 + 筛选 -->
     <view class="search-section">
       <view class="search-bar">
         <view class="search-container">
-          <icon class="search-icon" type="search" size="12"></icon>
+          <icon class="search-icon" type="search" size="24rpx"></icon>
           <input class="search-input" placeholder="搜索车牌、车型或视频标题" bindinput="onSearchInput" />
         </view>
         <button class="filter-button" bindtap="onFilter">
-          <icon class="filter-icon" type="filter" size="12"></icon>
+          <icon class="filter-icon" type="filter" size="22rpx"></icon>
           <text class="filter-text">筛选</text>
         </button>
       </view>
@@ -34,7 +35,7 @@
           </block>
         </view>
         <button class="sort-button" bindtap="onSortChange">
-          <icon class="sort-icon" type="sort" size="10"></icon>
+          <icon class="sort-icon" type="sort" size="20rpx"></icon>
           <text>按时间</text>
         </button>
       </view>
@@ -47,7 +48,7 @@
             class="chip-item {{activePlatform === item.id ? 'active' : ''}}"
             data-id="{{item.id}}"
             bindtap="onPlatformChange">
-            <icon wx:if="{{item.icon}}" class="chip-icon {{item.iconClass}}" type="{{item.icon}}" size="11"></icon>
+            <icon wx:if="{{item.icon}}" class="chip-icon {{item.iconClass}}" type="{{item.icon}}" size="22rpx"></icon>
             <text>{{item.name}}</text>
           </button>
         </block>
@@ -57,41 +58,69 @@
     <!-- 成片列表 -->
     <view class="clips-list">
       <block wx:for="{{clips}}" wx:key="id">
-        <clip-card 
-          class="clip-card-item"
-          clip="{{item}}"
-          bind:click="onClipClick"
-          bind:publish="onClipPublish"
-          bind:copy="onClipCopy"
-          bind:retry="onClipRetry">
-        </clip-card>
+        <view class="clip-card">
+          <view class="clip-card-main">
+            <view class="clip-cover-container">
+              <image class="clip-cover" src="{{item.image}}" mode="aspectFill"></image>
+              <view class="cover-overlay"></view>
+              <view class="play-button">
+                <icon class="play-icon" type="play" size="24rpx"></icon>
+              </view>
+              <view class="duration-tag">{{item.duration}}</view>
+              <view class="template-tag {{item.templateClass}}">{{item.template}}</view>
+            </view>
+            <view class="clip-info">
+              <view class="clip-header">
+                <text class="clip-title">{{item.title}}</text>
+                <text class="clip-time">{{item.time}}</text>
+              </view>
+              <view class="clip-description">{{item.description}}</view>
+              <view class="clip-footer">
+                <view class="clip-meta">
+                  <view class="status-tag {{item.statusClass}}">{{item.status}}</view>
+                  <view class="vehicle-info">
+                    <icon class="vehicle-icon" type="cart" size="20rpx"></icon>
+                    <text>{{item.vehiclePlate}}</text>
+                  </view>
+                </view>
+                <view class="clip-actions" wx:if="{{item.statusClass !== 'pending'}}">
+                  <button class="action-button distribute" bindtap="onClipPublish" data-id="{{item.id}}">一键分发</button>
+                </view>
+                <view class="clip-actions" wx:else>
+                  <button class="action-button copy" bindtap="onClipCopy" data-id="{{item.id}}">复制文案</button>
+                  <button class="action-button publish" bindtap="onClipPublish" data-id="{{item.id}}">去发布</button>
+                </view>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 平台状态条 -->
+          <view class="platform-status-bar" wx:if="{{item.platformStatus && item.platformStatus.length > 0}}">
+            <view class="platform-status-left">
+              <block wx:for="{{item.platformStatus}}" wx:key="id">
+                <view class="platform-status-item" wx:if="{{['douyin', 'kuaishou'].indexOf(item.id) >= 0}}">
+                  <icon class="platform-icon {{item.iconClass}}" type="{{item.icon}}" size="20rpx"></icon>
+                  <text class="{{item.textClass}}">{{item.statusText}}</text>
+                </view>
+              </block>
+            </view>
+            <view class="platform-status-right">
+              <block wx:for="{{item.platformStatus}}" wx:key="id">
+                <view class="platform-status-item" wx:if="{{['shipinhao', 'xiaohongshu'].indexOf(item.id) >= 0}}">
+                  <icon class="platform-icon {{item.iconClass}}" type="{{item.icon}}" size="20rpx"></icon>
+                  <text class="{{item.textClass}}">{{item.statusText}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
       </block>
 
       <!-- 底部提示 -->
       <view class="footer-tip">
-        <icon class="tip-icon" type="more" size="10"></icon>
+        <icon class="tip-icon" type="more" size="20rpx"></icon>
         <text class="tip-text">下拉可加载更多历史成片记录...</text>
       </view>
     </view>
   </scroll-view>
-
-  <!-- 底部 TabBar -->
-  <view class="tab-bar">
-    <button class="tab-item" bindtap="onNavToVehicles">
-      <icon class="tab-icon" type="waiting" size="16"></icon>
-      <text class="tab-text">车辆</text>
-    </button>
-    <button class="tab-item" bindtap="onNavToShoot">
-      <icon class="tab-icon" type="video" size="16"></icon>
-      <text class="tab-text">拍摄</text>
-    </button>
-    <button class="tab-item active" bindtap="onNavToClips">
-      <icon class="tab-icon" type="video_fill" size="16"></icon>
-      <text class="tab-text">成片</text>
-    </button>
-    <button class="tab-item" bindtap="onNavToProfile">
-      <icon class="tab-icon" type="person" size="16"></icon>
-      <text class="tab-text">我的</text>
-    </button>
-  </view>
 </view>

@@ -1,25 +1,16 @@
 /* 我的页面样式 */
 .container {
-  background-color: #0f172a;
+  background-color: #020617; /* bg-slate-950 */
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* 顶部导航中的帮助按钮 */
-.help-button {
-  font-size: 14rpx;
-  color: #94a3b8;
-  background: none;
-  border: none;
-  padding: 0;
-}
-
 /* 内容区域 */
 .content {
   flex: 1;
-  background-color: #020617;
-  padding-bottom: 128rpx;
+  background-color: #020617; /* bg-slate-950 */
+  padding-bottom: 48rpx; /* 减少底部padding，因为移除了底部TabBar */
 }
 
 /* 用户信息 */
@@ -40,7 +31,7 @@
   width: 96rpx;
   height: 96rpx;
   border-radius: 50%;
-  border: 4rpx solid #3b82f6;
+  border: 4rpx solid #3b82f6; /* border-2 border-blue-500 */
   overflow: hidden;
 }
 
@@ -57,22 +48,22 @@
 }
 
 .user-name {
-  font-size: 16rpx;
-  color: #f1f5f9;
+  font-size: 28rpx; /* text-sm */
+  color: #f1f5f9; /* text-slate-100 */
   font-weight: 600;
 }
 
 .store-info {
-  font-size: 14rpx;
-  color: #94a3b8;
+  font-size: 24rpx; /* text-[12px] */
+  color: #94a3b8; /* text-slate-400 */
 }
 
 .switch-button {
-  font-size: 13rpx;
-  color: #e2e8f0;
-  background-color: #1e293b;
-  border: 1rpx solid #475569;
-  border-radius: 16rpx;
+  font-size: 22rpx; /* text-[11px] */
+  color: #e2e8f0; /* text-slate-200 */
+  background-color: #1e293b; /* bg-slate-900 */
+  border: 1rpx solid #475569; /* border-slate-700 */
+  border-radius: 16rpx; /* rounded-2xl */
   padding: 12rpx 24rpx;
 }
 
@@ -82,21 +73,21 @@
 }
 
 .stats-grid {
-  display: flex;
-  gap: 16rpx;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx; /* gap-2 * 8 */
 }
 
 .stat-item {
-  flex: 1;
-  background-color: #1e293b;
-  border: 1rpx solid #334155;
-  border-radius: 16rpx;
-  padding: 24rpx;
+  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
+  border: 1rpx solid #334155; /* border-slate-800 */
+  border-radius: 16rpx; /* rounded-2xl */
+  padding: 24rpx; /* px-3 py-2 * 8 */
 }
 
 .stat-title {
-  font-size: 13rpx;
-  color: #94a3b8;
+  font-size: 22rpx; /* text-[11px] */
+  color: #94a3b8; /* text-slate-400 */
 }
 
 .stat-value-container {
@@ -106,28 +97,30 @@
 }
 
 .stat-value {
-  font-size: 28rpx;
-  color: #f1f5f9;
+  font-size: 40rpx; /* text-xl */
+  color: #f1f5f9; /* text-slate-100 */
   font-weight: 600;
+  margin-top: 8rpx; /* mt-1 */
 }
 
 .stat-unit {
-  font-size: 16rpx;
-  color: #f1f5f9;
+  font-size: 28rpx; /* text-sm */
+  color: #f1f5f9; /* text-slate-100 */
   font-weight: 600;
   margin-left: 4rpx;
   padding-bottom: 2rpx;
 }
 
 .stat-change {
-  font-size: 12rpx;
-  color: #34d399;
+  font-size: 20rpx; /* text-[10px] */
+  color: #34d399; /* text-emerald-400 */
+  margin-top: 4rpx; /* mt-0.5 */
 }
 
 .stat-desc {
-  font-size: 12rpx;
-  color: #94a3b8;
-  margin-top: 4rpx;
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-500 */
+  margin-top: 4rpx; /* mt-0.5 */
 }
 
 /* 设置列表 */
@@ -137,24 +130,24 @@
 }
 
 .settings-group {
-  background-color: #1e293b;
-  border: 1rpx solid #334155;
-  border-radius: 16rpx;
+  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
+  border: 1rpx solid #334155; /* border-slate-800 */
+  border-radius: 16rpx; /* rounded-2xl */
   margin-bottom: 24rpx;
 }
 
 .group-title {
-  font-size: 13rpx;
-  color: #94a3b8;
-  padding: 16rpx 24rpx;
+  font-size: 22rpx; /* text-[11px] */
+  color: #94a3b8; /* text-slate-400 */
+  padding: 16rpx 24rpx; /* px-3 py-2 * 8 */
 }
 
 .setting-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16rpx 24rpx;
-  border-top: 1rpx solid rgba(51, 65, 85, 0.8);
+  padding: 16rpx 24rpx; /* px-3 py-2 * 8 */
+  border-top: 1rpx solid rgba(51, 65, 85, 0.8); /* border-slate-800/80 */
   background: none;
   border: none;
   width: 100%;
@@ -164,20 +157,24 @@
 .item-left {
   display: flex;
   align-items: center;
-  gap: 16rpx;
+  gap: 16rpx; /* space-x-2 * 8 */
 }
 
 .item-icon {
-  color: #cbd5e1;
+  color: #cbd5e1; /* text-slate-300 */
+  width: 24rpx;
+  height: 24rpx;
 }
 
 .item-text {
-  font-size: 14rpx;
-  color: #f1f5f9;
+  font-size: 24rpx; /* text-[12px] */
+  color: #f1f5f9; /* text-slate-100 */
 }
 
 .arrow-icon {
-  color: #64748b;
+  color: #64748b; /* text-slate-500 */
+  width: 20rpx;
+  height: 20rpx;
 }
 
 /* 退出登录 */
@@ -188,43 +185,17 @@
 .logout-button {
   width: 100%;
   padding: 20rpx;
-  border-radius: 16rpx;
+  border-radius: 16rpx; /* rounded-2xl */
   background: none;
-  border: 1rpx solid rgba(239, 68, 68, 0.5);
-  color: #f87171;
-  font-size: 14rpx;
+  border: 1rpx solid rgba(239, 68, 68, 0.5); /* border-red-500/50 */
+  color: #f87171; /* text-red-400 */
+  font-size: 24rpx; /* text-[12px] */
 }
 
-/* 底部导航栏 */
-.tab-bar {
-  height: 128rpx;
-  background-color: rgba(0, 0, 0, 0.95);
-  border-top: 1rpx solid #334155;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 13rpx;
-  color: #94a3b8;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.tab-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.help-button {
+  font-size: 24rpx; /* text-xs */
+  color: #94a3b8; /* text-slate-400 */
   background: none;
   border: none;
   padding: 0;
-}
-
-.tab-item.active {
-  color: #3b82f6;
-}
-
-.tab-icon {
-  margin-bottom: 8rpx;
 }

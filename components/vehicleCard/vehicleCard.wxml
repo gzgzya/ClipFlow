@@ -30,7 +30,7 @@
             已发 {{processedVehicle.publishCount}}
           </text>
         </view>
-        <button class="action-button {{processedVehicle.actionType}}">{{processedVehicle.actionText}}</button>
+        <button class="action-button {{processedVehicle.actionType}}" bindtap="onActionTap">{{processedVehicle.actionText}}</button>
       </view>
     </view>
   </view>

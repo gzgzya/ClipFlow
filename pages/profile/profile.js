@@ -64,5 +64,27 @@ Page({
     const { index, subindex } = e.currentTarget.dataset;
     const item = this.data.sections[index].items[subindex];
     console.log('点击设置项:', item.text);
+  },
+  
+  onNavToHome() {
+    wx.switchTab({
+      url: '/pages/home/home'
+    });
+  },
+  
+  onNavToShoot() {
+    wx.switchTab({
+      url: '/pages/shootHome/shootHome'
+    });
+  },
+  
+  onNavToClips() {
+    wx.switchTab({
+      url: '/pages/clips/clips'
+    });
+  },
+  
+  onNavToProfile() {
+    // 当前页面，无需跳转
   }
 });

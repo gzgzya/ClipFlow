@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "导入素材",
+  "navigationBarBackgroundColor": "#0f172a",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

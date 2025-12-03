@@ -1,85 +1,16 @@
 /* 拍摄首页样式 */
 .container {
-  background-color: #0f172a;
+  background-color: #020617; /* bg-slate-950 */
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* 状态栏 */
-.status-bar {
-  height: 40rpx;
-  padding: 0 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.8);
-  font-size: 12rpx;
-  color: #f1f5f9;
-  font-weight: 600;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-}
-
-.battery {
-  width: 16rpx;
-  height: 8rpx;
-  border: 2rpx solid #f1f5f9;
-  border-radius: 2rpx;
-  position: relative;
-}
-
-.battery::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -4rpx;
-  transform: translateY(-50%);
-  width: 4rpx;
-  height: 6rpx;
-  background-color: #f1f5f9;
-  border-radius: 0 2rpx 2rpx 0;
-}
-
-/* 顶部导航 */
-.nav-bar {
-  height: 96rpx;
-  padding: 0 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  color: #f1f5f9;
-}
-
-.nav-title {
-  font-size: 14rpx;
-  font-weight: 600;
-}
-
-.camera-switch {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  background-color: #1e293b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.switch-icon {
-  color: #f1f5f9;
-}
-
 /* 内容区域 */
 .content {
   flex: 1;
-  background-color: #020617;
-  padding-bottom: 128rpx;
+  background-color: #020617; /* bg-slate-950 */
+  padding-bottom: 48rpx; /* 减少底部padding，因为移除了底部TabBar */
 }
 
 /* 通知区域 */
@@ -88,9 +19,9 @@
 }
 
 .notice-card {
-  background-color: #1e293b;
-  border: 1rpx solid #334155;
-  border-radius: 16rpx;
+  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
+  border: 1rpx solid #334155; /* border-slate-800 */
+  border-radius: 16rpx; /* rounded-2xl */
   padding: 24rpx;
   display: flex;
   justify-content: space-between;
@@ -102,19 +33,19 @@
 }
 
 .notice-title {
-  font-size: 12rpx;
-  color: #f1f5f9;
+  font-size: 22rpx; /* text-[11px] */
+  color: #f1f5f9; /* text-slate-100 */
   margin-bottom: 8rpx;
 }
 
 .notice-subtitle {
-  font-size: 10rpx;
-  color: #94a3b8;
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-400 */
 }
 
 .view-list-button {
-  font-size: 10rpx;
-  color: #60a5fa;
+  font-size: 20rpx; /* text-[10px] */
+  color: #60a5fa; /* text-blue-400 */
   background: none;
   border: none;
   padding: 0;
@@ -139,18 +70,18 @@
 }
 
 .section-title {
-  font-size: 11rpx;
-  color: #94a3b8;
+  font-size: 22rpx; /* text-[11px] */
+  color: #94a3b8; /* text-slate-400 */
 }
 
 .section-subtitle {
-  font-size: 10rpx;
-  color: #94a3b8;
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-500 */
 }
 
 .all-vehicles-button {
-  font-size: 11rpx;
-  color: #60a5fa;
+  font-size: 22rpx; /* text-[11px] */
+  color: #60a5fa; /* text-blue-400 */
   display: flex;
   align-items: center;
   gap: 4rpx;
@@ -160,7 +91,7 @@
 }
 
 .car-icon {
-  font-size: 10rpx;
+  font-size: 20rpx; /* text-[10px] */
 }
 
 /* 搜索栏 */
@@ -177,22 +108,22 @@
 .search-icon {
   position: absolute;
   left: 24rpx;
-  color: #94a3b8;
+  color: #94a3b8; /* text-slate-400 */
   z-index: 1;
 }
 
 .search-input {
   width: 100%;
   padding: 16rpx 32rpx 16rpx 72rpx;
-  border-radius: 32rpx;
-  background-color: #1e293b;
-  font-size: 12rpx;
-  color: #f1f5f9;
-  border: 1rpx solid #334155;
+  border-radius: 40rpx; /* rounded-2xl */
+  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
+  font-size: 24rpx; /* text-xs */
+  color: #f1f5f9; /* text-slate-100 */
+  border: 1rpx solid rgba(100, 116, 139, 0.8); /* border-slate-700/80 */
 }
 
 .search-input::placeholder {
-  color: #94a3b8;
+  color: #94a3b8; /* text-slate-500 */
 }
 
 /* 车辆列表 */
@@ -202,58 +133,140 @@
   gap: 16rpx;
 }
 
+/* 车辆项目 */
+.vehicle-item, .quick-vehicle-item {
+  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
+  border: 1rpx solid #334155; /* border-slate-800 */
+  border-radius: 16rpx; /* rounded-2xl */
+  padding: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quick-vehicle-item {
+  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
+  border: 1rpx solid #334155; /* border-slate-800 */
+}
+
+/* 车辆信息 */
+.vehicle-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.vehicle-avatar {
+  width: 72rpx; /* w-9 * 8 */
+  height: 72rpx; /* h-9 * 8 */
+  border-radius: 12rpx; /* rounded-xl */
+  overflow: hidden;
+  border: 1rpx solid #475569; /* border-slate-700 */
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vehicle-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.vehicle-name {
+  font-size: 22rpx; /* text-[11px] */
+  color: #f1f5f9; /* text-slate-100 */
+}
+
+.vehicle-status {
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-500 */
+}
+
+/* 统计信息 */
+.vehicle-stats {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 4rpx;
+}
+
+.stat-item {
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-400 */
+  display: flex;
+  align-items: center;
+}
+
+.stat-icon {
+  margin-right: 4rpx;
+  font-size: 20rpx;
+}
+
+.stat-icon.film {
+  color: #60a5fa; /* text-blue-400 */
+}
+
+.stat-icon.clock {
+  color: #94a3b8; /* text-slate-400 */
+}
+
+.stat-icon.info {
+  color: #fbbf24; /* text-amber-400 */
+}
+
+.stat-item.suggestion {
+  color: #fbbf24; /* text-amber-400 */
+}
+
+/* 操作按钮 */
+.action-button {
+  font-size: 20rpx; /* text-[10px] */
+  padding: 8rpx 20rpx; /* px-2.5 py-1 */
+  border-radius: 32rpx; /* rounded-full */
+  border: none;
+}
+
+.action-button.continue, .action-button.start {
+  background-color: #3b82f6; /* bg-blue-600 */
+  color: #ffffff; /* text-white */
+}
+
+.action-button.interior {
+  background-color: #1e293b; /* bg-slate-800 */
+  color: #f1f5f9; /* text-slate-100 */
+}
+
 /* 更多车辆提示 */
 .more-vehicles {
-  background-color: rgba(30, 41, 59, 0.6);
-  border: 1rpx dashed #475569;
-  border-radius: 16rpx;
+  background-color: rgba(30, 41, 59, 0.6); /* bg-slate-900/60 */
+  border: 1rpx dashed #475569; /* border-dashed border-slate-700 */
+  border-radius: 16rpx; /* rounded-2xl */
   padding: 16rpx;
-  font-size: 11rpx;
-  color: #94a3b8;
+  font-size: 22rpx; /* text-[11px] */
+  color: #94a3b8; /* text-slate-500 */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12rpx;
 }
 
+.more-icon {
+  font-size: 20rpx; /* text-[10px] */
+  margin-right: 12rpx;
+}
+
+.more-text {
+  /* 继承父元素样式 */
+}
+
 /* 底部提示 */
 .footer-tip {
   padding: 0 32rpx 24rpx;
-  font-size: 10rpx;
-  color: #94a3b8;
+  font-size: 20rpx; /* text-[10px] */
+  color: #94a3b8; /* text-slate-500 */
   line-height: 1.5;
-}
-
-/* 底部导航栏 */
-.tab-bar {
-  height: 128rpx;
-  background-color: rgba(0, 0, 0, 0.95);
-  border-top: 1rpx solid #334155;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 11rpx;
-  color: #94a3b8;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.tab-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-.tab-item.active {
-  color: #3b82f6;
-}
-
-.tab-icon {
-  margin-bottom: 8rpx;
 }

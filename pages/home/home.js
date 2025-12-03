@@ -151,20 +151,26 @@ Page({
 
   // 新增车辆事件
   onAddVehicle() {
-    // 模拟页面跳转
-    console.log('新增车辆');
+    // 跳转到新增车辆页面（这里应该是车辆编辑页面）
+    wx.navigateTo({
+      url: '/pages/vehicleEdit/vehicleEdit'
+    });
   },
 
   // 导入素材事件
   onImportMedia() {
-    // 模拟页面跳转
-    console.log('导入素材');
+    // 跳转到导入素材页面
+    wx.navigateTo({
+      url: '/pages/importMedia/importMedia'
+    });
   },
 
   // 批量生成事件
   onBatchGenerate() {
-    // 模拟页面跳转
-    console.log('批量生成');
+    // 跳转到一键成片页面
+    wx.navigateTo({
+      url: '/pages/batchGenerate/batchGenerate'
+    });
   },
 
   // 车辆点击事件
@@ -256,5 +262,25 @@ Page({
     wx.switchTab({
       url: '/pages/profile/profile'
     });
+  },
+
+  // 车辆卡片操作按钮点击事件
+  onVehicleActionTap(e) {
+    const vehicle = e.detail;
+    const vehicleData = this.data.vehicleList.find(item => item.id === vehicle.id);
+    
+    if (vehicleData) {
+      if (vehicleData.status === '在售') {
+        // 继续拍摄 - 跳转到标准化拍摄引导页面
+        wx.navigateTo({
+          url: '/pages/shootGuide/shootGuide'
+        });
+      } else {
+        // 查看记录 - 跳转到成片中心页面
+        wx.switchTab({
+          url: '/pages/clips/clips'
+        });
+      }
+    }
   }
 });

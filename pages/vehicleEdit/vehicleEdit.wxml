@@ -1,24 +1,5 @@
 <!-- 新增/编辑车辆页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <view class="status-bar">
-    <text class="status-text">9:41</text>
-    <view class="status-icons">
-      <icon class="status-icon" type="success_no_circle" size="10"></icon>
-      <icon class="status-icon" type="info" size="10"></icon>
-      <icon class="status-icon battery" type="success" size="12"></icon>
-    </view>
-  </view>
-
-  <!-- 顶部导航 -->
-  <view class="nav-bar">
-    <button class="back-button" bindtap="onBack">
-      <icon class="back-icon" type="arrow-left" size="12"></icon>
-    </button>
-    <text class="nav-title">新增车辆</text>
-    <button class="save-button" bindtap="onSave">保存</button>
-  </view>
-
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y="true">
     <form class="form">
@@ -95,10 +76,10 @@
         <view class="photo-grid">
           <block wx:for="{{photos}}" wx:key="index">
             <view class="photo-item">
-              <image class="photo-image" src="{{item.url}}" mode="aspectFill"></image>
+              <image wx:if="{{item.url}}" class="photo-image" src="{{item.url}}" mode="aspectFill"></image>
               <text wx:if="{{item.cover}}" class="cover-tag">封面</text>
               <button wx:if="{{!item.url}}" class="photo-add" bindtap="onAddPhoto">
-                <icon class="add-icon" type="add" size="16"></icon>
+                <icon class="add-icon" type="add" size="32rpx"></icon>
                 <text class="add-text">添加</text>
               </button>
             </view>

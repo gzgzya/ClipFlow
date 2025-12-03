@@ -66,8 +66,30 @@ Page({
   },
 
   onVehicleAction(e) {
-    const { id } = e.detail;
+    const id = e.currentTarget.dataset.id;
     console.log('车辆操作:', id);
     // 根据车辆ID和操作类型执行相应动作
+  },
+  
+  onNavToHome() {
+    wx.switchTab({
+      url: '/pages/home/home'
+    });
+  },
+  
+  onNavToShoot() {
+    // 当前页面，无需跳转
+  },
+  
+  onNavToClips() {
+    wx.switchTab({
+      url: '/pages/clips/clips'
+    });
+  },
+  
+  onNavToProfile() {
+    wx.switchTab({
+      url: '/pages/profile/profile'
+    });
   }
 });

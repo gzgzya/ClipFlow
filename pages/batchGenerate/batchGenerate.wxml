@@ -1,27 +1,5 @@
 <!-- 一键成片页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <view class="status-bar">
-    <text class="status-text">9:41</text>
-    <view class="status-icons">
-      <icon class="status-icon" type="success_no_circle" size="10"></icon>
-      <icon class="status-icon" type="info" size="10"></icon>
-      <icon class="status-icon battery" type="success" size="12"></icon>
-    </view>
-  </view>
-
-  <!-- 顶部导航 -->
-  <view class="nav-bar">
-    <button class="back-button" bindtap="onBack">
-      <icon class="back-icon" type="arrow-left" size="12"></icon>
-    </button>
-    <view class="nav-title">
-      <text class="title-main">一键成片</text>
-      <text class="title-sub">批量生成多车视频 · 适合空闲时间使用</text>
-    </view>
-    <button class="history-button" bindtap="onHistory">记录</button>
-  </view>
-
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y="true">
     <!-- 批量策略 & 模板 -->
@@ -29,7 +7,7 @@
       <view class="section-header">
         <text class="section-title">批量策略与模板</text>
         <button class="advanced-button" bindtap="onAdvancedSettings">
-          <icon class="advanced-icon" type="settings" size="10"></icon>
+          <icon class="advanced-icon" type="settings" size="20rpx"></icon>
           <text class="advanced-text">高级设置</text>
         </button>
       </view>
@@ -99,7 +77,7 @@
       <view class="section-header">
         <text class="section-title">待生成车辆（队列预览）</text>
         <button class="select-button" bindtap="onSelectVehicles">
-          <icon class="select-icon" type="add" size="10"></icon>
+          <icon class="select-icon" type="add" size="20rpx"></icon>
           <text class="select-text">从车库选择</text>
         </button>
       </view>
@@ -117,29 +95,29 @@
                   <text class="vehicle-status">{{item.status}}</text>
                   <view class="vehicle-details">
                     <text class="detail-item">
-                      <icon type="video" size="12" class="detail-icon blue"></icon>
+                      <icon type="video" size="24rpx" class="detail-icon blue"></icon>
                       素材 {{item.materials}}
                     </text>
                     <block wx:if="{{item.clips}}">
                       <text class="detail-item">
-                        <icon type="video_fill" size="12" class="detail-icon green"></icon>
+                        <icon type="video_fill" size="24rpx" class="detail-icon green"></icon>
                         历史成片 {{item.clips}}
                       </text>
                     </block>
                     <block wx:if="{{item.warning}}">
                       <text class="detail-item warning">
-                        <icon type="warn" size="12" class="detail-icon amber"></icon>
+                        <icon type="warn" size="24rpx" class="detail-icon amber"></icon>
                         {{item.warning}}
                       </text>
                     </block>
                     <block wx:if="{{item.feature}}">
                       <text class="detail-item feature">
-                        <icon type="magic" size="12" class="detail-icon green"></icon>
+                        <icon type="magic" size="24rpx" class="detail-icon green"></icon>
                         {{item.feature}}
                       </text>
                     </block>
                     <text class="detail-item">
-                      <icon type="time" size="12" class="detail-icon gray"></icon>
+                      <icon type="time" size="24rpx" class="detail-icon gray"></icon>
                       预计生成 {{item.estimatedTime}}
                     </text>
                   </view>
@@ -154,7 +132,7 @@
                   <button class="action-button {{item.actionType}}" size="mini">{{item.actionText}}</button>
                 </block>
                 <button class="remove-button" bindtap="onRemoveVehicle" data-id="{{item.id}}">
-                  <icon type="close" size="10"></icon>
+                  <icon type="close" size="20rpx"></icon>
                 </button>
               </view>
             </view>
@@ -163,7 +141,7 @@
         
         <!-- 更多提示 -->
         <view class="more-tip">
-          <icon class="tip-icon" type="more" size="10"></icon>
+          <icon class="tip-icon" type="more" size="20rpx"></icon>
           <text class="tip-text">还可再选择 7 台车辆加入本次一键成片任务...</text>
         </view>
       </view>
@@ -174,10 +152,10 @@
   <view class="bottom-bar">
     <view class="summary-container">
       <text class="summary-title">本次计划生成</text>
-      <text class="summary-text">{{summary.vehiclesCount}} 台车辆 · {{summary.clipsCount}} 条短视频 · 预计约 {{summary.estimatedMinutes}} 分钟</text>
+      <text class="summary-text">{{summary.vehiclesCount}} 台车辆 · {{summary.clipCount}} 条短视频 · 预计约 {{summary.estimatedMinutes}} 分钟</text>
     </view>
     <button class="generate-button" bindtap="onGenerate">
-      <icon class="generate-icon" type="magic" size="12"></icon>
+      <icon class="generate-icon" type="magic" size="24rpx"></icon>
       <text class="generate-text">立即一键成片</text>
     </button>
   </view>

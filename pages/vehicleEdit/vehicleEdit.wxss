@@ -2,7 +2,7 @@
 .container {
   width: 100%;
   height: 100vh;
-  background-color: #0f172a;
+  background-color: #020617; /* bg-slate-950 */
   display: flex;
   flex-direction: column;
 }
@@ -72,7 +72,7 @@
 /* 内容区域 */
 .content {
   flex: 1;
-  background-color: #0f172a;
+  background-color: #020617; /* bg-slate-950 */
   padding: 0 32rpx;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .ml-2 {
-  margin-left: 16rpx;
+  margin-left: 24rpx; /* space-x-3 */
 }
 
 .flex-1 {
@@ -109,27 +109,27 @@
 .form-label {
   display: block;
   margin-bottom: 8rpx;
-  color: #94a3b8;
-  font-size: 28rpx;
+  color: #94a3b8; /* text-slate-400 */
+  font-size: 24rpx; /* text-[12px] */
 }
 
 .form-sublabel {
-  font-size: 26rpx;
-  color: #64748b;
+  font-size: 22rpx; /* text-[11px] */
+  color: #64748b; /* text-slate-500 */
 }
 
 .form-input {
   width: 100%;
   padding: 16rpx 24rpx;
-  border-radius: 32rpx;
-  background-color: #0f172a;
-  border: 1px solid #334155;
-  font-size: 28rpx;
-  color: #f1f5f9;
+  border-radius: 40rpx; /* rounded-2xl */
+  background-color: #1e293b; /* bg-slate-900 */
+  border: 1px solid #475569; /* border-slate-700 */
+  font-size: 24rpx; /* text-xs */
+  color: #f1f5f9; /* text-slate-100 */
 }
 
 .form-input::placeholder {
-  color: #94a3b8;
+  color: #94a3b8; /* text-slate-500 */
 }
 
 .form-picker {
@@ -138,21 +138,21 @@
 
 .picker-display {
   padding: 16rpx 24rpx;
-  border-radius: 32rpx;
-  background-color: #0f172a;
-  border: 1px solid #334155;
-  font-size: 28rpx;
-  color: #f1f5f9;
+  border-radius: 40rpx; /* rounded-2xl */
+  background-color: #1e293b; /* bg-slate-900 */
+  border: 1px solid #475569; /* border-slate-700 */
+  font-size: 24rpx; /* text-xs */
+  color: #f1f5f9; /* text-slate-100 */
 }
 
 .form-textarea {
   width: 100%;
   padding: 16rpx 24rpx;
-  border-radius: 32rpx;
-  background-color: #0f172a;
-  border: 1px solid #334155;
-  font-size: 28rpx;
-  color: #f1f5f9;
+  border-radius: 40rpx; /* rounded-2xl */
+  background-color: #1e293b; /* bg-slate-900 */
+  border: 1px solid #475569; /* border-slate-700 */
+  font-size: 24rpx; /* text-xs */
+  color: #f1f5f9; /* text-slate-100 */
   height: 120rpx;
   resize: none;
 }
@@ -162,7 +162,7 @@
 }
 
 .form-textarea::placeholder {
-  color: #94a3b8;
+  color: #94a3b8; /* text-slate-500 */
 }
 
 .form-header {
@@ -176,31 +176,32 @@
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16rpx;
+  gap: 16rpx; /* gap-2 */
 }
 
 .photo-item {
   position: relative;
-  border-radius: 32rpx;
+  border-radius: 16rpx; /* rounded-2xl */
   overflow: hidden;
   height: 128rpx;
-  background-color: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(100, 116, 139, 0.7);
+  background-color: rgba(15, 23, 42, 0.6); /* bg-slate-900/60 */
+  border: 1px solid rgba(100, 116, 139, 0.7); /* border-slate-700/70 */
 }
 
 .photo-image {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .cover-tag {
   position: absolute;
-  top: 8rpx;
-  left: 8rpx;
-  font-size: 20rpx;
-  padding: 4rpx 8rpx;
-  border-radius: 16rpx;
-  background-color: rgba(0, 0, 0, 0.7);
+  top: 8rpx; /* top-1 * 8 */
+  left: 8rpx; /* left-1 * 8 */
+  font-size: 20rpx; /* text-[10px] */
+  padding: 4rpx 8rpx; /* px-1.5 py-0.5 */
+  border-radius: 16rpx; /* rounded-full */
+  background-color: rgba(0, 0, 0, 0.7); /* bg-black/70 */
   color: #ffffff;
 }
 
@@ -211,27 +212,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(15, 23, 42, 0.6);
-  border: 1px dashed #475569;
-  border-radius: 32rpx;
+  background-color: rgba(15, 23, 42, 0.6); /* bg-slate-900/60 */
+  border: 1px dashed #475569; /* border-dashed border-slate-600 */
+  border-radius: 16rpx; /* rounded-2xl */
 }
 
 .add-icon {
-  color: #94a3b8;
+  color: #94a3b8; /* text-slate-400 */
   margin-bottom: 8rpx;
 }
 
 .add-text {
-  font-size: 26rpx;
-  color: #94a3b8;
+  font-size: 22rpx; /* text-[11px] */
+  color: #94a3b8; /* text-slate-400 */
 }
 
 /* 模板卡片 */
 .template-card {
-  padding: 16rpx 24rpx;
-  border-radius: 32rpx;
-  background-color: #0f172a;
-  border: 1px solid #334155;
+  padding: 16rpx 24rpx; /* px-3 py-2 */
+  border-radius: 16rpx; /* rounded-2xl */
+  background-color: #1e293b; /* bg-slate-900 */
+  border: 1px solid #475569; /* border-slate-700 */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -243,28 +244,28 @@
 }
 
 .template-name {
-  font-size: 28rpx;
-  color: #f1f5f9;
+  font-size: 24rpx; /* text-[12px] */
+  color: #f1f5f9; /* text-slate-100 */
   margin-bottom: 8rpx;
 }
 
 .template-desc {
-  font-size: 24rpx;
-  color: #64748b;
+  font-size: 22rpx; /* text-[11px] */
+  color: #64748b; /* text-slate-500 */
 }
 
 .template-tag {
-  font-size: 24rpx;
-  padding: 4rpx 16rpx;
-  border-radius: 32rpx;
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  font-size: 20rpx; /* text-[10px] */
+  padding: 4rpx 16rpx; /* px-2 py-0.5 */
+  border-radius: 32rpx; /* rounded-full */
+  background-color: rgba(16, 185, 129, 0.15); /* bg-emerald-500/15 */
+  color: #6ee7b7; /* text-emerald-300 */
+  border: 1px solid rgba(16, 185, 129, 0.4); /* border-emerald-400/40 */
 }
 
 .template-link {
-  font-size: 26rpx;
-  color: #60a5fa;
+  font-size: 22rpx; /* text-[11px] */
+  color: #60a5fa; /* text-blue-400 */
 }
 
 /* CTA 按钮 */
@@ -275,12 +276,12 @@
 
 .cta-button {
   width: 100%;
-  padding: 24rpx;
-  border-radius: 32rpx;
-  background-color: #3b82f6;
+  padding: 20rpx; /* py-2.5 */
+  border-radius: 16rpx; /* rounded-2xl */
+  background-color: #3b82f6; /* bg-blue-600 */
   color: #ffffff;
-  font-size: 32rpx;
+  font-size: 28rpx; /* text-sm */
   font-weight: 500;
-  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); /* shadow-lg shadow-blue-600/30 */
   border: none;
 }

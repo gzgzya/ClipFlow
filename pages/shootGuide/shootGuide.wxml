@@ -1,32 +1,5 @@
 <!-- 标准化拍摄页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <view class="status-bar">
-    <text class="status-text">9:41</text>
-    <view class="status-icons">
-      <icon class="status-icon" type="success_no_circle" size="10"></icon>
-      <icon class="status-icon" type="info" size="10"></icon>
-      <icon class="status-icon battery" type="success" size="12"></icon>
-    </view>
-  </view>
-
-  <!-- 顶部导航 -->
-  <view class="nav-bar">
-    <button class="nav-button" bindtap="onBack">
-      <icon class="nav-icon" type="arrow-left" size="12"></icon>
-    </button>
-    <view class="nav-title">
-      <text class="title-main">标准化拍摄</text>
-      <text class="title-sub">宝马 325Li · 苏A88888</text>
-    </view>
-    <view class="nav-actions">
-      <button class="action-button" bindtap="onMediaManage">
-        <icon class="action-icon" type="pic" size="12"></icon>
-      </button>
-      <button class="text-button" bindtap="onStandard">规范</button>
-    </view>
-  </view>
-
   <!-- 内容区域 -->
   <view class="content">
     <!-- 步骤进度条 -->
@@ -36,19 +9,19 @@
         <text class="header-status">已完成 2/3 步</text>
       </view>
       <view class="progress-steps">
-        <view class="step-item completed">
-          <view class="step-indicator">
-            <icon class="step-icon" type="success" size="11"></icon>
+        <view class="step-item">
+          <view class="step-indicator completed">
+            <icon class="step-icon" type="success" size="11" color="#ffffff"></icon>
           </view>
           <view class="step-line filled"></view>
         </view>
-        <view class="step-item completed">
-          <view class="step-indicator">
-            <icon class="step-icon" type="success" size="11"></icon>
+        <view class="step-item">
+          <view class="step-indicator completed">
+            <icon class="step-icon" type="success" size="11" color="#ffffff"></icon>
           </view>
           <view class="step-line active"></view>
         </view>
-        <view class="step-item pending">
+        <view class="step-item">
           <view class="step-indicator pending">
             <text class="step-number">3</text>
           </view>
@@ -69,7 +42,7 @@
       <!-- 提示文案 -->
       <view class="preview-tip">
         <view class="tip-banner">
-          <icon class="tip-icon" type="lightbulp" size="10"></icon>
+          <icon class="tip-icon" type="lightbulp" size="10" color="#fbbf24"></icon>
           <text class="tip-text">建议：车头 45° 远景，保证光线充足</text>
         </view>
         <text class="tip-title">步骤 2 / 3 · 内饰 - 主驾视角</text>
@@ -86,7 +59,7 @@
     </view>
 
     <!-- 步骤列表 & 说明 -->
-    <scroll-view class="steps-section" scroll-y="true">
+    <view class="steps-section">
       <view class="section-header">
         <text class="header-text">当前步骤：内饰</text>
         <text class="header-subtext">建议 3 个小段</text>
@@ -96,7 +69,9 @@
         <view class="step-item completed">
           <view class="step-content">
             <view class="step-info">
-              <view class="step-number completed">1</view>
+              <view class="step-number completed">
+                <text class="number-text">1</text>
+              </view>
               <view class="step-desc">
                 <text class="desc-title">主驾视角 · 中控&方向盘</text>
                 <text class="desc-subtitle">已拍 11s · 建议突出液晶仪表、中控大屏</text>
@@ -109,7 +84,9 @@
         <view class="step-item active">
           <view class="step-content">
             <view class="step-info">
-              <view class="step-number active">2</view>
+              <view class="step-number active">
+                <text class="number-text">2</text>
+              </view>
               <view class="step-desc">
                 <text class="desc-title">后排空间 & 地台</text>
                 <text class="desc-subtitle">建议拍摄腿部空间、地台凸起情况</text>
@@ -122,7 +99,9 @@
         <view class="step-item">
           <view class="step-content">
             <view class="step-info">
-              <view class="step-number">3</view>
+              <view class="step-number">
+                <text class="number-text">3</text>
+              </view>
               <view class="step-desc">
                 <text class="desc-title">细节 & 配置展示</text>
                 <text class="desc-subtitle">方向盘、座椅、音响、氛围灯等高频关注点</text>
@@ -143,7 +122,7 @@
           <button class="next-button" bindtap="onNextStep">跳转</button>
         </view>
       </view>
-    </scroll-view>
+    </view>
   </view>
 
   <!-- 底部拍摄控制条 -->
@@ -154,13 +133,13 @@
     </view>
     <view class="control-buttons">
       <button class="control-button" bindtap="onRotate">
-        <icon class="control-icon" type="refresh" size="12"></icon>
+        <icon class="control-icon" type="refresh" size="12" color="#cbd5e1"></icon>
       </button>
       <button class="record-button" bindtap="onRecord">
         <view class="record-inner"></view>
       </button>
       <button class="control-button" bindtap="onCapture">
-        <icon class="control-icon" type="pic" size="12"></icon>
+        <icon class="control-icon" type="pic" size="12" color="#cbd5e1"></icon>
       </button>
     </view>
   </view>

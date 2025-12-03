@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "一键成片",
+  "navigationBarBackgroundColor": "#0f172a",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

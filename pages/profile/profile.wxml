@@ -1,11 +1,5 @@
 <!-- 我的页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <status-bar time="9:41"></status-bar>
-
-  <!-- 顶部导航 -->
-  <nav-bar title="我的" show-settings="true" settings-text="帮助与反馈" bind:settings="onHelpFeedback"></nav-bar>
-
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y="true">
     <!-- 用户信息 -->
@@ -47,10 +41,10 @@
           <block wx:for="{{item.items}}" wx:key="subindex">
             <button class="setting-item" bindtap="onItemClick" data-index="{{index}}" data-subindex="{{subindex}}">
               <view class="item-left">
-                <icon class="item-icon" type="{{item.icon}}" size="16"></icon>
+                <icon class="item-icon" type="{{item.icon}}" size="24rpx"></icon>
                 <text class="item-text">{{item.text}}</text>
               </view>
-              <icon class="arrow-icon" type="arrow" size="10"></icon>
+              <icon class="arrow-icon" type="arrow" size="20rpx"></icon>
             </button>
           </block>
         </view>
@@ -62,24 +56,4 @@
       <button class="logout-button" bindtap="onLogout">退出登录</button>
     </view>
   </scroll-view>
-
-  <!-- 底部 TabBar -->
-  <view class="tab-bar">
-    <button class="tab-item" bindtap="onNavToHome">
-      <icon class="tab-icon" type="waiting" size="16"></icon>
-      <text class="tab-text">车辆</text>
-    </button>
-    <button class="tab-item" bindtap="onNavToShoot">
-      <icon class="tab-icon" type="video" size="16"></icon>
-      <text class="tab-text">拍摄</text>
-    </button>
-    <button class="tab-item" bindtap="onNavToClips">
-      <icon class="tab-icon" type="video_fill" size="16"></icon>
-      <text class="tab-text">成片</text>
-    </button>
-    <button class="tab-item active" bindtap="onNavToProfile">
-      <icon class="tab-icon" type="person" size="16"></icon>
-      <text class="tab-text">我的</text>
-    </button>
-  </view>
 </view>

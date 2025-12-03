@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "新增车辆",
+  "navigationBarBackgroundColor": "#0f172a",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

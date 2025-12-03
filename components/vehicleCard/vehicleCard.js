@@ -64,7 +64,11 @@ Component({
     },
 
     onActionTap() {
-      this.triggerEvent('actiontap', { id: this.data.vehicle.id });
+      // 传递车辆数据和来源信息
+      this.triggerEvent('actiontap', { 
+        id: this.data.vehicle.id,
+        status: this.data.vehicle.status
+      });
     }
   }
 })

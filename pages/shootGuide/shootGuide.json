@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "标准化拍摄",
+  "navigationBarBackgroundColor": "#0f172a",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

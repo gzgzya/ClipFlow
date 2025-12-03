@@ -29,6 +29,7 @@
 .search-container {
   flex: 1;
   position: relative;
+  height: 72rpx; /* 固定高度 */
 }
 
 .search-icon {
@@ -38,11 +39,14 @@
   transform: translateY(-50%);
   z-index: 1;
   color: #94a3b8; /* text-slate-400 */
+  width: 24rpx;
+  height: 24rpx;
 }
 
 .search-input {
   width: 100%;
-  padding: 16rpx 24rpx 16rpx 80rpx;
+  height: 100%;
+  padding: 0 24rpx 0 80rpx; /* 只保留左右内边距 */
   border-radius: 40rpx; /* rounded-2xl -> 10px -> 20rpx*2 */
   background-color: rgba(30, 41, 59, 0.8); /* bg-slate-800/80 */
   font-size: 24rpx; /* text-xs */
@@ -56,20 +60,30 @@
 }
 
 .filter-button {
-  padding: 12rpx 24rpx;
+  height: 72rpx; /* 固定高度与搜索框一致 */
+  padding: 0 24rpx; /* 只保留左右内边距 */
   border-radius: 40rpx; /* rounded-2xl */
   background-color: rgba(30, 41, 59, 0.8); /* bg-slate-800/80 */
   font-size: 24rpx; /* text-xs */
   color: #f1f5f9; /* text-slate-100 */
   display: flex;
   align-items: center;
-  gap: 8rpx;
+  justify-content: center; /* 居中对齐文字 */
   border: 1px solid rgba(100, 116, 139, 0.6); /* border-slate-700/60 */
   white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.filter-button-content {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
 }
 
 .filter-icon {
   color: #94a3b8; /* text-slate-400 */
+  width: 22rpx;
+  height: 22rpx;
 }
 
 /* 统计区域 */
@@ -153,6 +167,20 @@
   border: none;
 }
 
+/* 为第二个按钮添加绿色渐变 */
+.quick-btn:nth-child(2) {
+  background: linear-gradient(to bottom right, #10b981, #34d399); /* from-emerald-500 to-emerald-400 */
+  color: #ffffff;
+  border: none;
+}
+
+/* 为第三个按钮添加紫色渐变 */
+.quick-btn:nth-child(3) {
+  background: linear-gradient(to bottom right, #8b5cf6, #a78bfa); /* from-violet-500 to-violet-400 */
+  color: #ffffff;
+  border: none;
+}
+
 .quick-btn-content {
   display: flex;
   flex-direction: column;
@@ -181,6 +209,14 @@
 /* 车辆列表 */
 .vehicle-list {
   padding: 0 32rpx 32rpx 32rpx;
+}
+
+.vehicle-item {
+  margin-bottom: 24rpx; /* 在车辆卡片之间添加间距 */
+}
+
+.vehicle-item:last-child {
+  margin-bottom: 0; /* 最后一个元素不需要下边距 */
 }
 
 .placeholder-card {
@@ -311,8 +347,9 @@
 
 .filter-options {
   display: flex;
-  gap: 16rpx;
+  flex-direction: row; /* 横向排列 */
   flex-wrap: wrap;
+  gap: 16rpx;
 }
 
 .filter-option {
@@ -322,12 +359,30 @@
   color: #f1f5f9; /* text-slate-100 */
   border: 1px solid rgba(100, 116, 139, 0.6); /* border-slate-700/60 */
   font-size: 24rpx; /* text-xs */
+  min-width: 120rpx; /* 最小宽度 */
+  text-align: center; /* 文本居中 */
+  box-sizing: border-box;
 }
 
 .filter-option.active {
   background: linear-gradient(to bottom right, #3b82f6, #60a5fa); /* bg-blue-600 */
   color: #ffffff;
   border: none;
+}
+
+/* 车辆状态筛选 */
+.filter-group:first-of-type .filter-options {
+  flex-direction: row; /* 确保横向布局 */
+}
+
+/* 成片数量筛选 */
+.filter-group:nth-of-type(2) .filter-options {
+  flex-direction: row; /* 确保横向布局 */
+}
+
+/* 排序方式筛选 */
+.filter-group:nth-of-type(3) .filter-options {
+  flex-direction: row; /* 确保横向布局 */
 }
 
 .filter-confirm {

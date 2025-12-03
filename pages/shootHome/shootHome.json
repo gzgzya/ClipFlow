@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "拍摄",
-  "usingComponents": {
-    "vehicle-card": "/components/vehicleCard/vehicleCard"
-  }
+  "navigationBarBackgroundColor": "#0f172a",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {}
 }
