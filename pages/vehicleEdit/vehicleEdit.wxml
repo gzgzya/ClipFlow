@@ -60,13 +60,13 @@
       </view>
 
       <!-- 卖点亮点 -->
-      <view class="form-section">
+      <view class="form-section textarea-section">
         <text class="form-label">卖点亮点</text>
         <textarea class="form-textarea" placeholder="例如：一手车源，无事故，4S 保养记录齐全，带 M 运动套件、全景天窗、HUD 抬头显示等..." bindinput="onHighlightsInput"></textarea>
       </view>
 
       <!-- 车辆故事 / 话术 -->
-      <view class="form-section">
+      <view class="form-section textarea-section">
         <text class="form-label">推荐话术（AI 可用）</text>
         <textarea class="form-textarea short" placeholder="简单写几句你平时介绍这台车的话，AI 会基于此生成口播与字幕文案。" bindinput="onDescriptionInput"></textarea>
       </view>

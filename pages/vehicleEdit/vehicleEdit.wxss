@@ -73,17 +73,33 @@
 .content {
   flex: 1;
   background-color: #020617; /* bg-slate-950 */
-  padding: 0 12rpx; /* 进一步减小内边距从16rpx到12rpx，为输入框留出更多空间 */
+  padding: 0 12rpx; /* 减小内边距以提供更多空间给表单元素 */
+}
+
+.form {
+  padding-top: 24rpx;
+  padding-bottom: 32rpx;
+  /* 移除padding-right以避免影响布局 */
+}
+
+.form-section {
+  margin-bottom: 24rpx;
+  padding-right: 12rpx; /* 添加右侧内边距以确保文本域右侧对齐 */
+}
+
+.form-section:nth-last-child(4),
+.form-section:nth-last-child(3) {
+  /* 移除复杂的选择器 */
 }
 
 .form-row {
   display: flex;
   align-items: center;
-  gap: 8rpx; /* 进一步减小间距从12rpx到8rpx，为输入框留出更多空间 */
+  gap: 8rpx; /* 减小间距以提供更多空间给表单元素 */
 }
 
 .w-24 {
-  width: 120rpx; /* 进一步减小宽度从140rpx到120rpx，为输入框留出更多空间 */
+  width: 120rpx; /* 减小宽度以提供更多空间给表单元素 */
 }
 
 .form-label {
@@ -133,7 +149,7 @@
 }
 
 .form-textarea {
-  width: calc(100% - 12rpx); /* 缩短宽度以匹配上方输入框的右侧对齐 */
+  width: 100%;
   padding: 16rpx 24rpx;
   border-radius: 40rpx; /* rounded-2xl */
   background-color: #1e293b; /* bg-slate-900 */
@@ -143,7 +159,11 @@
   height: 120rpx;
   resize: none;
   box-sizing: border-box; /* 确保padding包含在width内 */
-  margin-left: 12rpx; /* 通过margin调整位置以确保右对齐 */
+  /* 移除margin以避免影响对齐 */
+}
+
+.form-section:last-child {
+  padding-right: 0; /* 移除最后一部分的右侧内边距 */
 }
 
 .form-textarea.short {
@@ -273,4 +293,9 @@
   font-weight: 500;
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); /* shadow-lg shadow-blue-600/30 */
   border: none;
+}
+
+/* 文本域部分 */
+.textarea-section {
+  padding-right: 12rpx; /* 添加右侧内边距以确保文本域右侧对齐 */
 }
