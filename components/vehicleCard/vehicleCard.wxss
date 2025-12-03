@@ -37,12 +37,12 @@
 }
 
 .plate {
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* text-xs -> 增大字体，参考登录页面 */
   color: #94a3b8; /* text-slate-400 */
 }
 
 .status-tag {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* text-[10px] -> 增大字体，参考登录页面 */
   padding: 4rpx 16rpx; /* px-2 py-0.5 */
   border-radius: 32rpx; /* rounded-full */
 }
@@ -60,13 +60,13 @@
 }
 
 .model {
-  font-size: 28rpx; /* text-sm */
+  font-size: 32rpx; /* text-sm -> 增大字体，参考登录页面 */
   font-weight: 600;
   color: #f8fafc; /* text-slate-50 */
 }
 
 .features {
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* text-[11px] -> 增大字体，参考登录页面 */
   color: #94a3b8; /* text-slate-400 */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -87,7 +87,7 @@
 }
 
 .stat-item {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* text-[10px] -> 增大字体，参考登录页面 */
   color: #94a3b8; /* text-slate-400 */
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@
 
 .stat-icon {
   margin-right: 4rpx; /* mr-1 */
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* text-[10px] -> 增大字体，参考登录页面 */
 }
 
 .stat-icon.film {
@@ -111,7 +111,7 @@
 }
 
 .action-button {
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* text-[11px] -> 增大字体，参考登录页面 */
   padding: 8rpx 16rpx; /* px-2 py-1 */
   border-radius: 32rpx; /* rounded-full */
   border: none;

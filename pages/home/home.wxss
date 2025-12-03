@@ -49,7 +49,7 @@
   padding: 0 24rpx 0 80rpx; /* 只保留左右内边距 */
   border-radius: 40rpx; /* rounded-2xl -> 10px -> 20rpx*2 */
   background-color: rgba(30, 41, 59, 0.8); /* bg-slate-800/80 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* text-xs -> 增大字体，参考登录页面 */
   color: #f1f5f9; /* text-slate-100 */
   border: 1px solid rgba(100, 116, 139, 0.6); /* border-slate-700/60 */
   box-sizing: border-box;
@@ -64,7 +64,7 @@
   padding: 0 24rpx; /* 只保留左右内边距 */
   border-radius: 40rpx; /* rounded-2xl */
   background-color: rgba(30, 41, 59, 0.8); /* bg-slate-800/80 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* text-xs -> 增大字体，参考登录页面 */
   color: #f1f5f9; /* text-slate-100 */
   display: flex;
   align-items: center;
@@ -91,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* text-[11px] -> 增大字体，参考登录页面 */
   color: #94a3b8; /* text-slate-400 */
 }
 
@@ -189,20 +189,20 @@
 }
 
 .quick-subtitle {
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* text-[11px] -> 增大字体，参考登录页面 */
   opacity: 0.8;
   margin-bottom: 8rpx;
 }
 
 .quick-title {
-  font-size: 28rpx; /* text-sm */
+  font-size: 32rpx; /* text-sm -> 增大字体，参考登录页面 */
   font-weight: 600;
   margin-bottom: 8rpx;
   color: #f8fafc; /* text-slate-50 */
 }
 
 .quick-desc {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* text-[10px] -> 增大字体，参考登录页面 */
   opacity: 0.8;
 }
 
@@ -227,7 +227,7 @@
   align-items: center;
   justify-content: center;
   padding: 48rpx 0;
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* text-xs -> 增大字体，参考登录页面 */
   color: #64748b; /* text-slate-500 */
 }
 
@@ -244,7 +244,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* text-[11px] -> 增大字体，参考登录页面 */
   color: #94a3b8; /* text-slate-400 */
   position: fixed;
   bottom: 0;
@@ -325,7 +325,7 @@
 }
 
 .filter-title {
-  font-size: 32rpx; /* text-lg */
+  font-size: 32rpx; /* text-lg -> 增大字体，参考登录页面 */
   font-weight: bold;
   color: #f1f5f9; /* text-slate-100 */
 }
@@ -340,7 +340,7 @@
 
 .filter-group-title {
   display: block;
-  font-size: 28rpx; /* text-sm */
+  font-size: 28rpx; /* text-sm -> 增大字体，参考登录页面 */
   color: #cbd5e1; /* text-slate-300 */
   margin-bottom: 24rpx;
 }
@@ -358,7 +358,7 @@
   background-color: rgba(30, 41, 59, 0.8); /* bg-slate-800/80 */
   color: #f1f5f9; /* text-slate-100 */
   border: 1px solid rgba(100, 116, 139, 0.6); /* border-slate-700/60 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* text-xs -> 增大字体，参考登录页面 */
   min-width: 120rpx; /* 最小宽度 */
   text-align: center; /* 文本居中 */
   box-sizing: border-box;
@@ -391,7 +391,7 @@
   border-radius: 40rpx; /* rounded-2xl */
   background: linear-gradient(to bottom right, #3b82f6, #60a5fa); /* bg-blue-600 */
   color: #ffffff;
-  font-size: 28rpx; /* text-sm */
+  font-size: 32rpx; /* text-sm -> 增大字体，参考登录页面 */
   border: none;
   margin-top: 16rpx;
 }
