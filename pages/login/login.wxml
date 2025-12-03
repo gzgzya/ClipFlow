@@ -82,7 +82,6 @@
         <!-- 登录按钮 -->
         <view class="login-action">
           <button class="login-btn" bindtap="onLogin">登录并进入车库</button>
-          <view class="login-desc">登录即视为你已同意相关协议，后续可在「我的-隐私与权限」中管理授权设置。</view>
         </view>
       </form>
     </view>

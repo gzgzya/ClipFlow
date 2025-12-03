@@ -286,31 +286,39 @@
 /* 协议 */
 .agreement {
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* 改为居中对齐 */
   gap: 16rpx; /* space-x-2 (8px) -> 16rpx */
   margin-bottom: 16rpx; /* pt-1 (4px) -> 16rpx */
   line-height: 1.5;
 }
 
 .agreement-checkbox {
-  margin-top: 8rpx;
+  margin-top: 0; /* 移除顶部边距 */
   transform: scale(0.8);
+  width: 32rpx; /* 设置固定宽度 */
+  height: 32rpx; /* 设置固定高度 */
 }
 
 .agreement-text-container {
   flex: 1;
   font-size: 24rpx; /* 增大字体 10px -> 20rpx -> 24rpx */
   color: #64748b; /* text-slate-500 */
+  display: flex; /* 使用flex布局 */
+  flex-wrap: wrap; /* 允许换行 */
+  align-items: center; /* 垂直居中 */
+  gap: 8rpx; /* 元素之间的间距 */
 }
 
 .agreement-text {
   font-size: 24rpx; /* 增大字体 10px -> 20rpx -> 24rpx */
   color: #64748b; /* text-slate-500 */
+  line-height: 32rpx; /* 与勾选框高度一致 */
 }
 
 .agreement-link {
   color: #60a5fa; /* text-blue-400 */
   font-size: 24rpx; /* 增大字体 10px -> 20rpx -> 24rpx */
+  line-height: 32rpx; /* 与勾选框高度一致 */
 }
 
 /* 登录操作 */
@@ -330,16 +338,6 @@
   font-weight: 500;
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4); /* shadow-lg shadow-blue-600/40 */
   margin-bottom: 16rpx; /* 8px -> 16rpx (mt-1) */
-}
-
-.login-desc {
-  font-size: 24rpx; /* 增大字体 10px -> 20rpx -> 24rpx */
-  color: #64748b; /* text-slate-500 */
-  text-align: center;
-  line-height: 1.5;
-  white-space: nowrap; /* 确保文字在一行内显示 */
-  overflow: hidden; /* 隐藏超出部分 */
-  text-overflow: ellipsis; /* 超出部分显示省略号 */
 }
 
 /* 底部 */
