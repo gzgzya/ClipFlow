@@ -1,0 +1,474 @@
+/* 导入素材页面样式 */
+.container {
+  background-color: #0f172a;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 状态栏 */
+.status-bar {
+  height: 40rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 12rpx;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.battery {
+  width: 16rpx;
+  height: 8rpx;
+  border: 2rpx solid #f1f5f9;
+  border-radius: 2rpx;
+  position: relative;
+}
+
+.battery::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -4rpx;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 6rpx;
+  background-color: #f1f5f9;
+  border-radius: 0 2rpx 2rpx 0;
+}
+
+/* 顶部导航 */
+.nav-bar {
+  height: 96rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: #f1f5f9;
+}
+
+.back-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  color: #f1f5f9;
+}
+
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.4;
+}
+
+.title-main {
+  font-size: 14rpx;
+  font-weight: 600;
+}
+
+.title-sub {
+  font-size: 10rpx;
+  color: #94a3b8;
+}
+
+.finish-button {
+  font-size: 12rpx;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* 内容区域 */
+.content {
+  flex: 1;
+  background-color: #020617;
+  padding-bottom: 32rpx;
+}
+
+/* 区块 */
+.section {
+  padding: 24rpx 32rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.section-header.with-button {
+  align-items: flex-start;
+}
+
+.section-title {
+  font-size: 11rpx;
+  color: #94a3b8;
+}
+
+.section-subtitle {
+  font-size: 10rpx;
+  color: #94a3b8;
+}
+
+/* 导入来源 */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.source-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
+  border-radius: 16rpx;
+  font-size: 11rpx;
+  color: #f1f5f9;
+}
+
+.source-item.blue {
+  background-color: #3b82f6;
+}
+
+.source-item:not(.blue) {
+  background-color: #1e293b;
+  border: 1rpx solid #475569;
+}
+
+.source-icon {
+  margin-bottom: 12rpx;
+}
+
+.source-item:not(.blue) .source-icon.emerald {
+  color: #10b981;
+}
+
+.source-item:not(.blue) .source-icon.amber {
+  color: #f59e0b;
+}
+
+/* 车辆选择 */
+.switch-button {
+  font-size: 11rpx;
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.current-vehicle-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1e293b;
+  border: 1rpx solid #334155;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.vehicle-info {
+  display: flex;
+  align-items: center;
+}
+
+.image-container {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  border: 1rpx solid #475569;
+  margin-right: 16rpx;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vehicle-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-name {
+  font-size: 12rpx;
+  color: #f1f5f9;
+  margin-bottom: 8rpx;
+}
+
+.vehicle-description {
+  font-size: 10rpx;
+  color: #94a3b8;
+}
+
+.current-tag {
+  font-size: 10rpx;
+  padding: 4rpx 8rpx;
+  border-radius: 32rpx;
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  border: 1rpx solid rgba(16, 185, 129, 0.4);
+}
+
+.smart-recognition-card {
+  background-color: #1e293b;
+  border: 1rpx solid #334155;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.text-container {
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.card-title {
+  font-size: 12rpx;
+  color: #f1f5f9;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.card-description {
+  font-size: 10rpx;
+  color: #94a3b8;
+  display: block;
+}
+
+.toggle-switch {
+  transform: scale(0.8);
+}
+
+/* 归类规则 */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.rule-card {
+  background-color: #1e293b;
+  border: 1rpx solid #334155;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+}
+
+.rule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.rule-name {
+  font-size: 12rpx;
+  color: #f1f5f9;
+}
+
+.rule-time {
+  font-size: 10rpx;
+  color: #94a3b8;
+}
+
+.rule-description {
+  font-size: 10rpx;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* 素材列表 */
+.media-section {
+  padding-bottom: 0;
+}
+
+.media-item {
+  display: flex;
+  background-color: #1e293b;
+  border: 1rpx solid #334155;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-bottom: 16rpx;
+}
+
+.image-container {
+  position: relative;
+  width: 160rpx;
+  height: 112rpx;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 30%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.duration-tag {
+  position: absolute;
+  bottom: 8rpx;
+  left: 8rpx;
+  font-size: 10rpx;
+  padding: 4rpx 6rpx;
+  border-radius: 8rpx;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.classification-tag {
+  position: absolute;
+  top: 8rpx;
+  left: 8rpx;
+  font-size: 10rpx;
+  padding: 4rpx 6rpx;
+  border-radius: 8rpx;
+  color: white;
+}
+
+.classification-tag.blue {
+  background-color: #3b82f6;
+}
+
+.classification-tag.emerald {
+  background-color: #10b981;
+}
+
+.info-container {
+  flex: 1;
+  padding: 16rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.media-info {
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.media-name {
+  font-size: 12rpx;
+  color: #f1f5f9;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.media-source {
+  font-size: 10rpx;
+  color: #94a3b8;
+  display: block;
+}
+
+.remove-button {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background-color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+}
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.target-vehicle,
+.ai-suggestion {
+  display: flex;
+  align-items: center;
+  font-size: 10rpx;
+  color: #94a3b8;
+}
+
+.vehicle-icon {
+  color: #60a5fa;
+  margin-right: 4rpx;
+}
+
+.vehicle-text {
+  font-size: 10rpx;
+}
+
+.suggestion-icon {
+  color: #f59e0b;
+  margin-right: 4rpx;
+}
+
+.modify-button,
+.mark-button {
+  font-size: 10rpx;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.modify-button {
+  color: #60a5fa;
+}
+
+.mark-button {
+  color: #f59e0b;
+}
+
+/* 更多提示 */
+.more-tip {
+  background-color: rgba(30, 41, 59, 0.6);
+  border: 1rpx dashed #475569;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  font-size: 11rpx;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}

@@ -1,0 +1,184 @@
+<!-- 一键成片页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="back-button" bindtap="onBack">
+      <icon class="back-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">一键成片</text>
+      <text class="title-sub">批量生成多车视频 · 适合空闲时间使用</text>
+    </view>
+    <button class="history-button" bindtap="onHistory">记录</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 批量策略 & 模板 -->
+    <view class="section template-section">
+      <view class="section-header">
+        <text class="section-title">批量策略与模板</text>
+        <button class="advanced-button" bindtap="onAdvancedSettings">
+          <icon class="advanced-icon" type="settings" size="10"></icon>
+          <text class="advanced-text">高级设置</text>
+        </button>
+      </view>
+      
+      <view class="uniform-template-card">
+        <view class="card-content">
+          <view class="text-container">
+            <text class="card-title">统一使用同一模板</text>
+            <text class="card-description">适合同一批次车源统一风格输出，提升账号整体调性。</text>
+          </view>
+          <switch class="toggle-switch" checked="{{useSameTemplate}}" bindchange="toggleSameTemplate" />
+        </view>
+      </view>
+      
+      <!-- 模板选择 -->
+      <view class="templates-container">
+        <block wx:for="{{templates}}" wx:key="id">
+          <view class="template-card {{item.bgColor}} {{item.active ? 'active' : ''}}" bindtap="selectTemplate" data-id="{{item.id}}">
+            <text class="template-subtitle">{{item.subtitle}}</text>
+            <text class="template-title">{{item.title}}</text>
+            <text class="template-description">{{item.description}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- AI 统一设置 -->
+    <view class="section ai-section">
+      <view class="section-header">
+        <text class="section-title">AI 统一设置</text>
+        <text class="section-subtitle">可在单条视频中再微调</text>
+      </view>
+      
+      <view class="setting-card">
+        <view class="card-content">
+          <view class="text-container">
+            <text class="card-title">自动字幕 & 车况信息</text>
+            <text class="card-description">基于车档案与卖点亮点自动生成字幕文案。</text>
+          </view>
+          <switch class="toggle-switch" checked="{{autoSubtitle}}" bindchange="toggleAutoSubtitle" color="#10b981" />
+        </view>
+      </view>
+      
+      <view class="setting-card">
+        <view class="card-content">
+          <view class="text-container">
+            <text class="card-title">统一 AI 语音风格</text>
+            <text class="card-description">使用同一人设音色（如：男声 · 亲和 · 正常语速）。</text>
+          </view>
+          <switch class="toggle-switch" checked="{{uniformVoice}}" bindchange="toggleUniformVoice" color="#3b82f6" />
+        </view>
+      </view>
+      
+      <view class="setting-card">
+        <view class="card-content">
+          <view class="text-container">
+            <text class="card-title">自动 BGM & 片头片尾</text>
+            <text class="card-description">使用门店统一片头片尾，BGM 风格：活力/电子。</text>
+          </view>
+          <switch class="toggle-switch" checked="{{autoBgm}}" bindchange="toggleAutoBgm" color="#f59e0b" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 批量车辆选择 & 队列 -->
+    <view class="section vehicle-section">
+      <view class="section-header">
+        <text class="section-title">待生成车辆（队列预览）</text>
+        <button class="select-button" bindtap="onSelectVehicles">
+          <icon class="select-icon" type="add" size="10"></icon>
+          <text class="select-text">从车库选择</text>
+        </button>
+      </view>
+      
+      <view class="vehicles-list">
+        <block wx:for="{{vehicles}}" wx:key="id">
+          <view class="vehicle-card">
+            <view class="card-content">
+              <view class="vehicle-info">
+                <view class="image-container">
+                  <image class="vehicle-image" src="{{item.image}}" mode="aspectFill"></image>
+                </view>
+                <view class="info-container">
+                  <text class="vehicle-name">{{item.name}} · {{item.plate}}</text>
+                  <text class="vehicle-status">{{item.status}}</text>
+                  <view class="vehicle-details">
+                    <text class="detail-item">
+                      <icon type="video" size="12" class="detail-icon blue"></icon>
+                      素材 {{item.materials}}
+                    </text>
+                    <block wx:if="{{item.clips}}">
+                      <text class="detail-item">
+                        <icon type="video_fill" size="12" class="detail-icon green"></icon>
+                        历史成片 {{item.clips}}
+                      </text>
+                    </block>
+                    <block wx:if="{{item.warning}}">
+                      <text class="detail-item warning">
+                        <icon type="warn" size="12" class="detail-icon amber"></icon>
+                        {{item.warning}}
+                      </text>
+                    </block>
+                    <block wx:if="{{item.feature}}">
+                      <text class="detail-item feature">
+                        <icon type="magic" size="12" class="detail-icon green"></icon>
+                        {{item.feature}}
+                      </text>
+                    </block>
+                    <text class="detail-item">
+                      <icon type="time" size="12" class="detail-icon gray"></icon>
+                      预计生成 {{item.estimatedTime}}
+                    </text>
+                  </view>
+                </view>
+              </view>
+              
+              <view class="action-container">
+                <block wx:if="{{item.recommendation}}">
+                  <view class="recommendation-tag">{{item.recommendation}}</view>
+                </block>
+                <block wx:if="{{item.actionText}}">
+                  <button class="action-button {{item.actionType}}" size="mini">{{item.actionText}}</button>
+                </block>
+                <button class="remove-button" bindtap="onRemoveVehicle" data-id="{{item.id}}">
+                  <icon type="close" size="10"></icon>
+                </button>
+              </view>
+            </view>
+          </view>
+        </block>
+        
+        <!-- 更多提示 -->
+        <view class="more-tip">
+          <icon class="tip-icon" type="more" size="10"></icon>
+          <text class="tip-text">还可再选择 7 台车辆加入本次一键成片任务...</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="summary-container">
+      <text class="summary-title">本次计划生成</text>
+      <text class="summary-text">{{summary.vehiclesCount}} 台车辆 · {{summary.clipsCount}} 条短视频 · 预计约 {{summary.estimatedMinutes}} 分钟</text>
+    </view>
+    <button class="generate-button" bindtap="onGenerate">
+      <icon class="generate-icon" type="magic" size="12"></icon>
+      <text class="generate-text">立即一键成片</text>
+    </button>
+  </view>
+</view>

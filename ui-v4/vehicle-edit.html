@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>新增 / 编辑车辆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="h-12 px-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-800/80">
+        <i class="fa-solid fa-chevron-left text-xs"></i>
+      </button>
+      <div class="text-sm font-semibold">新增车辆</div>
+      <button class="text-xs text-blue-400">保存</button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative overflow-y-auto">
+      <form class="px-4 pt-3 pb-4 space-y-3 text-[12px]">
+        <!-- 车牌 & 状态 -->
+        <div class="flex space-x-3">
+          <div class="flex-1">
+            <label class="block text-slate-400 mb-1">车牌号</label>
+            <input
+              type="text"
+              placeholder="例如：苏A88888"
+              class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div class="w-24">
+            <label class="block text-slate-400 mb-1">车辆状态</label>
+            <select class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500">
+              <option>在售</option>
+              <option>已订</option>
+              <option>已售</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 品牌 / 车系 / 年款 -->
+        <div>
+          <label class="block text-slate-400 mb-1">品牌 / 车系</label>
+          <div class="flex space-x-2">
+            <input
+              type="text"
+              placeholder="品牌，如：宝马"
+              class="flex-1 px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+            <input
+              type="text"
+              placeholder="车系，如：3系"
+              class="flex-1 px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <div class="flex space-x-3">
+          <div class="flex-1">
+            <label class="block text-slate-400 mb-1">年款</label>
+            <input
+              type="text"
+              placeholder="如：2021"
+              class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div class="flex-1">
+            <label class="block text-slate-400 mb-1">排量 / 能源</label>
+            <input
+              type="text"
+              placeholder="2.0T / 混动"
+              class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- 基本信息 -->
+        <div class="flex space-x-3">
+          <div class="flex-1">
+            <label class="block text-slate-400 mb-1">表显里程</label>
+            <input
+              type="text"
+              placeholder="如：3.8 万公里"
+              class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div class="flex-1">
+            <label class="block text-slate-400 mb-1">车身颜色</label>
+            <input
+              type="text"
+              placeholder="如：白色"
+              class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- 卖点亮点 -->
+        <div>
+          <label class="block text-slate-400 mb-1">卖点亮点</label>
+          <textarea
+            rows="3"
+            placeholder="例如：一手车源，无事故，4S 保养记录齐全，带 M 运动套件、全景天窗、HUD 抬头显示等..."
+            class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+          ></textarea>
+        </div>
+
+        <!-- 车辆故事 / 话术 -->
+        <div>
+          <label class="block text-slate-400 mb-1">推荐话术（AI 可用）</label>
+          <textarea
+            rows="2"
+            placeholder="简单写几句你平时介绍这台车的话，AI 会基于此生成口播与字幕文案。"
+            class="w-full px-3 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+          ></textarea>
+        </div>
+
+        <!-- 车辆照片上传区 -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-slate-400">车辆照片</label>
+            <span class="text-[11px] text-slate-500">建议：封面 + 外观 + 内饰</span>
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            <div class="relative rounded-2xl overflow-hidden border border-slate-700/70 h-16">
+              <img
+                src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=400"
+                class="w-full h-full object-cover"
+                alt="车辆图1"
+              />
+              <div class="absolute top-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black/70 text-white">
+                封面
+              </div>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden border border-slate-700/70 h-16">
+              <img
+                src="https://images.pexels.com/photos/3075526/pexels-photo-3075526.jpeg?auto=compress&cs=tinysrgb&w=400"
+                class="w-full h-full object-cover"
+                alt="车辆图2"
+              />
+            </div>
+            <div class="relative rounded-2xl overflow-hidden border border-slate-700/70 h-16">
+              <img
+                src="https://images.pexels.com/photos/97079/pexels-photo-97079.jpeg?auto=compress&cs=tinysrgb&w=400"
+                class="w-full h-full object-cover"
+                alt="车辆图3"
+              />
+            </div>
+            <button
+              type="button"
+              class="h-16 rounded-2xl border border-dashed border-slate-600 flex flex-col items-center justify-center text-[11px] text-slate-400 bg-slate-900/60"
+            >
+              <i class="fa-solid fa-plus mb-1"></i>
+              <span>添加</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 默认拍摄模板配置（简化） -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-slate-400">拍摄模板</label>
+            <span class="text-[11px] text-blue-400">管理模板</span>
+          </div>
+          <div class="rounded-2xl bg-slate-900 border border-slate-700 px-3 py-2 text-[11px] flex items-center justify-between">
+            <div>
+              <div class="text-slate-100">标准 3 段讲车</div>
+              <div class="text-slate-500">
+                外观 15s + 内饰 10s + 亮点 10s
+              </div>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/40">
+              推荐
+            </span>
+          </div>
+        </div>
+
+        <!-- 底部 CTA -->
+        <div class="pt-2 pb-4">
+          <button
+            type="button"
+            class="w-full py-2.5 rounded-2xl bg-blue-600 text-white text-sm font-medium shadow-lg shadow-blue-600/30"
+          >
+            保存并开始拍摄
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

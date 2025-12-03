@@ -1,0 +1,35 @@
+@import "../../styles/common.wxss";
+
+.nav-bar {
+  height: 96rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #f1f5f9;
+}
+
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.4;
+}
+
+.title-main {
+  font-size: 14rpx;
+  font-weight: 600;
+}
+
+.title-sub {
+  font-size: 10rpx;
+  color: #94a3b8;
+}
+
+.settings-button {
+  font-size: 12rpx;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  padding: 0;
+}

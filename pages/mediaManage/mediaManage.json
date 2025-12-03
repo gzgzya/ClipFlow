@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "素材管理",
+  "usingComponents": {
+    "material-item": "/components/materialItem/materialItem",
+    "timeline-item": "/components/timelineItem/timelineItem"
+  }
+}

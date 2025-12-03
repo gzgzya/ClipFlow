@@ -1,0 +1,38 @@
+@import "../../styles/common.wxss";
+
+.status-bar {
+  height: 40rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12rpx;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.battery {
+  width: 16rpx;
+  height: 8rpx;
+  border: 2rpx solid #f1f5f9;
+  border-radius: 2rpx;
+  position: relative;
+}
+
+.battery::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -4rpx;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 6rpx;
+  background-color: #f1f5f9;
+  border-radius: 0 2rpx 2rpx 0;
+}

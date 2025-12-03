@@ -1,0 +1,97 @@
+<!-- 成片中心页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <status-bar time="9:41"></status-bar>
+
+  <!-- 顶部导航 -->
+  <nav-bar title="成片中心" subtitle="已生成 {{totalCount}} 条" show-settings="true" bind:settings="onSettings"></nav-bar>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 搜索 + 筛选 -->
+    <view class="search-section">
+      <view class="search-bar">
+        <view class="search-container">
+          <icon class="search-icon" type="search" size="12"></icon>
+          <input class="search-input" placeholder="搜索车牌、车型或视频标题" bindinput="onSearchInput" />
+        </view>
+        <button class="filter-button" bindtap="onFilter">
+          <icon class="filter-icon" type="filter" size="12"></icon>
+          <text class="filter-text">筛选</text>
+        </button>
+      </view>
+
+      <!-- 状态 Tab -->
+      <view class="tabs-section">
+        <view class="tabs-container">
+          <block wx:for="{{tabs}}" wx:key="id">
+            <button 
+              class="tab-item {{activeTab === item.id ? 'active' : ''}}" 
+              data-id="{{item.id}}"
+              bindtap="onTabChange">
+              {{item.name}}
+            </button>
+          </block>
+        </view>
+        <button class="sort-button" bindtap="onSortChange">
+          <icon class="sort-icon" type="sort" size="10"></icon>
+          <text>按时间</text>
+        </button>
+      </view>
+
+      <!-- 平台筛选 Chips -->
+      <view class="platform-chips">
+        <text class="chips-label">平台：</text>
+        <block wx:for="{{platforms}}" wx:key="id">
+          <button 
+            class="chip-item {{activePlatform === item.id ? 'active' : ''}}"
+            data-id="{{item.id}}"
+            bindtap="onPlatformChange">
+            <icon wx:if="{{item.icon}}" class="chip-icon {{item.iconClass}}" type="{{item.icon}}" size="11"></icon>
+            <text>{{item.name}}</text>
+          </button>
+        </block>
+      </view>
+    </view>
+
+    <!-- 成片列表 -->
+    <view class="clips-list">
+      <block wx:for="{{clips}}" wx:key="id">
+        <clip-card 
+          class="clip-card-item"
+          clip="{{item}}"
+          bind:click="onClipClick"
+          bind:publish="onClipPublish"
+          bind:copy="onClipCopy"
+          bind:retry="onClipRetry">
+        </clip-card>
+      </block>
+
+      <!-- 底部提示 -->
+      <view class="footer-tip">
+        <icon class="tip-icon" type="more" size="10"></icon>
+        <text class="tip-text">下拉可加载更多历史成片记录...</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部 TabBar -->
+  <view class="tab-bar">
+    <button class="tab-item" bindtap="onNavToVehicles">
+      <icon class="tab-icon" type="waiting" size="16"></icon>
+      <text class="tab-text">车辆</text>
+    </button>
+    <button class="tab-item" bindtap="onNavToShoot">
+      <icon class="tab-icon" type="video" size="16"></icon>
+      <text class="tab-text">拍摄</text>
+    </button>
+    <button class="tab-item active" bindtap="onNavToClips">
+      <icon class="tab-icon" type="video_fill" size="16"></icon>
+      <text class="tab-text">成片</text>
+    </button>
+    <button class="tab-item" bindtap="onNavToProfile">
+      <icon class="tab-icon" type="person" size="16"></icon>
+      <text class="tab-text">我的</text>
+    </button>
+  </view>
+</view>

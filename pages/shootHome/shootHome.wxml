@@ -1,0 +1,111 @@
+<!-- 拍摄首页 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <text class="nav-title">拍摄</text>
+    <button class="camera-switch" bindtap="onSwitchCamera">
+      <icon class="switch-icon" type="camera_light" size="12"></icon>
+    </button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 顶部提示条 -->
+    <view class="notice-section">
+      <view class="notice-card">
+        <view class="notice-content">
+          <view class="notice-title">今天还有 {{remainingVehicles}} 台车未完成拍摄</view>
+          <view class="notice-subtitle">建议优先拍完在售车的「外观 + 内饰 + 亮点」三段素材。</view>
+        </view>
+        <button class="view-list-button" bindtap="onViewList">查看列表</button>
+      </view>
+    </view>
+
+    <!-- "继续拍摄"区域 -->
+    <view class="section continuing-section">
+      <view class="section-header">
+        <text class="section-title">继续拍摄中的车辆</text>
+        <text class="section-subtitle">今日已拍完 {{completedToday}} 台</text>
+      </view>
+      
+      <view class="vehicle-list">
+        <block wx:for="{{continuingVehicles}}" wx:key="id">
+          <vehicle-card 
+            vehicle="{{item}}" 
+            bind:actiontap="onVehicleAction">
+          </vehicle-card>
+        </block>
+      </view>
+    </view>
+
+    <!-- 快速开始拍摄 -->
+    <view class="section quick-section">
+      <view class="section-header">
+        <text class="section-title">快速开始拍摄</text>
+        <button class="all-vehicles-button" bindtap="onAllVehicles">
+          <icon class="car-icon" type="waiting" size="10"></icon>
+          <text>全部车辆</text>
+        </button>
+      </view>
+      
+      <!-- 搜索栏 -->
+      <view class="search-bar">
+        <view class="search-container">
+          <icon class="search-icon" type="search" size="12"></icon>
+          <input class="search-input" placeholder="按车牌、车型搜索要拍摄的车辆" bindinput="onSearchInput" />
+        </view>
+      </view>
+      
+      <!-- 可拍摄车辆列表 -->
+      <view class="vehicle-list">
+        <block wx:for="{{quickVehicles}}" wx:key="id">
+          <vehicle-card 
+            vehicle="{{item}}" 
+            bind:actiontap="onVehicleAction">
+          </vehicle-card>
+        </block>
+        
+        <!-- 更多车辆提示 -->
+        <view class="more-vehicles">
+          <icon class="more-icon" type="more" size="10"></icon>
+          <text class="more-text">还有更多在售车辆，点击「全部车辆」查看...</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部提示 -->
+    <view class="footer-tip">
+      建议拍摄顺序：先拍完车外，再拍车内，最后补亮点。保持同一批次视频风格统一，有助于涨粉与建立专业形象。
+    </view>
+  </scroll-view>
+
+  <!-- 底部 TabBar -->
+  <view class="tab-bar">
+    <button class="tab-item" bindtap="onNavToHome">
+      <icon class="tab-icon" type="waiting" size="16"></icon>
+      <text class="tab-text">车辆</text>
+    </button>
+    <button class="tab-item active" bindtap="onNavToShoot">
+      <icon class="tab-icon" type="video" size="16"></icon>
+      <text class="tab-text">拍摄</text>
+    </button>
+    <button class="tab-item" bindtap="onNavToClips">
+      <icon class="tab-icon" type="video_fill" size="16"></icon>
+      <text class="tab-text">成片</text>
+    </button>
+    <button class="tab-item" bindtap="onNavToProfile">
+      <icon class="tab-icon" type="person" size="16"></icon>
+      <text class="tab-text">我的</text>
+    </button>
+  </view>
+</view>

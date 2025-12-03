@@ -1,0 +1,121 @@
+<!-- 一键分发页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="back-button" bindtap="onBack">
+      <icon class="back-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">一键分发</text>
+      <text class="title-sub">同步到多平台 · 一次写文案</text>
+    </view>
+    <button class="settings-button" bindtap="onSettings">设置</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 成片信息 -->
+    <view class="clip-info-section">
+      <view class="clip-card">
+        <view class="image-container">
+          <image class="clip-image" src="{{clipInfo.image}}" mode="aspectFill"></image>
+        </view>
+        <view class="info-container">
+          <text class="clip-title">{{clipInfo.title}}</text>
+          <text class="clip-meta">{{clipInfo.duration}} · 车牌 {{clipInfo.plate}} · 模板：{{clipInfo.template}}</text>
+        </view>
+        <text class="selected-count">已选择 {{selectedPlatformsCount}} 个平台</text>
+      </view>
+    </view>
+
+    <!-- 平台账号绑定 -->
+    <view class="section platforms-section">
+      <view class="section-header">
+        <text class="section-title">选择要发布的平台</text>
+        <button class="bind-button" bindtap="onBindAccount">
+          <icon class="bind-icon" type="add" size="10"></icon>
+          <text class="bind-text">绑定新账号</text>
+        </button>
+      </view>
+      
+      <view class="platforms-list">
+        <block wx:for="{{platforms}}" wx:key="id">
+          <view class="platform-item" bindtap="onTogglePlatform" data-id="{{item.id}}">
+            <view class="platform-info">
+              <view class="icon-container {{item.iconBg}}">
+                <icon class="platform-icon" type="{{item.icon}}" size="14"></icon>
+              </view>
+              <view class="text-container">
+                <text class="platform-name">{{item.name}} · {{item.account}}</text>
+                <text class="platform-status">{{item.status}} {{item.detail}}</text>
+              </view>
+            </view>
+            <switch class="platform-switch" checked="{{item.checked}}" />
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 文案预览 -->
+    <view class="section caption-section">
+      <view class="section-header">
+        <text class="section-title">跨平台通用文案</text>
+        <button class="edit-button" bindtap="onEditCaption">编辑</button>
+      </view>
+      
+      <view class="caption-container">
+        <text class="caption-text">{{caption}}</text>
+      </view>
+      
+      <view class="caption-footer">
+        <text class="caption-note">将自动填充到各平台，支持单独微调。</text>
+        <text class="save-template">可保存为模版</text>
+      </view>
+    </view>
+
+    <!-- 发布记录 -->
+    <view class="section records-section">
+      <view class="section-header">
+        <text class="section-title">最近发布记录</text>
+        <button class="view-all-button" bindtap="onViewAllRecords">查看全部</button>
+      </view>
+      
+      <view class="records-list">
+        <block wx:for="{{records}}" wx:key="id">
+          <view class="record-item">
+            <view class="record-info">
+              <icon class="record-platform-icon {{item.platformIcon}}" type="{{item.platformIcon}}" size="14"></icon>
+              <view class="record-text-container">
+                <text class="record-title">{{item.platform}} · {{item.title}}</text>
+                <text class="record-meta">
+                  {{item.time}} 
+                  <block wx:if="{{item.views}}">· 播放 {{item.views}} · 点赞 {{item.likes}}</block>
+                </text>
+              </view>
+            </view>
+            
+            <block wx:if="{{item.statusType === 'failed'}}">
+              <button class="retry-button" bindtap="onRetryPublish" data-id="{{item.id}}">修改并重发</button>
+            </block>
+            <block wx:elif="{{item.statusType === 'success'}}">
+              <text class="record-status success">{{item.status}}</text>
+            </block>
+            <block wx:elif="{{item.statusType === 'pending'}}">
+              <text class="record-status pending">{{item.status}}</text>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+</view>

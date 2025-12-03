@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>我的 & 设置</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="h-12 px-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <div class="text-sm font-semibold">我的</div>
+      <button class="text-xs text-slate-400">帮助与反馈</button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative pb-16 overflow-y-auto">
+      <!-- 用户信息 -->
+      <div class="px-4 pt-4 pb-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500">
+            <img
+              src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400"
+              class="w-full h-full object-cover"
+              alt="头像"
+            />
+          </div>
+          <div class="text-[12px]">
+            <div class="text-slate-100 text-sm font-semibold">老李 · 二手车商</div>
+            <div class="text-slate-400">
+              门店：XX 名车行（主账号）
+            </div>
+          </div>
+        </div>
+        <button class="px-3 py-1.5 rounded-2xl bg-slate-900 border border-slate-700 text-[11px] text-slate-200">
+          切换门店
+        </button>
+      </div>
+
+      <!-- 数据概览 -->
+      <div class="px-4 grid grid-cols-3 gap-2 text-[11px] mb-3">
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2">
+          <div class="text-slate-400">本周成片</div>
+          <div class="text-xl font-semibold mt-1">24</div>
+          <div class="text-[10px] text-emerald-400 mt-0.5">+ 36%</div>
+        </div>
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2">
+          <div class="text-slate-400">平均制作时长</div>
+          <div class="text-xl font-semibold mt-1">3.2<span class="text-sm"> 分</span></div>
+          <div class="text-[10px] text-emerald-400 mt-0.5">节省 18 分钟/条</div>
+        </div>
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2">
+          <div class="text-slate-400">团队成员</div>
+          <div class="text-xl font-semibold mt-1">5</div>
+          <div class="text-[10px] text-slate-500 mt-0.5">支持协作拍摄</div>
+        </div>
+      </div>
+
+      <!-- 设置列表 -->
+      <div class="px-4 text-[12px] space-y-3 mb-4">
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800">
+          <div class="px-3 py-2 text-[11px] text-slate-400">账号 & 团队</div>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-regular fa-user text-slate-300"></i>
+              <span>个人信息</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-users text-slate-300"></i>
+              <span>团队成员管理</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-store text-slate-300"></i>
+              <span>门店信息 & 品牌片头</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+        </div>
+
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800">
+          <div class="px-3 py-2 text-[11px] text-slate-400">剪辑 & 发布偏好</div>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-microphone-lines text-slate-300"></i>
+              <span>口播音色 & 语速偏好</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-music text-slate-300"></i>
+              <span>BGM 风格偏好</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-font text-slate-300"></i>
+              <span>字幕样式 & 字体</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-paper-plane text-slate-300"></i>
+              <span>默认分发平台 & 规则</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+        </div>
+
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800">
+          <div class="px-3 py-2 text-[11px] text-slate-400">系统</div>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-bell text-slate-300"></i>
+              <span>消息通知设置</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-shield-halved text-slate-300"></i>
+              <span>隐私 & 权限</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+          <button class="w-full flex items-center justify-between px-3 py-2 border-t border-slate-800/80">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-circle-info text-slate-300"></i>
+              <span>关于 ClipFlow</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 退出登录 -->
+      <div class="px-4 mb-6">
+        <button class="w-full py-2.5 rounded-2xl border border-red-500/50 text-red-400 text-[12px]">
+          退出登录
+        </button>
+      </div>
+    </div>
+
+    <!-- 底部 TabBar -->
+    <div class="h-16 bg-black/95 border-t border-slate-800 flex items-center justify-around text-[11px] text-slate-400">
+      <button class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-car-side text-base mb-0.5"></i>
+        <span>车辆</span>
+      </button>
+      <button class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-video text-base mb-0.5"></i>
+        <span>拍摄</span>
+      </button>
+      <button class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-clapperboard text-base mb-0.5"></i>
+        <span>成片</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-blue-500">
+        <i class="fa-regular fa-user text-base mb-0.5"></i>
+        <span>我的</span>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

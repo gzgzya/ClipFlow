@@ -1,0 +1,8 @@
+<!-- 模板项组件 -->
+<view class="template-item {{active ? 'active' : ''}}" bindtap="onTap">
+  <view class="item-content">
+    <text class="subtitle">{{template.subtitle}}</text>
+    <text class="title">{{template.title}}</text>
+    <text class="description">{{template.description}}</text>
+  </view>
+</view>

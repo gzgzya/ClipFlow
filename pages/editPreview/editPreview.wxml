@@ -1,0 +1,115 @@
+<!-- 自动剪辑页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="nav-button" bindtap="onBack">
+      <icon class="nav-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">自动剪辑</text>
+      <text class="title-sub">基于当前时间线一键生成</text>
+    </view>
+    <button class="history-button" bindtap="onHistory">历史</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 视频预览窗口 -->
+    <view class="preview-section">
+      <view class="preview-container">
+        <image class="preview-image" src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1200" mode="aspectFill"></image>
+        <view class="preview-overlay"></view>
+
+        <view class="preview-tags">
+          <text class="tag-text">预览 · 00:35</text>
+          <view class="ai-tags">
+            <text class="ai-tag subtitle">AI 字幕</text>
+            <text class="ai-tag voice">AI 口播</text>
+          </view>
+        </view>
+
+        <!-- 播放控制 -->
+        <view class="player-controls">
+          <view class="time-info">
+            <text class="current-time">00:12</text>
+            <text class="total-time">00:35</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill"></view>
+          </view>
+          <view class="control-buttons">
+            <button class="control-button" bindtap="onRewind">
+              <icon class="control-icon" type="prev" size="12"></icon>
+            </button>
+            <button class="play-button" bindtap="onPlay">
+              <icon class="play-icon" type="play" size="14"></icon>
+            </button>
+            <button class="control-button" bindtap="onForward">
+              <icon class="control-icon" type="next" size="12"></icon>
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 模板选择 -->
+    <view class="template-section">
+      <view class="section-header">
+        <text class="section-title">剪辑模板</text>
+        <button class="manage-button" bindtap="onManageTemplate">管理模板</button>
+      </view>
+      <scroll-view class="template-list" scroll-x="true">
+        <view class="template-items">
+          <template-item template="{{templates[0]}}" active="true"></template-item>
+          <template-item template="{{templates[1]}}"></template-item>
+          <template-item template="{{templates[2]}}"></template-item>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- AI 选项 -->
+    <view class="ai-section">
+      <ai-option option="{{aiOptions[0]}}" bindchange="onAIOptionChange"></ai-option>
+      <ai-option option="{{aiOptions[1]}}" bindchange="onAIOptionChange"></ai-option>
+      <ai-option option="{{aiOptions[2]}}" bindchange="onAIOptionChange"></ai-option>
+    </view>
+
+    <!-- 文案编辑 -->
+    <view class="copy-section">
+      <view class="section-header">
+        <text class="section-title">发布文案（可用于抖音/快手等）</text>
+        <button class="ai-button" bindtap="onAIGenerate">
+          <icon class="ai-icon" type="magic" size="10"></icon>
+          <text class="ai-text">AI 生成</text>
+        </button>
+      </view>
+      <textarea class="copy-textarea" placeholder="示例：一手 2021 宝马 325Li，3.8 万公里，无重大事故，配置丰富，支持第三方检测。诚心出售，有需要的朋友私聊我～" bindinput="onCopyInput"></textarea>
+      <view class="copy-info">
+        <text class="info-text">将同步到各平台发布框，可二次修改。</text>
+        <text class="word-count">字数：56 / 建议 40-80</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="time-info">
+      <text class="info-label">预计生成时间</text>
+      <text class="time-text">约 18 秒 · 云端自动完成</text>
+    </view>
+    <button class="generate-button" bindtap="onGenerate">
+      <icon class="generate-icon" type="magic" size="12"></icon>
+      <text class="generate-text">一键生成成片</text>
+    </button>
+  </view>
+</view>

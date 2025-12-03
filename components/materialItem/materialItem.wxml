@@ -1,0 +1,29 @@
+<!-- 素材项组件 -->
+<view class="material-item" bindtap="onTap">
+  <view class="item-container">
+    <view class="image-container">
+      <image class="material-image" src="{{material.image}}" mode="aspectFill"></image>
+      <view class="image-overlay"></view>
+      <text class="duration-tag">{{material.duration}}</text>
+      <text class="type-tag {{['exterior', 'interior', 'highlight'][['外观', '内饰', '亮点'].indexOf(material.type)]}}">{{material.type}}</text>
+    </view>
+    <view class="info-container">
+      <view class="info-header">
+        <view class="title-container">
+          <text class="material-title">{{material.title}}</text>
+          <text class="material-quality">{{material.quality}}</text>
+        </view>
+        <button class="status-button {{material.status === '已入时间线' ? 'added' : 'add'}}">
+          {{material.status}}
+        </button>
+      </view>
+      <view class="info-footer">
+        <text class="material-time">{{material.time}}</text>
+        <view class="action-buttons">
+          <button class="action-button retry" bindtap="onRetry">重拍</button>
+          <button class="action-button delete" bindtap="onDelete">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

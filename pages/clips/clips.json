@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "成片中心",
+  "usingComponents": {
+    "clip-card": "/components/clipCard/clipCard",
+    "status-bar": "/components/statusBar/statusBar",
+    "nav-bar": "/components/navBar/navBar"
+  }
+}

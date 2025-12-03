@@ -1,0 +1,10 @@
+<!-- AI选项组件 -->
+<view class="ai-option" bindtap="onTap">
+  <view class="option-content">
+    <view class="option-info">
+      <text class="option-title">{{option.title}}</text>
+      <text class="option-description">{{option.description}}</text>
+    </view>
+    <switch class="option-switch" checked="{{option.enabled}}" bindchange="onSwitchChange" />
+  </view>
+</view>

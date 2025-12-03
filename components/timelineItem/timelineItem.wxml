@@ -1,0 +1,7 @@
+<!-- 时间线项组件 -->
+<view class="timeline-item">
+  <view class="item-container {{['exterior', 'interior', 'highlight'][['外观', '内饰', '亮点'].indexOf(item.type)]}}">
+    <text class="item-type">{{item.type}}</text>
+    <text class="item-duration">{{item.duration}}</text>
+  </view>
+</view>

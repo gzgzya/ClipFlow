@@ -1,0 +1,221 @@
+/* 成片中心页面样式 */
+.container {
+  background-color: #0f172a;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 成片中心特定样式 */
+.count-tag {
+  font-size: 11rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 32rpx;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1rpx solid rgba(16, 185, 129, 0.4);
+}
+
+/* 内容区域 */
+.content {
+  flex: 1;
+  background-color: #020617;
+  padding-bottom: 128rpx;
+}
+
+/* 搜索区域 */
+.search-section {
+  padding: 24rpx 32rpx;
+  font-size: 11rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.search-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 24rpx;
+  color: #94a3b8;
+  z-index: 1;
+}
+
+.search-input {
+  flex: 1;
+  padding: 16rpx 32rpx 16rpx 72rpx;
+  border-radius: 32rpx;
+  background-color: #1e293b;
+  font-size: 12rpx;
+  color: #f1f5f9;
+  border: 1rpx solid #334155;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.filter-button {
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  background-color: #1e293b;
+  font-size: 12rpx;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  border: 1rpx solid #334155;
+}
+
+/* 状态标签 */
+.tabs-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tabs-container {
+  display: flex;
+  gap: 8rpx;
+}
+
+.tab-item {
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  font-size: 12rpx;
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border: none;
+}
+
+.tab-item.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.sort-button {
+  padding: 12rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: #1e293b;
+  font-size: 10rpx;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  border: 1rpx solid #334155;
+}
+
+/* 平台筛选 */
+.platform-chips {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  color: #94a3b8;
+  font-size: 10rpx;
+}
+
+.chips-label {
+  flex-shrink: 0;
+}
+
+.chip-item {
+  padding: 8rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  border: 1rpx solid #334155;
+  color: #f1f5f9;
+  font-size: 11rpx;
+}
+
+.chip-item.active {
+  border-color: #3b82f6;
+}
+
+.douyin {
+  color: #fff;
+}
+
+.kuaishou {
+  color: #f97316;
+}
+
+.weixin {
+  color: #10b981;
+}
+
+.xiaohongshu {
+  color: #ef4444;
+}
+
+/* 成片列表 */
+.clips-list {
+  padding: 0 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.clip-card-item {
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+.footer-tip {
+  padding: 16rpx;
+  border-radius: 16rpx;
+  background-color: rgba(30, 41, 59, 0.6);
+  border: 1rpx dashed #334155;
+  font-size: 11rpx;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+}
+
+/* 底部导航栏 */
+.tab-bar {
+  height: 128rpx;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-top: 1rpx solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 11rpx;
+  color: #94a3b8;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.tab-item.active {
+  color: #3b82f6;
+}
+
+.tab-icon {
+  margin-bottom: 8rpx;
+}

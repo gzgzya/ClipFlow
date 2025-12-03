@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>登录 - ClipFlow 车商视频助手</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航（登录一般不显示底部 Tab） -->
+    <div class="h-12 px-4 flex items-center justify-center bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <div class="text-sm font-semibold">登录 / 注册</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative overflow-hidden">
+      <!-- 顶部品牌视觉 -->
+      <div class="h-40 relative">
+        <img
+          src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          class="w-full h-full object-cover"
+          alt="车辆视觉图"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-slate-950"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
+          <div class="inline-flex items-center px-2 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-200 mb-2">
+            <i class="fa-solid fa-clapperboard-play text-emerald-300 mr-1"></i>
+            专为车商设计的视频工作台
+          </div>
+          <div class="text-xl font-semibold text-white tracking-wide">ClipFlow</div>
+          <div class="text-[11px] text-slate-300 mt-1">
+            车辆信息管理 · 标准化拍摄 · 自动剪辑 · 一键分发
+          </div>
+        </div>
+      </div>
+
+      <!-- 登录卡片 -->
+      <div class="absolute inset-x-0 bottom-0 top-32 px-4 pb-6 overflow-y-auto">
+        <div class="rounded-3xl bg-slate-900/95 border border-slate-800 px-4 pt-4 pb-4 text-[11px] shadow-[0_-20px_40px_rgba(15,23,42,0.9)]">
+          <!-- 微信快捷登录 -->
+          <div class="mb-3">
+            <button
+              class="w-full py-2.5 rounded-2xl bg-emerald-500 text-white text-sm font-medium flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/40"
+            >
+              <i class="fa-brands fa-weixin text-lg"></i>
+              <span>微信快捷登录 / 授权</span>
+            </button>
+            <div class="mt-1 text-[10px] text-slate-500 text-center">
+              仅用于获取你的微信昵称和头像，用于展示与账号识别，不会向你的好友发送任何消息。
+            </div>
+          </div>
+
+          <!-- 分割线 -->
+          <div class="flex items-center my-3">
+            <div class="flex-1 h-px bg-slate-800"></div>
+            <span class="px-2 text-[10px] text-slate-500">或 使用手机号登录</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+          </div>
+
+          <!-- 手机号 + 验证码登录 -->
+          <form class="space-y-3">
+            <div>
+              <label class="block mb-1 text-slate-400">手机号码</label>
+              <div class="flex items-center rounded-2xl bg-slate-950 border border-slate-700 px-3 py-2">
+                <span class="text-[11px] text-slate-400 mr-2">+86</span>
+                <input
+                  type="tel"
+                  placeholder="请输入你的常用手机号"
+                  class="flex-1 bg-transparent outline-none text-xs placeholder:text-slate-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block mb-1 text-slate-400">短信验证码</label>
+              <div class="flex items-center space-x-2">
+                <div class="flex-1 rounded-2xl bg-slate-950 border border-slate-700 px-3 py-2">
+                  <input
+                    type="text"
+                    placeholder="6 位数字验证码"
+                    class="w-full bg-transparent outline-none text-xs placeholder:text-slate-500"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="px-3 py-2 rounded-2xl bg-slate-800 text-[11px] text-slate-100 border border-slate-600"
+                >
+                  获取验证码
+                </button>
+              </div>
+              <div class="mt-1 text-[10px] text-slate-500">
+                未注册的手机号将自动创建账号。
+              </div>
+            </div>
+
+            <!-- 门店角色选择（简化） -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-slate-400">你的身份</span>
+                <span class="text-[10px] text-slate-500">用于推荐适合的拍摄模板</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-[10px]">
+                <button type="button" class="px-2 py-1.5 rounded-2xl bg-blue-600 text-white">
+                  二手车商
+                </button>
+                <button type="button" class="px-2 py-1.5 rounded-2xl bg-slate-800 text-slate-100 border border-slate-600">
+                  代拍
+                </button>
+                <button type="button" class="px-2 py-1.5 rounded-2xl bg-slate-800 text-slate-100 border border-slate-600">
+                  汽车经纪人
+                </button>
+              </div>
+            </div>
+
+            <!-- 协议勾选 -->
+            <div class="flex items-start space-x-2 text-[10px] text-slate-500">
+              <input type="checkbox" checked class="mt-0.5 w-3.5 h-3.5 rounded border-slate-500 bg-slate-900" />
+              <span>
+                我已阅读并同意
+                <a href="javascript:void(0)" class="text-blue-400">《用户服务协议》</a>
+                和
+                <a href="javascript:void(0)" class="text-blue-400">《隐私政策》</a>。
+              </span>
+            </div>
+
+            <!-- 登录按钮 -->
+            <div class="pt-1">
+              <a
+                href="home.html"
+                class="block w-full text-center py-2.5 rounded-2xl bg-blue-600 text-white text-sm font-medium shadow-lg shadow-blue-600/40"
+              >
+                登录并进入车库
+              </a>
+              <div class="mt-1 text-[10px] text-slate-500 text-center">
+                登录即视为你已同意相关协议，后续可在「我的-隐私与权限」中管理授权设置。
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- 底部小字 -->
+        <div class="mt-3 text-[10px] text-slate-500 text-center">
+          ClipFlow 车商视频助手 · 帮你一天拍好多车，不再怕剪辑。
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

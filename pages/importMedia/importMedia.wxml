@@ -1,0 +1,155 @@
+<!-- 导入素材页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="back-button" bindtap="onBack">
+      <icon class="back-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">导入素材</text>
+      <text class="title-sub">从相册/聊天导入并按车归类</text>
+    </view>
+    <button class="finish-button" bindtap="onFinish">完成</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 导入来源 -->
+    <view class="section sources-section">
+      <view class="section-header">
+        <text class="section-title">选择导入来源</text>
+        <text class="section-subtitle">支持批量选择</text>
+      </view>
+      
+      <view class="sources-grid">
+        <block wx:for="{{importSources}}" wx:key="id">
+          <button class="source-item {{item.color}} {{item.active ? 'active' : ''}}" bindtap="onSelectSource" data-id="{{item.id}}">
+            <icon class="source-icon" type="{{item.icon}}" size="14"></icon>
+            <text class="source-name">{{item.name}}</text>
+          </button>
+        </block>
+      </view>
+    </view>
+
+    <!-- 目标车辆选择 & 智能匹配 -->
+    <view class="section vehicle-section">
+      <view class="section-header with-button">
+        <text class="section-title">按车归类</text>
+        <button class="switch-button" bindtap="switchVehicle">
+          <icon class="switch-icon" type="waiting" size="10"></icon>
+          <text class="switch-text">切换车辆</text>
+        </button>
+      </view>
+      
+      <view class="current-vehicle-card">
+        <view class="vehicle-info">
+          <view class="image-container">
+            <image class="vehicle-image" src="{{currentVehicle.image}}" mode="aspectFill"></image>
+          </view>
+          <view class="vehicle-details">
+            <text class="vehicle-name">{{currentVehicle.name}} · {{currentVehicle.plate}}</text>
+            <text class="vehicle-description">{{currentVehicle.description}}</text>
+          </view>
+        </view>
+        <view class="current-tag">当前车辆</view>
+      </view>
+      
+      <view class="smart-recognition-card">
+        <view class="card-content">
+          <view class="text-container">
+            <text class="card-title">智能识别车牌/车型</text>
+            <text class="card-description">可自动识别视频中的车牌、车型，批量素材按不同车辆自动归类。</text>
+          </view>
+          <switch class="toggle-switch" checked="{{enableSmartRecognition}}" bindchange="toggleSmartRecognition" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 归类规则 -->
+    <view class="section rules-section">
+      <view class="section-header">
+        <text class="section-title">自动分组规则</text>
+        <text class="section-subtitle">可在「设置-剪辑偏好」中修改</text>
+      </view>
+      
+      <view class="rules-grid">
+        <block wx:for="{{classificationRules}}" wx:key="id">
+          <view class="rule-card">
+            <view class="rule-header">
+              <text class="rule-name">{{item.name}}</text>
+              <text class="rule-time">{{item.time}}</text>
+            </view>
+            <text class="rule-description">{{item.description}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 待导入素材预览列表 -->
+    <view class="section media-section">
+      <view class="section-header">
+        <text class="section-title">已选择的素材（模拟队列）</text>
+        <text class="section-subtitle">共 {{summary.count}} 段 · 预计占用 {{summary.size}}</text>
+      </view>
+      
+      <view class="media-list">
+        <block wx:for="{{mediaItems}}" wx:key="id">
+          <view class="media-item">
+            <view class="image-container">
+              <image class="preview-image" src="{{item.image}}" mode="aspectFill"></image>
+              <view class="image-overlay"></view>
+              <view class="duration-tag">{{item.duration}}</view>
+              <view class="classification-tag {{item.classificationColor}}">预计：{{item.classification}}</view>
+            </view>
+            
+            <view class="info-container">
+              <view class="header-row">
+                <view class="media-info">
+                  <text class="media-name">{{item.name}}</text>
+                  <text class="media-source">来源：{{item.source}} · {{item.time}}</text>
+                </view>
+                <button class="remove-button" bindtap="removeMedia" data-id="{{item.id}}">
+                  <icon type="close" size="10"></icon>
+                </button>
+              </view>
+              
+              <view class="action-row">
+                <block wx:if="{{item.targetVehicle}}">
+                  <view class="target-vehicle">
+                    <icon type="waiting" size="12" class="vehicle-icon"></icon>
+                    <text class="vehicle-text">将归属：{{item.targetVehicle}}</text>
+                  </view>
+                  <button class="modify-button" bindtap="modifyOwnership" data-id="{{item.id}}">{{item.action}}</button>
+                </block>
+                
+                <block wx:elif="{{item.suggestion}}">
+                  <view class="ai-suggestion">
+                    <icon type="magic" size="12" class="suggestion-icon"></icon>
+                    <text class="suggestion-text">{{item.suggestion}}</text>
+                  </view>
+                  <button class="mark-button" bindtap="markAsAlternative" data-id="{{item.id}}">{{item.action}}</button>
+                </block>
+              </view>
+            </view>
+          </view>
+        </block>
+        
+        <!-- 更多提示 -->
+        <view class="more-tip">
+          <icon class="tip-icon" type="more" size="10"></icon>
+          <text class="tip-text">还有 3 段素材将一并导入...</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

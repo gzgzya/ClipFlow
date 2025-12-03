@@ -1,0 +1,43 @@
+<!-- 车辆卡片组件 -->
+<view class="vehicle-card">
+  <view class="card-content">
+    <view class="image-container">
+      <image class="vehicle-image" src="{{vehicle.image}}" mode="aspectFill"></image>
+    </view>
+    
+    <view class="info-container">
+      <view class="title">{{vehicle.name}} · {{vehicle.plate}}</view>
+      
+      <view class="subtitle">{{vehicle.status}}</view>
+      
+      <view class="details">
+        <block wx:if="{{vehicle.materials}}">
+          <text class="detail-item">
+            <icon type="video" size="12" class="detail-icon blue"></icon>
+            素材 {{vehicle.materials}}
+          </text>
+        </block>
+        
+        <block wx:if="{{vehicle.lastTime}}">
+          <text class="detail-item">
+            <icon type="time" size="12" class="detail-icon gray"></icon>
+            最近 {{vehicle.lastTime}}
+          </text>
+        </block>
+        
+        <block wx:if="{{vehicle.suggestion}}">
+          <text class="detail-item suggestion">
+            <icon type="info" size="12" class="detail-icon amber"></icon>
+            {{vehicle.suggestion}}
+          </text>
+        </block>
+      </view>
+    </view>
+    
+    <block wx:if="{{showAction}}">
+      <button class="action-button {{vehicle.actionType}}" size="mini" bindtap="onActionTap">
+        {{vehicle.actionText}}
+      </button>
+    </block>
+  </view>
+</view>

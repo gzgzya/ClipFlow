@@ -1,0 +1,33 @@
+/* AI选项组件样式 */
+.ai-option {
+  padding: 16rpx 24rpx;
+  border-radius: 32rpx;
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 1px solid #1e293b;
+}
+
+.option-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.option-title {
+  font-size: 22rpx;
+  color: #f1f5f9;
+}
+
+.option-description {
+  font-size: 20rpx;
+  color: #94a3b8;
+}
+
+.option-switch {
+  transform: scale(0.8);
+}

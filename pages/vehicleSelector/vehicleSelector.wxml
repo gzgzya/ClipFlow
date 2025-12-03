@@ -1,0 +1,73 @@
+<!-- 选择车辆页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="nav-button" bindtap="onBack">
+      <icon class="nav-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">选择车辆</text>
+      <text class="title-sub">用于批量成片</text>
+    </view>
+    <button class="select-all-button" bindtap="onSelectAll">全选</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 顶部搜索与已选提示 -->
+    <view class="search-section">
+      <view class="search-bar">
+        <view class="search-container">
+          <icon class="search-icon" type="search" size="12"></icon>
+          <input class="search-input" placeholder="搜索车牌、车型或备注" bindinput="onSearchInput" />
+        </view>
+        <button class="filter-button" bindtap="onFilter">
+          <icon class="filter-icon" type="filter" size="12"></icon>
+          <text class="filter-text">筛选</text>
+        </button>
+      </view>
+
+      <!-- 已选择提示 -->
+      <view class="selection-info">
+        <view class="selection-text">
+          <text class="info-label">已选择</text>
+          <text class="selected-count">{{selectedCount}}</text>
+          <text class="info-label">台车辆</text>
+        </view>
+        <button class="clear-button" bindtap="onClearSelection">清空</button>
+      </view>
+    </view>
+
+    <!-- 车辆列表 -->
+    <scroll-view class="vehicle-list" scroll-y="true">
+      <block wx:for="{{vehicles}}" wx:key="id">
+        <vehicle-selector-item vehicle="{{item}}" bind:select="onVehicleSelect"></vehicle-selector-item>
+      </block>
+
+      <!-- 更多车辆提示 -->
+      <view class="load-more">
+        <icon class="more-icon" type="more" size="10"></icon>
+        <text class="more-text">下拉加载更多车辆...</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="cancel-button" bindtap="onCancel">取消</button>
+    <button class="confirm-button" bindtap="onConfirm">
+      <text class="confirm-text">确认选择</text>
+      <text class="count-badge">{{selectedCount}} 台</text>
+    </button>
+  </view>
+</view>

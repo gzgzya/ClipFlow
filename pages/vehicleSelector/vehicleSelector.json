@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择车辆",
+  "usingComponents": {
+    "vehicle-selector-item": "/components/vehicleSelectorItem/vehicleSelectorItem"
+  }
+}

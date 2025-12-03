@@ -1,0 +1,13 @@
+<!-- 素材卡片组件 -->
+<view class="material-card">
+  <view class="card-header">
+    <text class="card-type">{{type}}</text>
+    <text class="card-progress">{{progress}}</text>
+  </view>
+  <view class="progress-container">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{percent}}%"></view>
+    </view>
+  </view>
+  <text class="card-count">素材 {{count}}</text>
+</view>

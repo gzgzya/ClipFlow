@@ -1,0 +1,20 @@
+<view class="nav-bar nav-bg">
+  <block wx:if="{{showBack}}">
+    <button class="icon-button" bindtap="onBack">
+      <icon class="back-icon" type="arrow-left" size="12"></icon>
+    </button>
+  </block>
+  
+  <view class="nav-title">
+    <text class="title-main">{{title}}</text>
+    <text class="title-sub">{{subtitle}}</text>
+  </view>
+  
+  <block wx:if="{{showSettings}}">
+    <button class="settings-button" bindtap="onSettings">{{settingsText}}</button>
+  </block>
+  
+  <block wx:else>
+    <view style="width: 32rpx;"></view>
+  </block>
+</view>

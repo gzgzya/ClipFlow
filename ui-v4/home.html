@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>首页 - 车辆列表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- iOS 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="h-12 px-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <div class="flex items-center space-x-2">
+        <span class="text-lg font-semibold">ClipFlow 车库</span>
+        <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/40">
+          车商专用
+        </span>
+      </div>
+      <button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-700/70">
+        <i class="fa-solid fa-qrcode text-xs"></i>
+      </button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative">
+      <!-- 顶部搜索与统计 -->
+      <div class="px-4 pt-3 pb-2 space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-xs"></i>
+            <input
+              type="text"
+              placeholder="搜索车牌、车型或备注"
+              class="w-full pl-8 pr-3 py-2 rounded-2xl bg-slate-800/80 text-xs placeholder:text-slate-500 border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <button class="px-3 py-1.5 rounded-2xl bg-slate-800/80 text-xs flex items-center space-x-1 border border-slate-700/60">
+            <i class="fa-solid fa-filter text-[11px]"></i>
+            <span>筛选</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-slate-400">
+          <div class="flex space-x-3">
+            <span class="flex items-center space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>在售 18</span>
+            </span>
+            <span class="flex items-center space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>已售 6</span>
+            </span>
+          </div>
+          <div class="flex space-x-3">
+            <span>今日成片 5</span>
+            <span>待发布 9</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快捷入口 -->
+      <div class="px-4 pb-3 grid grid-cols-3 gap-3 text-xs">
+        <button class="flex flex-col items-start px-3 py-2 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 text-white">
+          <span class="text-[11px] opacity-80">快速开始</span>
+          <span class="font-semibold mt-0.5">新增车辆</span>
+          <span class="mt-1 text-[10px] opacity-80">创建车档案并开始拍摄</span>
+        </button>
+        <button class="flex flex-col items-start px-3 py-2 rounded-2xl bg-slate-800/80 text-slate-100 border border-slate-700/70">
+          <span class="text-[11px] opacity-80">导入素材</span>
+          <span class="font-semibold mt-0.5">从相册</span>
+          <span class="mt-1 text-[10px] opacity-80">自动按车归类</span>
+        </button>
+        <button class="flex flex-col items-start px-3 py-2 rounded-2xl bg-slate-800/80 text-slate-100 border border-slate-700/70">
+          <span class="text-[11px] opacity-80">一键生成</span>
+          <span class="font-semibold mt-0.5">批量成片</span>
+          <span class="mt-1 text-[10px] opacity-80">空闲时统一处理</span>
+        </button>
+      </div>
+
+      <!-- 车辆列表 -->
+      <div class="px-4 pb-16 overflow-y-auto space-y-3 h-[560px]">
+        <!-- 车辆卡片示例 1 -->
+        <div class="rounded-3xl bg-slate-900/80 border border-slate-700/70 overflow-hidden">
+          <div class="flex">
+            <div class="w-28 h-24 overflow-hidden">
+              <img
+                src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=800"
+                class="w-full h-full object-cover"
+                alt="车辆封面"
+              />
+            </div>
+            <div class="flex-1 p-3 space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="text-xs text-slate-400">苏A · 88888</div>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/40">
+                  在售
+                </span>
+              </div>
+              <div class="text-sm font-semibold text-slate-50">
+                2021 宝马 325Li M运动曜夜
+              </div>
+              <div class="text-[11px] text-slate-400 line-clamp-1">
+                无钥匙进入 · 座椅加热 · 首保已做 · 一手车源
+              </div>
+              <div class="flex items-center justify-between mt-1">
+                <div class="flex items-center space-x-2 text-[10px] text-slate-400">
+                  <span><i class="fa-solid fa-film mr-1 text-blue-400"></i>素材 12</span>
+                  <span><i class="fa-solid fa-clapperboard-play mr-1 text-emerald-400"></i>成片 3</span>
+                  <span><i class="fa-solid fa-paper-plane mr-1 text-amber-400"></i>已发 5</span>
+                </div>
+                <button class="text-[11px] px-2 py-1 rounded-full bg-blue-600 text-white">
+                  继续拍摄
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 车辆卡片示例 2 -->
+        <div class="rounded-3xl bg-slate-900/80 border border-slate-700/70 overflow-hidden">
+          <div class="flex">
+            <div class="w-28 h-24 overflow-hidden">
+              <img
+                src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=800"
+                class="w-full h-full object-cover"
+                alt="车辆封面"
+              />
+            </div>
+            <div class="flex-1 p-3 space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="text-xs text-slate-400">沪B · 66666</div>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-600/30 text-slate-300 border border-slate-500/60">
+                  已售
+                </span>
+              </div>
+              <div class="text-sm font-semibold text-slate-50">
+                2019 奔驰 C200L 运动版
+              </div>
+              <div class="text-[11px] text-slate-400 line-clamp-1">
+                原厂漆 · 无事故 · 按时保养
+              </div>
+              <div class="flex items-center justify-between mt-1">
+                <div class="flex items-center space-x-2 text-[10px] text-slate-400">
+                  <span><i class="fa-solid fa-film mr-1 text-blue-400"></i>素材 8</span>
+                  <span><i class="fa-solid fa-clapperboard-play mr-1 text-emerald-400"></i>成片 2</span>
+                  <span><i class="fa-solid fa-paper-plane mr-1 text-amber-400"></i>已发 4</span>
+                </div>
+                <button class="text-[11px] px-2 py-1 rounded-full bg-slate-700 text-slate-100">
+                  查看记录
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 可复制更多车辆卡片，占位 -->
+        <div class="rounded-3xl bg-slate-900/80 border border-dashed border-slate-700/60 flex items-center justify-center py-6 text-xs text-slate-500">
+          <span class="mr-2">
+            <i class="fa-regular fa-square-plus"></i>
+          </span>
+          <span>下拉加载更多车辆...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部 TabBar -->
+    <div class="h-16 bg-black/95 border-t border-slate-800 flex items-center justify-around text-[11px] text-slate-400">
+      <button class="flex flex-col items-center justify-center text-blue-500">
+        <i class="fa-solid fa-car-side text-base mb-0.5"></i>
+        <span>车辆</span>
+      </button>
+      <button class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-video text-base mb-0.5"></i>
+        <span>拍摄</span>
+      </button>
+      <button class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-clapperboard text-base mb-0.5"></i>
+        <span>成片</span>
+      </button>
+      <button class="flex flex-col items-center justify-center">
+        <i class="fa-regular fa-user text-base mb-0.5"></i>
+        <span>我的</span>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

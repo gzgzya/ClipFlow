@@ -1,0 +1,130 @@
+<!-- 新增/编辑车辆页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="back-button" bindtap="onBack">
+      <icon class="back-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <text class="nav-title">新增车辆</text>
+    <button class="save-button" bindtap="onSave">保存</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <form class="form">
+      <!-- 车牌 & 状态 -->
+      <view class="form-section">
+        <view class="form-row">
+          <view class="form-col flex-1">
+            <text class="form-label">车牌号</text>
+            <input class="form-input" placeholder="例如：苏A88888" bindinput="onPlateInput" />
+          </view>
+          <view class="form-col w-24">
+            <text class="form-label">车辆状态</text>
+            <picker class="form-picker" mode="selector" range="{{statusOptions}}" bindchange="onStatusChange">
+              <view class="picker-display">{{statusOptions[statusIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <!-- 品牌 / 车系 / 年款 -->
+      <view class="form-section">
+        <text class="form-label">品牌 / 车系</text>
+        <view class="form-row">
+          <input class="form-input flex-1" placeholder="品牌，如：宝马" bindinput="onBrandInput" />
+          <input class="form-input flex-1 ml-2" placeholder="车系，如：3系" bindinput="onSeriesInput" />
+        </view>
+      </view>
+
+      <view class="form-section">
+        <view class="form-row">
+          <view class="form-col flex-1">
+            <text class="form-label">年款</text>
+            <input class="form-input" placeholder="如：2021" bindinput="onYearInput" />
+          </view>
+          <view class="form-col flex-1 ml-2">
+            <text class="form-label">排量 / 能源</text>
+            <input class="form-input" placeholder="2.0T / 混动" bindinput="onEngineInput" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 基本信息 -->
+      <view class="form-section">
+        <view class="form-row">
+          <view class="form-col flex-1">
+            <text class="form-label">表显里程</text>
+            <input class="form-input" placeholder="如：3.8 万公里" bindinput="onMileageInput" />
+          </view>
+          <view class="form-col flex-1 ml-2">
+            <text class="form-label">车身颜色</text>
+            <input class="form-input" placeholder="如：白色" bindinput="onColorInput" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 卖点亮点 -->
+      <view class="form-section">
+        <text class="form-label">卖点亮点</text>
+        <textarea class="form-textarea" placeholder="例如：一手车源，无事故，4S 保养记录齐全，带 M 运动套件、全景天窗、HUD 抬头显示等..." bindinput="onHighlightsInput"></textarea>
+      </view>
+
+      <!-- 车辆故事 / 话术 -->
+      <view class="form-section">
+        <text class="form-label">推荐话术（AI 可用）</text>
+        <textarea class="form-textarea short" placeholder="简单写几句你平时介绍这台车的话，AI 会基于此生成口播与字幕文案。" bindinput="onDescriptionInput"></textarea>
+      </view>
+
+      <!-- 车辆照片上传区 -->
+      <view class="form-section">
+        <view class="form-header">
+          <text class="form-label">车辆照片</text>
+          <text class="form-sublabel">建议：封面 + 外观 + 内饰</text>
+        </view>
+        <view class="photo-grid">
+          <block wx:for="{{photos}}" wx:key="index">
+            <view class="photo-item">
+              <image class="photo-image" src="{{item.url}}" mode="aspectFill"></image>
+              <text wx:if="{{item.cover}}" class="cover-tag">封面</text>
+              <button wx:if="{{!item.url}}" class="photo-add" bindtap="onAddPhoto">
+                <icon class="add-icon" type="add" size="16"></icon>
+                <text class="add-text">添加</text>
+              </button>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <!-- 默认拍摄模板配置 -->
+      <view class="form-section">
+        <view class="form-header">
+          <text class="form-label">拍摄模板</text>
+          <text class="template-link">管理模板</text>
+        </view>
+        <view class="template-card">
+          <view class="template-info">
+            <text class="template-name">标准 3 段讲车</text>
+            <text class="template-desc">外观 15s + 内饰 10s + 亮点 10s</text>
+          </view>
+          <view class="template-tag">推荐</view>
+        </view>
+      </view>
+
+      <!-- 底部 CTA -->
+      <view class="form-section cta-section">
+        <button class="cta-button" bindtap="onSaveAndShoot">保存并开始拍摄</button>
+      </view>
+    </form>
+  </scroll-view>
+</view>

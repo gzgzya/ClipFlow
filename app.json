@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/vehicleEdit/vehicleEdit",
+    "pages/vehicleDetail/vehicleDetail",
+    "pages/shootGuide/shootGuide",
+    "pages/mediaManage/mediaManage",
+    "pages/editPreview/editPreview",
+    "pages/vehicleSelector/vehicleSelector",
+    "pages/clips/clips",
+    "pages/shootHome/shootHome",
+    "pages/profile/profile",
+    "pages/batchGenerate/batchGenerate",
+    "pages/publish/publish",
+    "pages/importMedia/importMedia"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0f172a",
+    "navigationBarTitleText": "ClipFlow",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

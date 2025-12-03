@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "自动剪辑",
+  "usingComponents": {
+    "template-item": "/components/templateItem/templateItem",
+    "ai-option": "/components/aiOption/aiOption"
+  }
+}

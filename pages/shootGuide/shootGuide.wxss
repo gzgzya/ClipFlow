@@ -1,0 +1,500 @@
+/* 标准化拍摄页面样式 */
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 状态栏 */
+.status-bar {
+  height: 40rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20rpx;
+  color: #f1f5f9;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.status-text {
+  font-weight: 600;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  margin-left: 8rpx;
+}
+
+/* 顶部导航 */
+.nav-bar {
+  height: 96rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: #f1f5f9;
+}
+
+.nav-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: rgba(30, 41, 59, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon {
+  color: #f1f5f9;
+}
+
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-main {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.title-sub {
+  font-size: 20rpx;
+  color: #94a3b8;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.action-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: rgba(30, 41, 59, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon {
+  color: #f1f5f9;
+}
+
+.text-button {
+  font-size: 24rpx;
+  color: #94a3b8;
+  background: none;
+  border: none;
+}
+
+/* 内容区域 */
+.content {
+  flex: 1;
+  background-color: #0f172a;
+  position: relative;
+  padding-bottom: 128rpx;
+}
+
+/* 步骤进度条 */
+.progress-section {
+  padding: 24rpx 32rpx 16rpx;
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-bottom: 16rpx;
+}
+
+.header-status {
+  color: #f1f5f9;
+}
+
+.progress-steps {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.step-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.step-indicator {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background-color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.step-indicator.pending {
+  border: 1px solid #64748b;
+  background-color: transparent;
+}
+
+.step-number {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+
+.step-icon {
+  color: #ffffff;
+}
+
+.step-line {
+  flex: 1;
+  height: 8rpx;
+  margin: 0 8rpx;
+  background-color: #64748b;
+}
+
+.step-line.filled {
+  background-color: #10b981;
+}
+
+.step-line.active {
+  background-color: #3b82f6;
+}
+
+.step-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+
+/* 摄像头预览区域 */
+.preview-section {
+  margin: 16rpx 32rpx;
+  border-radius: 48rpx;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  height: 512rpx;
+  position: relative;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, rgba(0, 0, 0, 0.4));
+}
+
+.preview-tip {
+  position: absolute;
+  top: 24rpx;
+  left: 24rpx;
+  right: 24rpx;
+  font-size: 22rpx;
+  color: #f1f5f9;
+}
+
+.tip-banner {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.tip-icon {
+  color: #fbbf24;
+  margin-right: 8rpx;
+}
+
+.tip-title {
+  margin-top: 16rpx;
+  color: #e2e8f0;
+}
+
+.tip-desc {
+  font-size: 20rpx;
+  color: #cbd5e1;
+  margin-top: 8rpx;
+}
+
+.preview-footer {
+  position: absolute;
+  bottom: 24rpx;
+  left: 24rpx;
+  right: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fragment-info {
+  /* 左侧信息 */
+}
+
+.fragment-text {
+  padding: 8rpx 12rpx;
+  border-radius: 32rpx;
+  background-color: rgba(0, 0, 0, 0.6);
+  font-size: 20rpx;
+  color: #f1f5f9;
+}
+
+.retake-button {
+  padding: 8rpx 20rpx;
+  border-radius: 32rpx;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(248, 113, 113, 0.6);
+  font-size: 20rpx;
+  color: #fecaca;
+}
+
+/* 步骤列表 */
+.steps-section {
+  padding: 24rpx 32rpx 0;
+  height: 320rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.header-text {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+
+.header-subtext {
+  font-size: 20rpx;
+  color: #64748b;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.step-item {
+  /* 每个步骤项 */
+}
+
+.step-item.completed {
+  /* 已完成的步骤 */
+}
+
+.step-item.active {
+  /* 当前活动步骤 */
+}
+
+.step-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 24rpx;
+  border-radius: 32rpx;
+  background-color: rgba(15, 23, 42, 0.8);
+}
+
+.step-content.active {
+  border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+.step-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.step-number {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background-color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20rpx;
+  color: #f1f5f9;
+}
+
+.step-number.completed {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.step-number.active {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+.step-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.desc-title {
+  font-size: 22rpx;
+  color: #f1f5f9;
+}
+
+.desc-subtitle {
+  font-size: 20rpx;
+  color: #94a3b8;
+}
+
+.step-action {
+  padding: 8rpx 16rpx;
+  border-radius: 32rpx;
+  font-size: 20rpx;
+  background-color: #334155;
+  color: #f1f5f9;
+  border: none;
+}
+
+.step-action.completed {
+  color: #60a5fa;
+  background-color: transparent;
+}
+
+.step-action.active {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+/* 下一个主步骤提示 */
+.next-step {
+  border-radius: 32rpx;
+  background: linear-gradient(to right, rgba(245, 158, 11, 0.1), rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+  border: 1px solid #334155;
+  overflow: hidden;
+}
+
+.next-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 24rpx;
+}
+
+.next-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.info-title {
+  font-size: 22rpx;
+  color: #f1f5f9;
+}
+
+.info-desc {
+  font-size: 20rpx;
+  color: #94a3b8;
+}
+
+.next-button {
+  padding: 8rpx 20rpx;
+  border-radius: 32rpx;
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-size: 22rpx;
+  border: none;
+}
+
+/* 底部拍摄控制条 */
+.control-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 64rpx 32rpx;
+  background-color: #0f172a;
+}
+
+.control-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-bottom: 8rpx;
+}
+
+.duration-text {
+  color: #94a3b8;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.control-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: rgba(30, 41, 59, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-icon {
+  color: #cbd5e1;
+}
+
+.record-button {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  background-color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);
+  border: 8rpx solid rgba(239, 68, 68, 0.3);
+}
+
+.record-inner {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background-color: rgba(239, 68, 68, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}

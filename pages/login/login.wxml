@@ -1,0 +1,95 @@
+<!-- 登录页面 -->
+<view class="container">
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 顶部品牌视觉 -->
+    <view class="brand-section">
+      <image class="brand-image" src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1200" mode="aspectFill"></image>
+      <view class="brand-overlay"></view>
+      <view class="brand-content">
+        <view class="brand-tag">
+          <text class="tag-icon">▶</text>
+          <text class="tag-text">专为车商设计的视频工作台</text>
+        </view>
+        <text class="brand-name">ClipFlow</text>
+        <text class="brand-desc">车辆信息管理 · 标准化拍摄 · 自动剪辑 · 一键分发</text>
+      </view>
+    </view>
+
+    <!-- 登录卡片 -->
+    <view class="login-card">
+      <!-- 微信快捷登录 -->
+      <view class="wechat-login">
+        <button class="wechat-btn" bindtap="onWechatLogin">
+          <text class="wechat-icon">ⓦ</text>
+          <text class="wechat-text">微信快捷登录 / 授权</text>
+        </button>
+      </view>
+
+      <!-- 分割线 -->
+      <view class="divider">
+        <view class="divider-line-left"></view>
+        <text class="divider-text">或 使用手机号登录</text>
+        <view class="divider-line-right"></view>
+      </view>
+
+      <!-- 手机号 + 验证码登录 -->
+      <form class="phone-login">
+        <view class="input-group">
+          <text class="input-label">手机号码</text>
+          <view class="phone-input-wrapper">
+            <text class="country-code">+86</text>
+            <input class="phone-input" type="number" placeholder="请输入你的常用手机号" bindinput="onPhoneInput" />
+          </view>
+        </view>
+
+        <view class="input-group">
+          <text class="input-label">短信验证码</text>
+          <view class="captcha-wrapper">
+            <view class="captcha-input-wrapper">
+              <input class="captcha-input" type="number" placeholder="6 位数字验证码" bindinput="onCaptchaInput" />
+            </view>
+            <button class="captcha-btn" bindtap="onGetCaptcha">获取验证码</button>
+          </view>
+          <view class="captcha-desc">未注册的手机号将自动创建账号。</view>
+        </view>
+
+        <!-- 门店角色选择 -->
+        <view class="role-section">
+          <view class="role-header">
+            <text class="role-label">你的身份</text>
+            <text class="role-desc">用于推荐适合的拍摄模板</text>
+          </view>
+          <view class="role-options">
+            <button class="role-btn {{selectedRole === '二手车商' ? 'active' : ''}}" data-role="二手车商" bindtap="onRoleSelect">二手车商</button>
+            <button class="role-btn {{selectedRole === '代拍' ? 'active' : ''}}" data-role="代拍" bindtap="onRoleSelect">代拍</button>
+            <button class="role-btn {{selectedRole === '汽车经纪人' ? 'active' : ''}}" data-role="汽车经纪人" bindtap="onRoleSelect">汽车经纪人</button>
+          </view>
+        </view>
+
+        <!-- 协议勾选 -->
+        <view class="agreement">
+          <checkbox class="agreement-checkbox" checked="{{agreed}}" bindchange="onAgreementChange"></checkbox>
+          <view class="agreement-text-container">
+            <text class="agreement-text">我已阅读并同意</text>
+            <text class="agreement-link" bindtap="onShowAgreement">《用户服务协议》</text>
+            <text class="agreement-text">和</text>
+            <text class="agreement-link" bindtap="onShowPrivacy">《隐私政策》</text>
+            <text class="agreement-text">。</text>
+          </view>
+        </view>
+
+        <!-- 登录按钮 -->
+        <view class="login-action">
+          <button class="login-btn" bindtap="onLogin">登录并进入车库</button>
+          <view class="login-desc">登录即视为你已同意相关协议，后续可在「我的-隐私与权限」中管理授权设置。</view>
+        </view>
+      </form>
+    </view>
+
+    <!-- 底部小字 -->
+    <view class="footer">
+      <text class="footer-text">ClipFlow 车商视频助手 · 帮你一天拍好多车，不再怕剪辑。</text>
+    </view>
+  </view>
+</view>

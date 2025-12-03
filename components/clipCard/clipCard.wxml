@@ -1,0 +1,61 @@
+<!-- 成片卡片组件 -->
+<view class="clip-card" bindtap="onTap">
+  <view class="card-content">
+    <view class="image-container">
+      <image class="clip-image" src="{{clip.image}}" mode="aspectFill"></image>
+      <view class="image-overlay"></view>
+      <view class="play-icon">
+        <icon type="play" size="14"></icon>
+      </view>
+      <view class="duration-tag">{{clip.duration}}</view>
+      <view class="template-tag {{clip.templateClass}}">{{clip.template}}</view>
+    </view>
+    
+    <view class="info-container">
+      <view class="title-row">
+        <text class="clip-title">{{clip.title}}</text>
+        <text class="time-text">{{clip.time}}</text>
+      </view>
+      
+      <text class="description-text">{{clip.description}}</text>
+      
+      <view class="actions-row">
+        <view class="status-container">
+          <view class="status-tag {{clip.statusClass}}">{{clip.status}}</view>
+          <view class="vehicle-tag">
+            <icon type="waiting" size="12" class="vehicle-icon"></icon>
+            <text>{{clip.vehiclePlate}}</text>
+          </view>
+        </view>
+        
+        <view class="buttons-container">
+          <block wx:if="{{clip.status === '待发布'}}">
+            <button class="action-button copy-button" size="mini" bindtap="onCopy">复制文案</button>
+            <button class="action-button publish-button" size="mini" bindtap="onPublish">去发布</button>
+          </block>
+          
+          <block wx:elif="{{clip.status.indexOf('失败') !== -1}}">
+            <button class="action-button retry-button" size="mini" bindtap="onRetry">修改标题并重发</button>
+          </block>
+          
+          <block wx:else>
+            <button class="action-button distribute-button" size="mini" bindtap="onPublish">一键分发</button>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <block wx:if="{{clip.platformStatus}}">
+    <view class="platform-status-bar">
+      <view class="platform-list">
+        <block wx:for="{{clip.platformStatus}}" wx:key="id">
+          <view class="platform-item">
+            <icon type="{{item.icon}}" size="12" class="platform-icon {{item.iconClass}}"></icon>
+            <text class="platform-text {{item.textClass}}">{{item.statusText}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

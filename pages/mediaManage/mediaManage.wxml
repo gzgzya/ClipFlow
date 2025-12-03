@@ -1,0 +1,85 @@
+<!-- 素材管理页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="nav-button" bindtap="onBack">
+      <icon class="nav-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">素材管理</text>
+      <text class="title-sub">按车整理 · 一键加入时间线</text>
+    </view>
+    <button class="done-button" bindtap="onDone">完成</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 车辆信息条 -->
+    <view class="vehicle-info">
+      <view class="vehicle-details">
+        <image class="vehicle-image" src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=400" mode="aspectFill"></image>
+        <view class="vehicle-text">
+          <text class="vehicle-name">宝马 325Li · 苏A88888</text>
+          <text class="vehicle-stats">素材 12 · 外观 5 · 内饰 4 · 亮点 3</text>
+        </view>
+      </view>
+      <text class="timeline-count">已选入时间线 <text class="highlight">6</text> 段</text>
+    </view>
+
+    <!-- 筛选与排序 -->
+    <view class="filter-section">
+      <view class="filter-buttons">
+        <button class="filter-button active">全部</button>
+        <button class="filter-button">外观</button>
+        <button class="filter-button">内饰</button>
+        <button class="filter-button">亮点</button>
+      </view>
+      <button class="sort-button" bindtap="onSort">
+        <icon class="sort-icon" type="sort" size="10"></icon>
+        <text class="sort-text">按拍摄时间</text>
+      </button>
+    </view>
+
+    <!-- 素材列表 -->
+    <view class="materials-list">
+      <block wx:for="{{materials}}" wx:key="id">
+        <material-item material="{{item}}" bindtap="onMaterialTap"></material-item>
+      </block>
+    </view>
+
+    <!-- 时间线预览 -->
+    <view class="timeline-section">
+      <view class="timeline-header">
+        <text class="timeline-title">剪辑时间线预览</text>
+        <view class="timeline-info">
+          <text class="info-text">共 6 段 · 预计时长 00:35</text>
+          <button class="edit-button" bindtap="onAutoEdit">
+            <icon class="edit-icon" type="magic" size="10"></icon>
+            <text class="edit-text">去自动剪辑</text>
+          </button>
+        </view>
+      </view>
+      <scroll-view class="timeline-preview" scroll-x="true">
+        <view class="timeline-items">
+          <block wx:for="{{timelineItems}}" wx:key="id">
+            <timeline-item item="{{item}}"></timeline-item>
+          </block>
+          <button class="add-timeline-item" bindtap="onAddToTimeline">
+            <icon class="add-icon" type="add" size="12"></icon>
+            <text class="add-text">添加</text>
+          </button>
+        </view>
+      </scroll-view>
+    </view>
+  </scroll-view>
+</view>

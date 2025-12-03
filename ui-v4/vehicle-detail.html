@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>车辆详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="h-12 px-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-800/80">
+        <i class="fa-solid fa-chevron-left text-xs"></i>
+      </button>
+      <div class="flex flex-col items-center leading-tight">
+        <span class="text-sm font-semibold">2021 宝马 325Li</span>
+        <span class="text-[10px] text-slate-400">苏A · 88888</span>
+      </div>
+      <button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-800/80">
+        <i class="fa-regular fa-pen-to-square text-xs"></i>
+      </button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative overflow-y-auto">
+      <!-- 顶部车辆图片轮播（静态模拟） -->
+      <div class="h-44 relative">
+        <img
+          src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          class="w-full h-full object-cover"
+          alt="车辆大图"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+        <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs">
+          <div class="space-y-0.5">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[10px]">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 mr-1"></span>
+              在售
+            </span>
+            <div class="mt-1 text-slate-50 font-semibold text-sm">
+              2021 宝马 325Li M运动曜夜
+            </div>
+            <div class="text-[10px] text-slate-300">
+              行驶 3.8 万公里 · 一手车 · 无事故 · 原厂保养
+            </div>
+          </div>
+          <div class="flex space-x-1">
+            <div class="w-10 h-10 rounded-2xl overflow-hidden border border-slate-700/70">
+              <img
+                src="https://images.pexels.com/photos/97079/pexels-photo-97079.jpeg?auto=compress&cs=tinysrgb&w=600"
+                class="w-full h-full object-cover"
+                alt="车内图"
+              />
+            </div>
+            <div class="w-10 h-10 rounded-2xl overflow-hidden border border-slate-700/70">
+              <img
+                src="https://images.pexels.com/photos/3075526/pexels-photo-3075526.jpeg?auto=compress&cs=tinysrgb&w=600"
+                class="w-full h-full object-cover"
+                alt="车细节图"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 进度 & 数据统计 -->
+      <div class="px-4 pt-3 pb-2 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-slate-400">拍摄与成片进度</span>
+          <span class="text-[11px] text-blue-400">
+            建议完成：外观 + 内饰 + 亮点
+          </span>
+        </div>
+        <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+          <div class="h-full w-3/4 bg-gradient-to-r from-blue-500 via-emerald-400 to-amber-300"></div>
+        </div>
+        <div class="flex items-center justify-between text-[11px] text-slate-400">
+          <div>已完成 75%</div>
+          <div class="flex space-x-3">
+            <span>素材 12</span>
+            <span>成片 3</span>
+            <span>发布 5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快捷操作按钮 -->
+      <div class="px-4 grid grid-cols-3 gap-3 text-xs">
+        <a href="shoot-guide.html" class="flex flex-col items-center justify-center py-2 rounded-2xl bg-blue-600 text-white">
+          <i class="fa-solid fa-video mb-1"></i>
+          <span class="text-[11px]">继续拍摄</span>
+        </a>
+        <a href="edit-preview.html" class="flex flex-col items-center justify-center py-2 rounded-2xl bg-slate-800/80 text-slate-100 border border-slate-700/70">
+          <i class="fa-solid fa-clapperboard-play mb-1 text-emerald-400"></i>
+          <span class="text-[11px]">智能剪辑</span>
+        </a>
+        <a href="publish.html" class="flex flex-col items-center justify-center py-2 rounded-2xl bg-slate-800/80 text-slate-100 border border-slate-700/70">
+          <i class="fa-solid fa-paper-plane mb-1 text-amber-400"></i>
+          <span class="text-[11px]">一键分发</span>
+        </a>
+      </div>
+
+      <!-- 车辆信息 -->
+      <div class="px-4 mt-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs text-slate-400">车辆信息</h3>
+          <button class="text-[11px] text-slate-400 flex items-center space-x-1">
+            <i class="fa-solid fa-pen text-[10px]"></i><span>编辑</span>
+          </button>
+        </div>
+        <div class="rounded-2xl bg-slate-900/80 border border-slate-800 px-3 py-2.5 text-[11px] space-y-1.5">
+          <div class="flex justify-between">
+            <span class="text-slate-500">品牌车系</span>
+            <span class="text-slate-100">宝马 3 系</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">年款 / 排量</span>
+            <span class="text-slate-100">2021 · 2.0T</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">里程 / 颜色</span>
+            <span class="text-slate-100">3.8 万公里 · 白色</span>
+          </div>
+          <div>
+            <span class="text-slate-500">卖点亮点：</span>
+            <span class="text-slate-100">
+              一手车源，整备到位，支持第三方检测，适合家用与通勤。
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 素材概览 -->
+      <div class="px-4 mt-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs text-slate-400">素材概览</h3>
+          <button class="text-[11px] text-blue-400 flex items-center space-x-1">
+            <i class="fa-solid fa-folder-open text-[10px]"></i><span>管理素材</span>
+          </button>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-[11px]">
+          <div class="rounded-2xl bg-slate-900/80 border border-slate-800 px-2.5 py-2">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-slate-300">外观</span>
+              <span class="text-[10px] text-emerald-400">3/3</span>
+            </div>
+            <div class="h-1 rounded-full bg-slate-800 overflow-hidden mb-1">
+              <div class="h-full w-full bg-gradient-to-r from-blue-500 to-emerald-400"></div>
+            </div>
+            <div class="text-slate-500">素材 5</div>
+          </div>
+          <div class="rounded-2xl bg-slate-900/80 border border-slate-800 px-2.5 py-2">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-slate-300">内饰</span>
+              <span class="text-[10px] text-amber-400">2/3</span>
+            </div>
+            <div class="h-1 rounded-full bg-slate-800 overflow-hidden mb-1">
+              <div class="h-full w-2/3 bg-gradient-to-r from-blue-500 to-amber-300"></div>
+            </div>
+            <div class="text-slate-500">素材 4</div>
+          </div>
+          <div class="rounded-2xl bg-slate-900/80 border border-slate-800 px-2.5 py-2">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-slate-300">亮点</span>
+              <span class="text-[10px] text-slate-400">1/2</span>
+            </div>
+            <div class="h-1 rounded-full bg-slate-800 overflow-hidden mb-1">
+              <div class="h-full w-1/2 bg-gradient-to-r from-blue-500 to-slate-500"></div>
+            </div>
+            <div class="text-slate-500">素材 3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 成片列表 -->
+      <div class="px-4 mt-4 mb-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xs text-slate-400">成片</h3>
+          <button class="text-[11px] text-blue-400 flex items-center space-x-1">
+            <i class="fa-solid fa-plus text-[10px]"></i><span>新建成片</span>
+          </button>
+        </div>
+        <div class="space-y-2">
+          <!-- 成片卡片 1 -->
+          <div class="flex rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden">
+            <div class="w-24 h-16 relative">
+              <img
+                src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=600"
+                class="w-full h-full object-cover"
+                alt="成片封面"
+              />
+              <div class="absolute inset-0 bg-black/30"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fa-solid fa-play text-white text-xs bg-black/50 rounded-full w-6 h-6 flex items-center justify-center"></i>
+              </div>
+              <div class="absolute bottom-1 right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black/70 text-white">
+                00:32
+              </div>
+            </div>
+            <div class="flex-1 px-3 py-2 text-[11px] flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-100">320Li 全景外观讲解</span>
+                  <span class="text-[10px] text-slate-400">昨日 15:23</span>
+                </div>
+                <div class="text-slate-400 line-clamp-1 mt-0.5">
+                  主打无事故、一手车源，适合注重性价比的家用用户。
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-[10px] text-slate-500">
+                  <span><i class="fa-brands fa-tiktok mr-0.5"></i>已发</span>
+                  <span><i class="fa-brands fa-weixin mr-0.5"></i>待发</span>
+                </div>
+                <button class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-100">
+                  分发
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 成片卡片 2 -->
+          <div class="flex rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden">
+            <div class="w-24 h-16 relative">
+              <img
+                src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=600"
+                class="w-full h-full object-cover"
+                alt="成片封面"
+              />
+              <div class="absolute inset-0 bg-black/30"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fa-solid fa-play text-white text-xs bg-black/50 rounded-full w-6 h-6 flex items-center justify-center"></i>
+              </div>
+              <div class="absolute bottom-1 right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black/70 text-white">
+                00:18
+              </div>
+            </div>
+            <div class="flex-1 px-3 py-2 text-[11px] flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-100">内饰体验细节展示</span>
+                  <span class="text-[10px] text-amber-400">待发布</span>
+                </div>
+                <div class="text-slate-400 line-clamp-1 mt-0.5">
+                  重点突出车内做工、配置、后排空间及乘坐体验。
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-[10px] text-slate-500">
+                  <span><i class="fa-brands fa-kickstarter-k mr-0.5"></i>快手</span>
+                </div>
+                <button class="px-2 py-0.5 rounded-full bg-blue-600 text-white">
+                  一键发布
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

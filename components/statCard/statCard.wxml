@@ -1,0 +1,9 @@
+<view class="stat-card card-bg card-border">
+  <text class="stat-title secondary-text">{{title}}</text>
+  <view class="stat-value-container">
+    <text class="stat-value primary-text">{{value}}</text>
+    <text wx:if="{{unit}}" class="stat-unit primary-text">{{unit}}</text>
+  </view>
+  <text wx:if="{{change}}" class="stat-change success-text">{{change}}</text>
+  <text wx:if="{{description}}" class="stat-desc secondary-text">{{description}}</text>
+</view>

@@ -1,0 +1,40 @@
+@import "../../styles/common.wxss";
+
+.stat-card {
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.stat-title {
+  font-size: 11rpx;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.stat-value-container {
+  display: flex;
+  align-items: flex-end;
+  margin: 8rpx 0;
+}
+
+.stat-value {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.stat-unit {
+  font-size: 14rpx;
+  font-weight: 600;
+  margin-left: 4rpx;
+  padding-bottom: 2rpx;
+}
+
+.stat-change {
+  font-size: 10rpx;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.stat-desc {
+  font-size: 10rpx;
+}

@@ -1,0 +1,45 @@
+/* 素材卡片组件样式 */
+.material-card {
+  padding: 16rpx 20rpx;
+  border-radius: 32rpx;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid #1e293b;
+  font-size: 22rpx;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.card-type {
+  color: #cbd5e1;
+}
+
+.card-progress {
+  font-size: 20rpx;
+  color: #34d399;
+}
+
+.progress-container {
+  margin-bottom: 8rpx;
+}
+
+.progress-bar {
+  height: 8rpx;
+  border-radius: 4rpx;
+  background-color: #1e293b;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #3b82f6, #34d399, #64748b);
+}
+
+.card-count {
+  color: #94a3b8;
+  font-size: 20rpx;
+}

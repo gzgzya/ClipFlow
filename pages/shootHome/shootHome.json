@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "拍摄",
+  "usingComponents": {
+    "vehicle-card": "/components/vehicleCard/vehicleCard"
+  }
+}

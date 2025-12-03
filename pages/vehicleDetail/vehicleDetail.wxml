@@ -1,0 +1,145 @@
+<!-- 车辆详情页面 -->
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-text">9:41</text>
+    <view class="status-icons">
+      <icon class="status-icon" type="success_no_circle" size="10"></icon>
+      <icon class="status-icon" type="info" size="10"></icon>
+      <icon class="status-icon battery" type="success" size="12"></icon>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <button class="nav-button" bindtap="onBack">
+      <icon class="nav-icon" type="arrow-left" size="12"></icon>
+    </button>
+    <view class="nav-title">
+      <text class="title-main">2021 宝马 325Li</text>
+      <text class="title-sub">苏A · 88888</text>
+    </view>
+    <button class="nav-button" bindtap="onEdit">
+      <icon class="nav-icon" type="edit" size="12"></icon>
+    </button>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y="true">
+    <!-- 顶部车辆图片轮播 -->
+    <view class="banner-section">
+      <image class="banner-image" src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=1200" mode="aspectFill"></image>
+      <view class="banner-overlay"></view>
+      
+      <view class="banner-content">
+        <view class="banner-info">
+          <view class="status-tag">
+            <view class="status-dot"></view>
+            <text class="status-text">在售</text>
+          </view>
+          <text class="vehicle-model">2021 宝马 325Li M运动曜夜</text>
+          <text class="vehicle-details">行驶 3.8 万公里 · 一手车 · 无事故 · 原厂保养</text>
+        </view>
+        <view class="thumbnail-container">
+          <image class="thumbnail-image" src="https://images.pexels.com/photos/97079/pexels-photo-97079.jpeg?auto=compress&cs=tinysrgb&w=600" mode="aspectFill"></image>
+          <image class="thumbnail-image" src="https://images.pexels.com/photos/3075526/pexels-photo-3075526.jpeg?auto=compress&cs=tinysrgb&w=600" mode="aspectFill"></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 进度 & 数据统计 -->
+    <view class="progress-section">
+      <view class="progress-header">
+        <text class="progress-title">拍摄与成片进度</text>
+        <text class="progress-tip">建议完成：外观 + 内饰 + 亮点</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill"></view>
+      </view>
+      <view class="progress-stats">
+        <text class="stats-text">已完成 75%</text>
+        <view class="stats-details">
+          <text class="stats-item">素材 12</text>
+          <text class="stats-item">成片 3</text>
+          <text class="stats-item">发布 5</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 快捷操作按钮 -->
+    <view class="action-grid">
+      <button class="action-button primary" bindtap="onContinueShoot">
+        <icon class="action-icon" type="video" size="14"></icon>
+        <text class="action-text">继续拍摄</text>
+      </button>
+      <button class="action-button" bindtap="onSmartEdit">
+        <icon class="action-icon clapperboard" type="video_fill" size="14"></icon>
+        <text class="action-text">智能剪辑</text>
+      </button>
+      <button class="action-button" bindtap="onPublish">
+        <icon class="action-icon paper-plane" type="send" size="14"></icon>
+        <text class="action-text">一键分发</text>
+      </button>
+    </view>
+
+    <!-- 车辆信息 -->
+    <view class="info-section">
+      <view class="section-header">
+        <text class="section-title">车辆信息</text>
+        <button class="edit-button" bindtap="onEditInfo">
+          <icon class="edit-icon" type="edit" size="10"></icon>
+          <text class="edit-text">编辑</text>
+        </button>
+      </view>
+      <view class="info-card">
+        <view class="info-row">
+          <text class="info-label">品牌车系</text>
+          <text class="info-value">宝马 3 系</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">年款 / 排量</text>
+          <text class="info-value">2021 · 2.0T</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">里程 / 颜色</text>
+          <text class="info-value">3.8 万公里 · 白色</text>
+        </view>
+        <view class="info-row column">
+          <text class="info-label">卖点亮点：</text>
+          <text class="info-value">一手车源，整备到位，支持第三方检测，适合家用与通勤。</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 素材概览 -->
+    <view class="material-section">
+      <view class="section-header">
+        <text class="section-title">素材概览</text>
+        <button class="manage-button" bindtap="onManageMaterials">
+          <icon class="manage-icon" type="folder" size="10"></icon>
+          <text class="manage-text">管理素材</text>
+        </button>
+      </view>
+      <view class="material-grid">
+        <material-card type="外观" progress="3/3" percent="100" count="5"></material-card>
+        <material-card type="内饰" progress="2/3" percent="66.7" count="4"></material-card>
+        <material-card type="亮点" progress="1/2" percent="50" count="3"></material-card>
+      </view>
+    </view>
+
+    <!-- 成片列表 -->
+    <view class="clips-section">
+      <view class="section-header">
+        <text class="section-title">成片</text>
+        <button class="new-button" bindtap="onCreateClip">
+          <icon class="new-icon" type="add" size="10"></icon>
+          <text class="new-text">新建成片</text>
+        </button>
+      </view>
+      <view class="clips-list">
+        <clip-card clip="{{clipList[0]}}" bindtap="onClipTap"></clip-card>
+        <clip-card clip="{{clipList[1]}}" bindtap="onClipTap"></clip-card>
+      </view>
+    </view>
+  </scroll-view>
+</view>

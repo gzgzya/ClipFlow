@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>拍摄 - ClipFlow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="h-12 px-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <div class="text-sm font-semibold">拍摄</div>
+      <button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-800/80">
+        <i class="fa-solid fa-camera-rotate text-xs"></i>
+      </button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative pb-16 overflow-y-auto">
+      <!-- 顶部提示条 -->
+      <div class="px-4 pt-3 pb-2 text-[11px]">
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2 flex items-center justify-between">
+          <div>
+            <div class="text-slate-100">今天还有 3 台车未完成拍摄</div>
+            <div class="text-slate-400 text-[10px]">
+              建议优先拍完在售车的「外观 + 内饰 + 亮点」三段素材。
+            </div>
+          </div>
+          <button class="text-[10px] text-blue-400">查看列表</button>
+        </div>
+      </div>
+
+      <!-- “继续拍摄”区域 -->
+      <div class="px-4 mt-1 text-[11px]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-slate-400">继续拍摄中的车辆</span>
+          <span class="text-slate-500 text-[10px]">今日已拍完 2 台</span>
+        </div>
+        <div class="space-y-2">
+          <!-- 车 1 -->
+          <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <div class="w-9 h-9 rounded-xl overflow-hidden border border-slate-700">
+                <img
+                  src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  class="w-full h-full object-cover"
+                  alt="车辆封面"
+                />
+              </div>
+              <div>
+                <div class="text-slate-100">宝马 325Li · 苏A88888</div>
+                <div class="text-slate-500 text-[10px]">
+                  已完成：外观 · 内饰 ｜ 待拍：亮点
+                </div>
+                <div class="flex items-center space-x-2 mt-0.5 text-[10px] text-slate-400">
+                  <span><i class="fa-solid fa-film mr-1 text-blue-400"></i>素材 12</span>
+                  <span><i class="fa-solid fa-clock mr-1 text-slate-400"></i>最近 10 分钟前</span>
+                </div>
+              </div>
+            </div>
+            <!-- 这里可跳转 shoot-guide.html -->
+            <a href="shoot-guide.html"
+               class="px-2.5 py-1 rounded-full bg-blue-600 text-white text-[10px]">
+              继续拍摄
+            </a>
+          </div>
+
+          <!-- 车 2 -->
+          <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <div class="w-9 h-9 rounded-xl overflow-hidden border border-slate-700">
+                <img
+                  src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  class="w-full h-full object-cover"
+                  alt="车辆封面"
+                />
+              </div>
+              <div>
+                <div class="text-slate-100">奔驰 C200L · 沪B66666</div>
+                <div class="text-slate-500 text-[10px]">
+                  已完成：外观 ｜ 待拍：内饰 · 亮点
+                </div>
+                <div class="flex items-center space-x-2 mt-0.5 text-[10px] text-slate-400">
+                  <span><i class="fa-solid fa-film mr-1 text-blue-400"></i>素材 5</span>
+                  <span><i class="fa-solid fa-circle-info mr-1 text-amber-400"></i>建议补拍内饰</span>
+                </div>
+              </div>
+            </div>
+            <a href="shoot-guide.html"
+               class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-100 text-[10px]">
+              去拍内饰
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快速开始拍摄 -->
+      <div class="px-4 mt-4 text-[11px]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-slate-400">快速开始拍摄</span>
+          <button class="text-blue-400 text-[11px] flex items-center space-x-1">
+            <i class="fa-solid fa-car-side text-[10px]"></i>
+            <span>全部车辆</span>
+          </button>
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="mb-2">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-xs"></i>
+            <input
+              type="text"
+              placeholder="按车牌、车型搜索要拍摄的车辆"
+              class="w-full pl-8 pr-3 py-2 rounded-2xl bg-slate-900/90 text-xs placeholder:text-slate-500 border border-slate-700/80 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- 可拍摄车辆列表（简化） -->
+        <div class="space-y-2">
+          <!-- 可拍车 1 -->
+          <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <div class="w-9 h-9 rounded-xl overflow-hidden border border-slate-700">
+                <img
+                  src="https://images.pexels.com/photos/3075526/pexels-photo-3075526.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  class="w-full h-full object-cover"
+                  alt="车辆封面"
+                />
+              </div>
+              <div>
+                <div class="text-slate-100">奥迪 A4L · 浙C12345</div>
+                <div class="text-slate-500 text-[10px]">
+                  未拍摄 ｜ 建议先拍「外观三段」
+                </div>
+              </div>
+            </div>
+            <a href="shoot-guide.html"
+               class="px-2.5 py-1 rounded-full bg-blue-600 text-white text-[10px]">
+              开始拍摄
+            </a>
+          </div>
+
+          <!-- 可拍车 2 -->
+          <div class="rounded-2xl bg-slate-900/60 border border-dashed border-slate-700 px-3 py-2 text-[11px] text-slate-500 flex items-center justify-center">
+            <i class="fa-solid fa-ellipsis text-[10px] mr-1.5"></i>
+            <span>还有更多在售车辆，点击「全部车辆」查看...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部提示 -->
+      <div class="px-4 mt-4 pb-4 text-[10px] text-slate-500">
+        建议拍摄顺序：先拍完车外，再拍车内，最后补亮点。保持同一批次视频风格统一，有助于涨粉与建立专业形象。
+      </div>
+    </div>
+
+    <!-- 底部 TabBar -->
+    <div class="h-16 bg-black/95 border-t border-slate-800 flex items-center justify-around text-[11px] text-slate-400">
+      <a href="home.html" class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-car-side text-base mb-0.5"></i>
+        <span>车辆</span>
+      </a>
+      <a href="shoot-home.html" class="flex flex-col items-center justify-center text-blue-500">
+        <i class="fa-solid fa-video text-base mb-0.5"></i>
+        <span>拍摄</span>
+      </a>
+      <a href="clips.html" class="flex flex-col items-center justify-center">
+        <i class="fa-solid fa-clapperboard text-base mb-0.5"></i>
+        <span>成片</span>
+      </a>
+      <a href="profile.html" class="flex flex-col items-center justify-center">
+        <i class="fa-regular fa-user text-base mb-0.5"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

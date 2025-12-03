@@ -1,0 +1,36 @@
+<!-- 车辆选择项组件 -->
+<label class="vehicle-item {{vehicle.selected ? 'selected' : ''}}" bindtap="onSelect">
+  <view class="checkbox-container">
+    <checkbox class="vehicle-checkbox" checked="{{vehicle.selected}}" bindchange="onCheckboxChange"></checkbox>
+  </view>
+  <view class="vehicle-content">
+    <view class="image-container">
+      <image class="vehicle-image" src="{{vehicle.imageUrl}}" mode="aspectFill"></image>
+    </view>
+    <view class="info-container">
+      <view class="top-section">
+        <text class="plate-text">{{vehicle.plate}}</text>
+        <view class="status-tag">
+          <text class="status-text">{{vehicle.status}}</text>
+        </view>
+      </view>
+      <text class="model-text">{{vehicle.model}}</text>
+      <text class="features-text">{{vehicle.features}}</text>
+      <view class="bottom-section">
+        <view class="stats-container">
+          <text class="stats-item">
+            <icon class="stats-icon" type="video" size="12"></icon>
+            素材 {{vehicle.materials}}
+          </text>
+          <text class="stats-item">
+            <icon class="stats-icon" type="video_fill" size="12"></icon>
+            成片 {{vehicle.clips}}
+          </text>
+        </view>
+        <text class="queue-status {{vehicle.inQueue ? 'in-queue' : 'not-in-queue'}}">
+          {{vehicle.inQueue ? '✓ 已加入队列' : '未加入'}}
+        </text>
+      </view>
+    </view>
+  </view>
+</label>

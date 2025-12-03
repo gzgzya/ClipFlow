@@ -1,0 +1,283 @@
+/* 首页样式 */
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #0f172a;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 状态栏 */
+.status-bar {
+  height: 40rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #f1f5f9;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.status-text {
+  font-weight: 600;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  margin-left: 8rpx;
+}
+
+/* 顶部导航 */
+.nav-bar {
+  height: 96rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: #f1f5f9;
+}
+
+.nav-title {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.title-text {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.title-tag {
+  font-size: 26rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  margin-left: 16rpx;
+}
+
+.qr-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: rgba(30, 41, 59, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-icon {
+  color: #f1f5f9;
+}
+
+/* 内容区域 */
+.content {
+  flex: 1;
+  background-color: #0f172a;
+}
+
+.top-section {
+  padding: 0 32rpx;
+  padding-top: 24rpx;
+  padding-bottom: 16rpx;
+}
+
+/* 搜索区域 */
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.search-container {
+  flex: 1;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16rpx 24rpx 16rpx 80rpx;
+  border-radius: 32rpx;
+  background-color: rgba(30, 41, 59, 0.8);
+  font-size: 28rpx;
+  color: #f1f5f9;
+  border: 1px solid rgba(100, 116, 139, 0.6);
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.filter-button {
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  background-color: rgba(30, 41, 59, 0.8);
+  font-size: 28rpx;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  border: 1px solid rgba(100, 116, 139, 0.6);
+}
+
+.filter-icon {
+  color: #f1f5f9;
+}
+
+/* 统计区域 */
+.stats-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #94a3b8;
+}
+
+.stats-left {
+  display: flex;
+  gap: 24rpx;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stats-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.stats-dot.available {
+  background-color: #34d399;
+}
+
+.stats-dot.sold {
+  background-color: #64748b;
+}
+
+.stats-text {
+  /* 继承父元素样式 */
+}
+
+.stats-right {
+  display: flex;
+  gap: 24rpx;
+}
+
+/* 快捷入口 */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24rpx;
+  padding: 0 32rpx;
+  padding-bottom: 24rpx;
+}
+
+.quick-btn {
+  padding: 24rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: rgba(30, 41, 59, 0.8);
+  color: #f1f5f9;
+  text-align: left;
+  border: 1px solid rgba(100, 116, 139, 0.6);
+}
+
+.quick-btn.primary {
+  background: linear-gradient(to bottom right, #3b82f6, #60a5fa);
+  color: #ffffff;
+  border: none;
+}
+
+.quick-btn-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-subtitle {
+  font-size: 26rpx;
+  opacity: 0.8;
+  margin-bottom: 8rpx;
+}
+
+.quick-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.quick-desc {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+/* 车辆列表 */
+.vehicle-list {
+  padding: 0 32rpx;
+  padding-bottom: 128rpx;
+}
+
+.placeholder-card {
+  border-radius: 48rpx;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px dashed rgba(100, 116, 139, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx 0;
+  font-size: 28rpx;
+  color: #64748b;
+}
+
+.placeholder-icon {
+  margin-right: 16rpx;
+  color: #64748b;
+}
+
+/* 底部 TabBar */
+.tab-bar {
+  height: 128rpx;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-top: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 26rpx;
+  color: #94a3b8;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+}
+
+.tab-item.active {
+  color: #3b82f6;
+}
+
+.tab-icon {
+  margin-bottom: 8rpx;
+}

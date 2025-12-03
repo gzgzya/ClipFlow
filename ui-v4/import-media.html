@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>导入素材 - ClipFlow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] rounded-[40px] bg-black shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-10 px-4 flex items-center justify-between text-xs text-slate-100 bg-black/80">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center space-x-1">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-[12px]"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="h-12 px-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100">
+      <button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-800/80">
+        <i class="fa-solid fa-chevron-left text-xs"></i>
+      </button>
+      <div class="flex flex-col items-center leading-tight">
+        <span class="text-sm font-semibold">导入素材</span>
+        <span class="text-[10px] text-slate-400">从相册/聊天导入并按车归类</span>
+      </div>
+      <button class="text-xs text-slate-400">完成</button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="flex-1 bg-slate-950 text-slate-100 relative overflow-y-auto">
+      <!-- 导入来源 -->
+      <div class="px-4 pt-3 text-[11px] space-y-2">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-slate-400">选择导入来源</span>
+          <span class="text-slate-500 text-[10px]">支持批量选择</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button class="flex flex-col items-center justify-center py-3 rounded-2xl bg-blue-600 text-white">
+            <i class="fa-solid fa-photo-film mb-1.5"></i>
+            <span class="text-[11px]">手机相册</span>
+          </button>
+          <button class="flex flex-col items-center justify-center py-3 rounded-2xl bg-slate-900 border border-slate-700">
+            <i class="fa-brands fa-weixin mb-1.5 text-emerald-400"></i>
+            <span class="text-[11px]">微信聊天</span>
+          </button>
+          <button class="flex flex-col items-center justify-center py-3 rounded-2xl bg-slate-900 border border-slate-700">
+            <i class="fa-solid fa-folder-open mb-1.5 text-amber-300"></i>
+            <span class="text-[11px]">本地文件</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 目标车辆选择 & 智能匹配 -->
+      <div class="px-4 mt-3 text-[11px] space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-400">按车归类</span>
+          <button class="text-blue-400 text-[11px] flex items-center space-x-1">
+            <i class="fa-solid fa-car-side text-[10px]"></i>
+            <span>切换车辆</span>
+          </button>
+        </div>
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <div class="w-9 h-9 rounded-xl overflow-hidden border border-slate-700">
+              <img
+                src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=400"
+                class="w-full h-full object-cover"
+                alt="车辆封面"
+              />
+            </div>
+            <div>
+              <div class="text-slate-100">宝马 325Li · 苏A88888</div>
+              <div class="text-slate-500 text-[10px]">
+                将导入的素材默认归属到此车辆
+              </div>
+            </div>
+          </div>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/40">
+            当前车辆
+          </span>
+        </div>
+
+        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-3 py-2 flex items-start justify-between">
+          <div>
+            <div class="text-slate-100">智能识别车牌/车型</div>
+            <div class="text-slate-400 text-[10px] mt-0.5">
+              可自动识别视频中的车牌、车型，批量素材按不同车辆自动归类。
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer mt-0.5">
+            <input type="checkbox" class="sr-only peer" checked />
+            <div class="w-8 h-4 bg-slate-600 rounded-full peer peer-checked:bg-blue-500 relative">
+              <div class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all peer-checked:translate-x-4"></div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 归类规则 -->
+      <div class="px-4 mt-3 text-[11px]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-slate-400">自动分组规则</span>
+          <span class="text-slate-500 text-[10px]">可在「设置-剪辑偏好」中修改</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-2.5 py-2">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-slate-100">外观</span>
+              <span class="text-[10px] text-slate-400">约 10-20s</span>
+            </div>
+            <div class="text-[10px] text-slate-400">
+              识别车身、车头车尾、侧面等画面
+            </div>
+          </div>
+          <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-2.5 py-2">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-slate-100">内饰</span>
+              <span class="text-[10px] text-slate-400">约 8-15s</span>
+            </div>
+            <div class="text-[10px] text-slate-400">
+              中控、方向盘、座椅、后排等画面
+            </div>
+          </div>
+          <div class="rounded-2xl bg-slate-900/90 border border-slate-800 px-2.5 py-2">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-slate-100">亮点</span>
+              <span class="text-[10px] text-slate-400">约 3-8s</span>
+            </div>
+            <div class="text-[10px] text-slate-400">
+              HUD、音响、改装件等近景细节
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 待导入素材预览列表（模拟导入队列） -->
+      <div class="px-4 mt-3 mb-4 text-[11px]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-slate-400">已选择的素材（模拟队列）</span>
+          <span class="text-slate-500 text-[10px]">共 6 段 · 预计占用 1.2GB</span>
+        </div>
+        <div class="space-y-2">
+          <!-- 队列项 1 -->
+          <div class="flex rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden">
+            <div class="w-20 h-14 relative">
+              <img
+                src="https://images.pexels.com/photos/3752169/pexels-photo-3752169.jpeg?auto=compress&cs=tinysrgb&w=400"
+                class="w-full h-full object-cover"
+                alt="预览封面"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+              <div class="absolute bottom-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black/70 text-white">
+                00:12
+              </div>
+              <div class="absolute top-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                预计：外观
+              </div>
+            </div>
+            <div class="flex-1 px-3 py-2 flex flex-col justify-between">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-slate-100">IMG_2025_0901.MP4</div>
+                  <div class="text-slate-500 text-[10px]">
+                    来源：手机相册 · 今天 14:22
+                  </div>
+                </div>
+                <button class="w-4 h-4 flex items-center justify-center rounded-full bg-slate-800 text-[10px] text-slate-300">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="flex items-center justify-between mt-1">
+                <div class="flex items-center space-x-1 text-[10px] text-slate-400">
+                  <i class="fa-solid fa-car-side text-blue-400"></i>
+                  <span>将归属：宝马 325Li</span>
+                </div>
+                <button class="text-[10px] text-blue-400">
+                  修改归属
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 队列项 2 -->
+          <div class="flex rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden">
+            <div class="w-20 h-14 relative">
+              <img
+                src="https://images.pexels.com/photos/97079/pexels-photo-97079.jpeg?auto=compress&cs=tinysrgb&w=400"
+                class="w-full h-full object-cover"
+                alt="预览封面"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+              <div class="absolute bottom-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black/70 text-white">
+                00:09
+              </div>
+              <div class="absolute top-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500 text-white">
+                预计：内饰
+              </div>
+            </div>
+            <div class="flex-1 px-3 py-2 flex flex-col justify-between">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-slate-100">WeChat_2025_0901.MP4</div>
+                  <div class="text-slate-500 text-[10px]">
+                    来源：微信聊天 · 今天 13:58
+                  </div>
+                </div>
+                <button class="w-4 h-4 flex items-center justify-center rounded-full bg-slate-800 text-[10px] text-slate-300">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="flex items-center justify-between mt-1">
+                <div class="flex items-center space-x-1 text-[10px] text-slate-400">
+                  <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+                  <span>AI 建议保留 · 清晰度高</span>
+                </div>
+                <button class="text-[10px] text-amber-400">
+                  标记为备选
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 队列项 3（示例更多项...） -->
+          <div class="rounded-2xl bg-slate-900/60 border border-dashed border-slate-700 px-3 py-2 text-[11px] text-slate-500 flex items-center justify-center">
+            <i class="fa-solid fa-ellipsis text-[10px] mr-1.5"></i>
+            <span>还有 3 段素材将一并导入...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

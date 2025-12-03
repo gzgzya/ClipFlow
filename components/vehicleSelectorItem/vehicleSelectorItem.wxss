@@ -1,0 +1,132 @@
+/* 车辆选择项组件样式 */
+.vehicle-item {
+  display: flex;
+  align-items: center;
+  border-radius: 48rpx;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.7);
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  cursor: pointer;
+}
+
+.vehicle-item.selected {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.checkbox-container {
+  padding: 32rpx 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.vehicle-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 8rpx;
+}
+
+.vehicle-content {
+  flex: 1;
+  display: flex;
+}
+
+.image-container {
+  width: 224rpx;
+  height: 192rpx;
+  overflow: hidden;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+}
+
+.info-container {
+  flex: 1;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.plate-text {
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+.status-tag {
+  padding: 4rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.status-text {
+  font-size: 20rpx;
+  color: #34d399;
+}
+
+.model-text {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.features-text {
+  font-size: 22rpx;
+  color: #94a3b8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.bottom-section {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.stats-item {
+  font-size: 20rpx;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+}
+
+.stats-icon {
+  margin-right: 8rpx;
+  color: #60a5fa;
+}
+
+.stats-icon[type="video_fill"] {
+  color: #34d399;
+}
+
+.queue-status {
+  font-size: 20rpx;
+}
+
+.queue-status.in-queue {
+  color: #60a5fa;
+}
+
+.queue-status.not-in-queue {
+  color: #64748b;
+}
