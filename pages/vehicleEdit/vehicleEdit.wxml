@@ -62,13 +62,16 @@
       <!-- 卖点亮点 -->
       <view class="form-section textarea-section">
         <text class="form-label">卖点亮点</text>
-        <textarea class="form-textarea" placeholder="例如：一手车源，无事故，4S 保养记录齐全，带 M 运动套件、全景天窗、HUD 抬头显示等..." bindinput="onHighlightsInput"></textarea>
+        <textarea class="form-textarea auto-height" placeholder="例如：一手车源，无事故，4S 保养记录齐全，带 M 运动套件、全景天窗、HUD 抬头显示等..." bindinput="onHighlightsInput" auto-height></textarea>
       </view>
 
       <!-- 车辆故事 / 话术 -->
       <view class="form-section textarea-section">
-        <text class="form-label">推荐话术（AI 可用）</text>
-        <textarea class="form-textarea short" placeholder="简单写几句你平时介绍这台车的话，AI 会基于此生成口播与字幕文案。" bindinput="onDescriptionInput"></textarea>
+        <view class="form-header">
+          <text class="form-label">推荐话术（AI 可用）</text>
+          <button class="ai-generate-button" bindtap="onGenerateDescription">生成</button>
+        </view>
+        <textarea class="form-textarea auto-height" placeholder="简单写几句你平时介绍这台车的话，AI 会基于此生成口播与字幕文案。" bindinput="onDescriptionInput" auto-height></textarea>
       </view>
 
       <!-- 车辆照片上传区 -->

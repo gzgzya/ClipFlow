@@ -305,3 +305,44 @@
 .form-textarea {
   width: calc(100% - 20rpx); /* 适当缩短宽度 */
 }
+
+/* AI话术容器 */
+.ai-textarea-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10rpx;
+}
+
+.ai-textarea {
+  flex: 1;
+  margin-right: 0;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.ai-generate-button {
+  width: 120rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+  background-color: #3b82f6; /* bg-blue-600 */
+  color: #ffffff;
+  font-size: 24rpx; /* text-[12px] */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 自动调整高度的文本域 */
+.form-textarea.auto-height {
+  height: auto;
+  min-height: 120rpx;
+}
+
+.form-textarea.short.auto-height {
+  min-height: 120rpx;
+}

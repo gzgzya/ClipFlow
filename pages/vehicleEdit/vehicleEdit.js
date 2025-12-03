@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statusOptions: ['在售', '已订', '已售'],
+    statusOptions: ['在售', '已售'],
     statusIndex: 0,
     photos: [
       { url: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=400', cover: true },
@@ -131,6 +131,12 @@ Page({
   // 推荐话术输入事件
   onDescriptionInput(e) {
     console.log('推荐话术输入:', e.detail.value);
+  },
+
+  // AI生成推荐话术事件
+  onGenerateDescription() {
+    console.log('AI生成推荐话术');
+    // 这里可以添加AI生成话术的逻辑
   },
 
   // 添加照片事件
