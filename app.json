@@ -2,18 +2,18 @@
   "pages": [
     "pages/login/login",
     "pages/home/home",
-    "pages/vehicleEdit/vehicleEdit",
+    "pages/shootHome/shootHome",
+    "pages/clips/clips",
+    "pages/profile/profile",
     "pages/vehicleDetail/vehicleDetail",
-    "pages/shootGuide/shootGuide",
+    "pages/vehicleEdit/vehicleEdit",
+    "pages/importMedia/importMedia",
     "pages/mediaManage/mediaManage",
     "pages/editPreview/editPreview",
-    "pages/vehicleSelector/vehicleSelector",
-    "pages/clips/clips",
-    "pages/shootHome/shootHome",
-    "pages/profile/profile",
-    "pages/batchGenerate/batchGenerate",
     "pages/publish/publish",
-    "pages/importMedia/importMedia"
+    "pages/batchGenerate/batchGenerate",
+    "pages/shootGuide/shootGuide",
+    "pages/vehicleSelector/vehicleSelector"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,6 +21,37 @@
     "navigationBarTitleText": "ClipFlow",
     "navigationBarTextStyle": "white"
   },
-  "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "tabBar": {
+    "color": "#94a3b8",
+    "selectedColor": "#3b82f6",
+    "backgroundColor": "#000000",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "车辆",
+        "iconPath": "static/icons/car.png",
+        "selectedIconPath": "static/icons/car-active.png"
+      },
+      {
+        "pagePath": "pages/shootHome/shootHome",
+        "text": "拍摄",
+        "iconPath": "static/icons/video.png",
+        "selectedIconPath": "static/icons/video-active.png"
+      },
+      {
+        "pagePath": "pages/clips/clips",
+        "text": "成片",
+        "iconPath": "static/icons/clapperboard.png",
+        "selectedIconPath": "static/icons/clapperboard-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "static/icons/user.png",
+        "selectedIconPath": "static/icons/user-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
 }

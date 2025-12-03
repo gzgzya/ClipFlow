@@ -6,38 +6,32 @@
     </view>
     
     <view class="info-container">
-      <view class="title">{{vehicle.name}} · {{vehicle.plate}}</view>
+      <view class="header">
+        <text class="plate">{{vehicle.plate}}</text>
+        <view class="status-tag {{vehicle.statusClass}}">{{vehicle.status}}</view>
+      </view>
       
-      <view class="subtitle">{{vehicle.status}}</view>
+      <view class="model">{{vehicle.model}}</view>
       
-      <view class="details">
-        <block wx:if="{{vehicle.materials}}">
-          <text class="detail-item">
-            <icon type="video" size="12" class="detail-icon blue"></icon>
-            素材 {{vehicle.materials}}
+      <view class="features">{{vehicle.features}}</view>
+      
+      <view class="stats-and-action">
+        <view class="stats">
+          <text class="stat-item">
+            <text class="stat-icon film">🎬</text>
+            素材 {{vehicle.materialCount}}
           </text>
-        </block>
-        
-        <block wx:if="{{vehicle.lastTime}}">
-          <text class="detail-item">
-            <icon type="time" size="12" class="detail-icon gray"></icon>
-            最近 {{vehicle.lastTime}}
+          <text class="stat-item">
+            <text class="stat-icon clapperboard">🎬</text>
+            成片 {{vehicle.clipCount}}
           </text>
-        </block>
-        
-        <block wx:if="{{vehicle.suggestion}}">
-          <text class="detail-item suggestion">
-            <icon type="info" size="12" class="detail-icon amber"></icon>
-            {{vehicle.suggestion}}
+          <text class="stat-item">
+            <text class="stat-icon paper">✈️</text>
+            已发 {{vehicle.publishCount}}
           </text>
-        </block>
+        </view>
+        <button class="action-button {{vehicle.actionType}}">{{vehicle.actionText}}</button>
       </view>
     </view>
-    
-    <block wx:if="{{showAction}}">
-      <button class="action-button {{vehicle.actionType}}" size="mini" bindtap="onActionTap">
-        {{vehicle.actionText}}
-      </button>
-    </block>
   </view>
 </view>

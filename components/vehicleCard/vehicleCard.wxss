@@ -1,23 +1,19 @@
 /* 车辆卡片组件样式 */
 .vehicle-card {
-  background-color: #1e293b;
-  border: 1rpx solid #334155;
-  border-radius: 16rpx;
-  padding: 24rpx;
+  border-radius: 48rpx;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.7);
+  overflow: hidden;
 }
 
 .card-content {
   display: flex;
-  align-items: center;
 }
 
 .image-container {
-  width: 72rpx;
-  height: 72rpx;
-  border-radius: 12rpx;
+  width: 112rpx;
+  height: 96rpx;
   overflow: hidden;
-  border: 1rpx solid #475569;
-  margin-right: 16rpx;
 }
 
 .vehicle-image {
@@ -28,74 +24,105 @@
 
 .info-container {
   flex: 1;
+  padding: 24rpx;
   display: flex;
   flex-direction: column;
+  gap: 8rpx;
 }
 
-.title {
-  font-size: 12rpx;
-  color: #f1f5f9;
-  margin-bottom: 8rpx;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.subtitle {
-  font-size: 10rpx;
+.plate {
+  font-size: 24rpx;
   color: #94a3b8;
-  margin-bottom: 8rpx;
 }
 
-.details {
+.status-tag {
+  font-size: 20rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 32rpx;
+}
+
+.status-tag.for-sale {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.status-tag.sold {
+  background-color: rgba(100, 116, 139, 0.3);
+  color: #cbd5e1;
+  border: 1px solid rgba(100, 116, 139, 0.6);
+}
+
+.model {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.features {
+  font-size: 22rpx;
+  color: #94a3b8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stats-and-action {
   display: flex;
-  flex-direction: column;
-  gap: 4rpx;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8rpx;
 }
 
-.detail-item {
-  font-size: 10rpx;
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.stat-item {
+  font-size: 20rpx;
   color: #94a3b8;
   display: flex;
   align-items: center;
 }
 
-.detail-icon {
+.stat-icon {
   margin-right: 4rpx;
+  font-size: 20rpx;
 }
 
-.blue {
+.stat-icon.film {
   color: #60a5fa;
 }
 
-.gray {
-  color: #94a3b8;
+.stat-icon.clapperboard {
+  color: #34d399;
 }
 
-.amber {
-  color: #fbbf24;
-}
-
-.suggestion {
+.stat-icon.paper {
   color: #fbbf24;
 }
 
 .action-button {
-  font-size: 10rpx;
-  padding: 8rpx 20rpx;
+  font-size: 22rpx;
+  padding: 8rpx 16rpx;
   border-radius: 32rpx;
-  height: auto;
-  line-height: 1.4;
+  border: none;
 }
 
 .action-button.continue {
   background-color: #3b82f6;
-  color: white;
+  color: #ffffff;
 }
 
-.action-button.interior {
-  background-color: #334155;
+.action-button.record {
+  background-color: #1e293b;
   color: #f1f5f9;
-}
-
-.action-button.start {
-  background-color: #3b82f6;
-  color: white;
 }
