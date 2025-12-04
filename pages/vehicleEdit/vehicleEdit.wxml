@@ -22,14 +22,15 @@
         </view>
       </view>
 
-      <!-- 品牌 / 车系 / 年款 -->
+      <!-- 品牌 / 车系 -->
       <view class="form-section">
-        <text class="form-label">品牌 / 车系</text>
         <view class="form-row">
           <view class="form-col flex-1">
+            <text class="form-label">品牌</text>
             <input class="form-input" placeholder="品牌，如：宝马" bindinput="onBrandInput" />
           </view>
           <view class="form-col flex-1">
+            <text class="form-label">车系</text>
             <input class="form-input" placeholder="车系，如：3系" bindinput="onSeriesInput" />
           </view>
         </view>
@@ -78,7 +79,7 @@
       </view>
 
       <!-- 车辆照片上传区 -->
-      <view class="form-section">
+      <view class="form-section vehicle-photos">
         <view class="form-header">
           <text class="form-label">车辆照片</text>
           <text class="form-sublabel">建议：封面 + 外观 + 内饰</text>
