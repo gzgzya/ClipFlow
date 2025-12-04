@@ -91,21 +91,22 @@
     </view>
   </scroll-view>
 
-  <!-- 底部拍摄控制条 -->
-  <view class="control-bar">
-    <view class="control-info">
-      <text class="info-text">长按录制 / 点击开始&结束</text>
-      <text class="duration-text">总时长：{{totalDuration}} / 建议 {{recommendedTotalDuration}}</text>
-    </view>
-    <view class="control-buttons">
-      <button class="control-button" bindtap="onRotate">
-        <icon class="control-icon" type="refresh" size="12" color="#cbd5e1"></icon>
+  <!-- 底部拍摄控制条 - 手机相机风格 -->
+  <view class="camera-control-bar">
+    <view class="control-buttons-container">
+      <!-- 切换摄像头按钮 -->
+      <button class="control-button switch-camera" bindtap="onRotate">
+        <icon class="control-icon" type="refresh" size="16" color="#ffffff"></icon>
       </button>
+      
+      <!-- 录制按钮 -->
       <button class="record-button" bindtap="onRecord">
         <view class="record-inner"></view>
       </button>
-      <button class="control-button" bindtap="onCapture">
-        <icon class="control-icon" type="pic" size="12" color="#cbd5e1"></icon>
+      
+      <!-- 相册按钮 -->
+      <button class="control-button album" bindtap="onCapture">
+        <icon class="control-icon" type="pic" size="16" color="#ffffff"></icon>
       </button>
     </view>
   </view>

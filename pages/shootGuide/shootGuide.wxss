@@ -14,7 +14,7 @@
   flex: 1;
   background-color: #020617;
   position: relative;
-  padding-bottom: 160rpx;
+  padding-bottom: 180rpx;
   height: 100%;
 }
 
@@ -319,7 +319,6 @@
 .step-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 16rpx 24rpx;
   border-radius: 32rpx;
   background-color: rgba(15, 23, 42, 0.8);
@@ -334,6 +333,7 @@
   display: flex;
   align-items: center;
   gap: 16rpx;
+  flex: 1;
 }
 
 .step-number {
@@ -393,6 +393,8 @@
   background-color: #334155;
   color: #f1f5f9;
   border: none;
+  margin-left: auto;
+  height: fit-content;
 }
 
 .step-action.completed {
@@ -422,7 +424,6 @@
 .next-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 12rpx 20rpx;
 }
 
@@ -430,6 +431,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rpx;
+  flex: 1;
 }
 
 .info-title {
@@ -443,61 +445,63 @@
 }
 
 .next-button {
-  padding: 6rpx 16rpx;
+  padding: 8rpx 16rpx;
   border-radius: 32rpx;
   background-color: #3b82f6;
   color: #ffffff;
   font-size: 24rpx;
   border: none;
+  margin-left: auto;
+  white-space: nowrap;
+  height: fit-content;
 }
 
-/* 底部拍摄控制条 */
-.control-bar {
+/* 底部拍摄控制条 - 手机相机风格 */
+.camera-control-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 0 64rpx 32rpx;
-  background-color: #020617;
+  padding: 20rpx 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.control-info {
+.control-buttons-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 26rpx;
-  color: #cbd5e1;
-  margin-bottom: 8rpx;
-}
-
-.duration-text {
-  color: #94a3b8;
-}
-
-.control-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin-bottom: 16rpx;
 }
 
 .control-button {
-  width: 64rpx;
-  height: 64rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
-  background-color: rgba(30, 41, 59, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.control-button.switch-camera {
+  background-color: rgba(30, 41, 59, 0.8);
+}
+
+.control-button.album {
+  background-color: rgba(30, 41, 59, 0.8);
 }
 
 .control-icon {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 .record-button {
-  width: 128rpx;
-  height: 128rpx;
+  width: 140rpx;
+  height: 140rpx;
   border-radius: 50%;
   background-color: #ef4444;
   display: flex;
