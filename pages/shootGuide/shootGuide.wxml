@@ -1,7 +1,7 @@
 <!-- 标准化拍摄页面 -->
 <view class="container">
   <!-- 内容区域 -->
-  <view class="content">
+  <scroll-view class="content" scroll-y="true">
     <!-- 步骤进度条 -->
     <view class="progress-section">
       <view class="progress-header">
@@ -21,9 +21,9 @@
           </block>
         </view>
         <view class="step-labels">
-          <block wx:for="{{shootProgress.steps}}" wx:key="id">
-            <text class="label-text">{{item.name}}</text>
-          </block>
+          <text class="label-text">外观</text>
+          <text class="label-text">内饰</text>
+          <text class="label-text">亮点</text>
         </view>
       </view>
     </view>
@@ -89,7 +89,7 @@
         </view>
       </view>
     </view>
-  </view>
+  </scroll-view>
 
   <!-- 底部拍摄控制条 -->
   <view class="control-bar">
