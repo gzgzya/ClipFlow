@@ -21,9 +21,9 @@
           </block>
         </view>
         <view class="step-labels">
-          <text class="label-text">外观</text>
-          <text class="label-text">内饰</text>
-          <text class="label-text">亮点</text>
+          <text class="label-text left">外观</text>
+          <text class="label-text center">内饰</text>
+          <text class="label-text right">亮点</text>
         </view>
       </view>
     </view>
