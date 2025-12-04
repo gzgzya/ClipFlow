@@ -193,17 +193,16 @@
   position: relative;
 }
 
-.preview-image {
+/* 三种预览模式样式 */
+.preview-mode {
   width: 100%;
   height: 100%;
 }
 
-.camera-preview {
-  width: 100%;
-  height: 100%;
-}
-
-.media-preview, .media-player {
+.default-preview .preview-image,
+.camera-preview .camera-preview,
+.media-preview .media-preview,
+.media-preview .media-player {
   width: 100%;
   height: 100%;
 }
@@ -572,4 +571,9 @@
   border-radius: 50%;
   background-color: rgba(239, 68, 68, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 解决重复定义的问题 */
+.step-wrapper:first-child .step-line {
+  margin-left: 24rpx;
 }

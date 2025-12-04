@@ -30,30 +30,38 @@
 
     <!-- 摄像头预览区域 -->
     <view class="preview-section">
-      <!-- 默认预览图 -->
-      <image wx:if="{{!showCameraPreview && !selectedMedia.url}}" class="preview-image" src="{{currentPreviewImage}}" mode="aspectFill"></image>
+      <!-- 三种互斥的预览模式 -->
       
-      <!-- 摄像头实时预览 -->
-      <camera wx:if="{{showCameraPreview}}" class="camera-preview" device-position="{{cameraPosition}}"></camera>
+      <!-- 默认预览模式 -->
+      <view wx:if="{{!showCameraPreview && !selectedMedia.url}}" class="preview-mode default-preview">
+        <image class="preview-image" src="{{currentPreviewImage}}" mode="aspectFill"></image>
+      </view>
       
-      <!-- 媒体预览区域 -->
-      <block wx:if="{{selectedMedia.url && !selectedMedia.shouldPlay}}">
-        <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-        <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}"></video>
-        <!-- 播放按钮覆盖层 -->
-        <view class="play-overlay" bindtap="onPlayMedia">
-          <view class="play-button">
-            <icon wx:if="{{selectedMedia.type === 'video'}}" type="play" size="40" color="#ffffff"></icon>
-            <!-- 图片不需要播放按钮，直接显示图片 -->
+      <!-- 摄像头预览模式 -->
+      <view wx:if="{{showCameraPreview}}" class="preview-mode camera-preview">
+        <camera class="camera-preview" device-position="{{cameraPosition}}"></camera>
+      </view>
+      
+      <!-- 媒体预览模式 -->
+      <view wx:if="{{selectedMedia.url}}" class="preview-mode media-preview">
+        <!-- 媒体预览但未播放状态 -->
+        <block wx:if="{{!selectedMedia.shouldPlay}}">
+          <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
+          <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}"></video>
+          <!-- 播放按钮覆盖层 -->
+          <view class="play-overlay" bindtap="onPlayMedia">
+            <view class="play-button">
+              <icon wx:if="{{selectedMedia.type === 'video'}}" type="play" size="40" color="#ffffff"></icon>
+            </view>
           </view>
-        </view>
-      </block>
-      
-      <!-- 媒体播放区域 -->
-      <block wx:if="{{selectedMedia.url && selectedMedia.shouldPlay}}">
-        <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-        <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay controls></video>
-      </block>
+        </block>
+        
+        <!-- 媒体播放状态 -->
+        <block wx:else>
+          <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
+          <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay controls></video>
+        </block>
+      </view>
       
       <view class="preview-overlay"></view>
       
@@ -126,7 +134,7 @@
       </button>
       
       <!-- 录制按钮 -->
-      <button class="record-button" 
+      <button class="record-button {{isRecording ? 'recording' : ''}}" 
               bindtouchstart="onRecordTouchStart" 
               bindtouchend="onRecordTouchEnd"
               bindtouchcancel="onRecordTouchCancel">

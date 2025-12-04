@@ -1,18 +1,36 @@
 // pages/shootGuide/shootGuide.js
+
+// 定义常量
+const STEP_STATUS = {
+  PENDING: 'pending',
+  ACTIVE: 'active',
+  COMPLETED: 'completed'
+};
+
+const MEDIA_TYPE = {
+  IMAGE: 'image',
+  VIDEO: 'video'
+};
+
+const CAMERA_POSITION = {
+  FRONT: 'front',
+  BACK: 'back'
+};
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    // 添加拍摄进度状态数据
+    // 拍摄进度状态数据
     shootProgress: {
-      currentStep: 1, // 当前步骤（1-外观，2-内饰，3-亮点）
+      currentStep: 1, // 当前主步骤（1-外观，2-内饰，3-亮点）
       totalSteps: 3,
       completedSteps: 0,
       steps: [
-        { id: 1, name: '外观', status: 'active' },
-        { id: 2, name: '内饰', status: 'pending' },
-        { id: 3, name: '亮点', status: 'pending' }
+        { id: 1, name: '外观', status: STEP_STATUS.ACTIVE },
+        { id: 2, name: '内饰', status: STEP_STATUS.PENDING },
+        { id: 3, name: '亮点', status: STEP_STATUS.PENDING }
       ]
     },
     
@@ -22,19 +40,19 @@ Page({
     // 不同步骤的子步骤列表
     stepSubSteps: {
       1: [ // 外观步骤
-        { id: 1, title: '车头 45° 远景', subtitle: '建议拍摄车头全貌，保证光线充足', status: 'pending', mediaUrl: '' },
-        { id: 2, title: '侧面环绕拍摄', subtitle: '展示车身线条与轮毂细节', status: 'pending', mediaUrl: '' },
-        { id: 3, title: '车尾特写', subtitle: '重点展示尾灯与排气设计', status: 'pending', mediaUrl: '' }
+        { id: 1, title: '车头 45° 远景', subtitle: '建议拍摄车头全貌，保证光线充足', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 2, title: '侧面环绕拍摄', subtitle: '展示车身线条与轮毂细节', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 3, title: '车尾特写', subtitle: '重点展示尾灯与排气设计', status: STEP_STATUS.PENDING, mediaUrl: '' }
       ],
       2: [ // 内饰步骤
-        { id: 1, title: '主驾视角 · 中控&方向盘', subtitle: '建议突出液晶仪表、中控大屏', status: 'pending', mediaUrl: '' },
-        { id: 2, title: '后排空间 & 地台', subtitle: '建议拍摄腿部空间、地台凸起情况', status: 'pending', mediaUrl: '' },
-        { id: 3, title: '细节 & 配置展示', subtitle: '方向盘、座椅、音响、氛围灯等高频关注点', status: 'pending', mediaUrl: '' }
+        { id: 1, title: '主驾视角 · 中控&方向盘', subtitle: '建议突出液晶仪表、中控大屏', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 2, title: '后排空间 & 地台', subtitle: '建议拍摄腿部空间、地台凸起情况', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 3, title: '细节 & 配置展示', subtitle: '方向盘、座椅、音响、氛围灯等高频关注点', status: STEP_STATUS.PENDING, mediaUrl: '' }
       ],
       3: [ // 亮点步骤
-        { id: 1, title: '动力系统展示', subtitle: '发动机舱与启动声浪演示', status: 'pending', mediaUrl: '' },
-        { id: 2, title: '科技配置演示', subtitle: '辅助驾驶与智能互联功能', status: 'pending', mediaUrl: '' },
-        { id: 3, title: '安全配置展示', subtitle: '主动安全与被动安全配置', status: 'pending', mediaUrl: '' }
+        { id: 1, title: '动力系统展示', subtitle: '发动机舱与启动声浪演示', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 2, title: '科技配置演示', subtitle: '辅助驾驶与智能互联功能', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 3, title: '安全配置展示', subtitle: '主动安全与被动安全配置', status: STEP_STATUS.PENDING, mediaUrl: '' }
       ]
     },
 
@@ -67,7 +85,7 @@ Page({
     showCameraPreview: false,
     
     // 摄像头位置（前置/后置）
-    cameraPosition: "back",
+    cameraPosition: CAMERA_POSITION.BACK,
     
     // 录制状态
     isRecording: false,
@@ -78,7 +96,7 @@ Page({
     // 当前选中查看的媒体信息
     selectedMedia: {
       url: "",
-      type: "image",
+      type: MEDIA_TYPE.IMAGE,
       shouldPlay: false // 是否应该播放
     }
   },
@@ -130,11 +148,11 @@ Page({
     // 根据已完成步骤数量更新状态
     shootProgress.steps.forEach((step, index) => {
       if (index < shootProgress.completedSteps) {
-        step.status = 'completed';
+        step.status = STEP_STATUS.COMPLETED;
       } else if (index === shootProgress.completedSteps) {
-        step.status = 'active';
+        step.status = STEP_STATUS.ACTIVE;
       } else {
-        step.status = 'pending';
+        step.status = STEP_STATUS.PENDING;
       }
     });
     
@@ -157,6 +175,11 @@ Page({
     // 清理定时器
     if (this.data.longPressTimer) {
       clearTimeout(this.data.longPressTimer);
+    }
+    
+    // 确保录制被正确停止
+    if (this.data.isRecording) {
+      this.stopRecording();
     }
   },
 
@@ -205,6 +228,16 @@ Page({
       title: '重新拍摄当前片段',
       icon: 'none'
     });
+    
+    // 重置媒体选择状态
+    this.setData({
+      selectedMedia: {
+        url: "",
+        type: MEDIA_TYPE.IMAGE,
+        shouldPlay: false
+      },
+      showCameraPreview: true
+    });
   },
 
   // 查看已完成的媒体内容（点击step-info区域）
@@ -212,14 +245,16 @@ Page({
     const subStepId = e.currentTarget.dataset.substepId;
     const subStep = this.data.currentStepSubSteps.find(item => item.id === subStepId);
     
-    if (subStep && subStep.status === 'completed' && subStep.mediaUrl) {
+    if (subStep && subStep.status === STEP_STATUS.COMPLETED && subStep.mediaUrl) {
+      // 自动进入媒体预览模式
       this.setData({
         selectedMedia: {
           url: subStep.mediaUrl,
-          type: subStep.mediaType || 'image',
+          type: subStep.mediaType || MEDIA_TYPE.IMAGE,
           shouldPlay: false // 默认不播放，需要点击播放按钮
         },
-        showCameraPreview: false // 确保不显示摄像头预览
+        showCameraPreview: false, // 确保不显示摄像头预览
+        showCameraControls: false // 隐藏相机控制栏
       });
       
       wx.showToast({
@@ -243,13 +278,22 @@ Page({
     const subStepId = e.currentTarget.dataset.substepId;
     console.log('开始拍摄子步骤:', subStepId);
     
+    // 如果正在录制，不允许切换步骤
+    if (this.data.isRecording) {
+      wx.showToast({
+        title: '请先停止当前录制',
+        icon: 'none'
+      });
+      return;
+    }
+    
     // 显示底部相机控制栏和摄像头预览
     this.setData({
       showCameraControls: true,
       showCameraPreview: true,
       selectedMedia: {
         url: "",
-        type: "image",
+        type: MEDIA_TYPE.IMAGE,
         shouldPlay: false
       }, // 清除选中的媒体
       activeSubStepId: subStepId
@@ -265,6 +309,15 @@ Page({
   onNextStep() {
     const shootProgress = {...this.data.shootProgress};
     
+    // 如果正在录制，不允许切换步骤
+    if (this.data.isRecording) {
+      wx.showToast({
+        title: '请先停止当前录制',
+        icon: 'none'
+      });
+      return;
+    }
+    
     // 直接跳转到下一步
     if (shootProgress.currentStep < shootProgress.totalSteps) {
       // 标记当前步骤为完成
@@ -272,7 +325,14 @@ Page({
       shootProgress.currentStep++;
       
       this.setData({
-        shootProgress
+        shootProgress,
+        // 重置媒体选择状态
+        selectedMedia: {
+          url: "",
+          type: MEDIA_TYPE.IMAGE,
+          shouldPlay: false
+        },
+        showCameraPreview: false
       });
       
       // 更新当前步骤的子步骤
@@ -287,19 +347,31 @@ Page({
 
   // 旋转镜头事件
   onRotate() {
-    const newPosition = this.data.cameraPosition === "front" ? "back" : "front";
+    // 如果正在录制，不允许切换摄像头
+    if (this.data.isRecording) {
+      wx.showToast({
+        title: '录制中无法切换摄像头',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    const newPosition = this.data.cameraPosition === CAMERA_POSITION.FRONT ? CAMERA_POSITION.BACK : CAMERA_POSITION.FRONT;
     this.setData({
       cameraPosition: newPosition
     });
     
     wx.showToast({
-      title: newPosition === "front" ? '前置摄像头' : '后置摄像头',
+      title: newPosition === CAMERA_POSITION.FRONT ? '前置摄像头' : '后置摄像头',
       icon: 'none'
     });
   },
 
   // 录制按钮触摸开始 - 支持长按录制
   onRecordTouchStart() {
+    // 如果已经处于录制状态，不做任何操作
+    if (this.data.isRecording) return;
+    
     const timer = setTimeout(() => {
       // 长按触发录制
       this.startRecording();
@@ -345,7 +417,44 @@ Page({
     }
   },
 
-  // 开始录制
+  // 拍照流程: takePhoto → 保存 → 更新子步骤状态 → 退出相机模式
+  takePicture() {
+    console.log('拍照');
+    
+    // 拍照
+    this.cameraContext.takePhoto({
+      quality: 'high',
+      success: (res) => {
+        console.log('拍照成功', res);
+        wx.showToast({
+          title: '拍照完成',
+          icon: 'success'
+        });
+        
+        // 统一媒体数据结构
+        const mediaData = {
+          url: res.tempImagePath,
+          type: MEDIA_TYPE.IMAGE,
+          shouldPlay: false
+        };
+        
+        // 保存媒体并完成拍摄流程
+        this.saveMediaAndExitCameraMode(mediaData);
+      },
+      fail: (err) => {
+        console.error('拍照失败', err);
+        wx.showToast({
+          title: '拍照失败',
+          icon: 'none'
+        });
+        
+        // 退出相机模式
+        this.exitCameraMode();
+      }
+    });
+  },
+
+  // 录制流程: startRecord → stopRecord → 保存 → 更新状态 → 退出相机模式
   startRecording() {
     this.setData({
       isRecording: true
@@ -370,12 +479,18 @@ Page({
         this.setData({
           isRecording: false
         });
+        
+        // 退出相机模式
+        this.exitCameraMode();
       }
     });
   },
 
   // 停止录制
   stopRecording() {
+    // 如果未在录制状态，不做任何操作
+    if (!this.data.isRecording) return;
+    
     this.setData({
       isRecording: false
     });
@@ -389,8 +504,15 @@ Page({
           icon: 'success'
         });
         
-        // 保存媒体URL并完成拍摄
-        this.saveMediaAndComplete(res.tempVideoPath, 'video');
+        // 统一媒体数据结构
+        const mediaData = {
+          url: res.tempVideoPath,
+          type: MEDIA_TYPE.VIDEO,
+          shouldPlay: false
+        };
+        
+        // 保存媒体并完成拍摄流程
+        this.saveMediaAndExitCameraMode(mediaData);
       },
       fail: (err) => {
         console.error('停止录制失败', err);
@@ -398,48 +520,33 @@ Page({
           title: '录制失败',
           icon: 'none'
         });
-      }
-    });
-  },
-
-  // 拍照
-  takePicture() {
-    console.log('拍照');
-    
-    // 拍照
-    this.cameraContext.takePhoto({
-      quality: 'high',
-      success: (res) => {
-        console.log('拍照成功', res);
-        wx.showToast({
-          title: '拍照完成',
-          icon: 'success'
-        });
         
-        // 保存媒体URL并完成拍摄
-        this.saveMediaAndComplete(res.tempImagePath, 'image');
-      },
-      fail: (err) => {
-        console.error('拍照失败', err);
-        wx.showToast({
-          title: '拍照失败',
-          icon: 'none'
-        });
+        // 退出相机模式
+        this.exitCameraMode();
       }
     });
   },
 
-  // 打开相册事件
+  // 相册选择流程: wx.chooseMedia → 保存 → 更新状态 → 自动进入媒体预览模式
   onOpenAlbum() {
+    // 如果正在录制，不允许打开相册
+    if (this.data.isRecording) {
+      wx.showToast({
+        title: '录制中无法打开相册',
+        icon: 'none'
+      });
+      return;
+    }
+    
     console.log('打开相册');
     
     // 调用系统相册选择图片或视频
     wx.chooseMedia({
       count: 9, // 最多选择9个文件
-      mediaType: ['image', 'video'], // 可选择图片和视频
+      mediaType: [MEDIA_TYPE.IMAGE, MEDIA_TYPE.VIDEO], // 可选择图片和视频
       sourceType: ['album'], // 从相册选择
       maxDuration: 30, // 视频最大时长30秒
-      camera: 'back', // 使用后置摄像头
+      camera: CAMERA_POSITION.BACK, // 使用后置摄像头
       success: (res) => {
         console.log('选择媒体成功', res);
         wx.showToast({
@@ -450,10 +557,17 @@ Page({
         // 获取第一个选择的媒体文件
         if (res.tempFiles && res.tempFiles.length > 0) {
           const mediaFile = res.tempFiles[0];
-          const mediaType = res.type === 'image' ? 'image' : 'video';
+          const mediaType = res.type === MEDIA_TYPE.IMAGE ? MEDIA_TYPE.IMAGE : MEDIA_TYPE.VIDEO;
           
-          // 保存媒体URL并完成拍摄
-          this.saveMediaAndComplete(mediaFile.tempFilePath, mediaType);
+          // 统一媒体数据结构
+          const mediaData = {
+            url: mediaFile.tempFilePath,
+            type: mediaType,
+            shouldPlay: false
+          };
+          
+          // 保存媒体并自动进入媒体预览模式
+          this.saveMediaAndPreview(mediaData);
         }
       },
       fail: (err) => {
@@ -469,18 +583,45 @@ Page({
     });
   },
   
-  // 保存媒体URL并完成拍摄
-  saveMediaAndComplete(mediaUrl, mediaType) {
-    // 更新当前子步骤的媒体URL
+  // 保存媒体并完成拍摄流程，然后退出相机模式
+  saveMediaAndExitCameraMode(mediaData) {
+    // 更新当前子步骤的媒体信息
+    this.updateSubStepWithMedia(mediaData);
+    
+    // 退出相机模式
+    this.exitCameraMode();
+    
+    // 检查是否所有子步骤都已完成
+    this.checkAndProceedToNextStep();
+  },
+  
+  // 保存媒体并自动进入媒体预览模式
+  saveMediaAndPreview(mediaData) {
+    // 更新当前子步骤的媒体信息
+    this.updateSubStepWithMedia(mediaData);
+    
+    // 自动进入媒体预览模式
+    this.setData({
+      selectedMedia: mediaData,
+      showCameraPreview: false,
+      showCameraControls: false
+    });
+    
+    // 检查是否所有子步骤都已完成
+    this.checkAndProceedToNextStep();
+  },
+  
+  // 更新子步骤的媒体信息
+  updateSubStepWithMedia(mediaData) {
     const subStepId = this.data.activeSubStepId;
     if (subStepId) {
       const updatedSubSteps = this.data.currentStepSubSteps.map(step => {
         if (step.id === subStepId) {
           return {
             ...step,
-            status: 'completed',
-            mediaUrl: mediaUrl,
-            mediaType: mediaType
+            status: STEP_STATUS.COMPLETED,
+            mediaUrl: mediaData.url,
+            mediaType: mediaData.type
           };
         }
         return step;
@@ -489,86 +630,44 @@ Page({
       this.setData({
         currentStepSubSteps: updatedSubSteps
       });
-      
-      // 检查是否所有子步骤都已完成
-      const allCompleted = updatedSubSteps.every(step => step.status === 'completed');
-      
-      if (allCompleted) {
-        // 更新主步骤进度
-        const shootProgress = {...this.data.shootProgress};
-        shootProgress.completedSteps = shootProgress.currentStep;
-        
-        // 如果还有下一步，激活下一步
-        if (shootProgress.currentStep < shootProgress.totalSteps) {
-          shootProgress.currentStep++;
-        }
-        
-        this.setData({
-          shootProgress
-        });
-        
-        // 更新当前步骤的子步骤
-        this.initCurrentStep();
-        
-        wx.showToast({
-          title: `已完成${shootProgress.steps[shootProgress.currentStep-2].name}拍摄`,
-          icon: 'none'
-        });
-      }
     }
-    
-    // 完成拍摄流程
-    this.completeShooting();
   },
   
-  // 完成拍摄
-  completeShooting() {
-    // 隐藏底部相机控制栏和摄像头预览
+  // 退出相机模式
+  exitCameraMode() {
     this.setData({
       showCameraControls: false,
-      showCameraPreview: false
+      showCameraPreview: false,
+      activeSubStepId: null
     });
+  },
+  
+  // 检查并继续到下一步（如果所有子步骤已完成）
+  checkAndProceedToNextStep() {
+    const updatedSubSteps = this.data.currentStepSubSteps;
+    const allCompleted = updatedSubSteps.every(step => step.status === STEP_STATUS.COMPLETED);
     
-    // 更新当前子步骤状态为已完成
-    const subStepId = this.data.activeSubStepId;
-    if (subStepId) {
-      const updatedSubSteps = this.data.currentStepSubSteps.map(step => {
-        if (step.id === subStepId) {
-          return {...step, status: 'completed'};
-        }
-        return step;
-      });
+    if (allCompleted) {
+      // 更新主步骤进度
+      const shootProgress = {...this.data.shootProgress};
+      shootProgress.completedSteps = shootProgress.currentStep;
+      
+      // 如果还有下一步，激活下一步
+      if (shootProgress.currentStep < shootProgress.totalSteps) {
+        shootProgress.currentStep++;
+      }
       
       this.setData({
-        currentStepSubSteps: updatedSubSteps,
-        activeSubStepId: null
+        shootProgress
       });
       
-      // 检查是否所有子步骤都已完成
-      const allCompleted = updatedSubSteps.every(step => step.status === 'completed');
+      // 更新当前步骤的子步骤
+      this.initCurrentStep();
       
-      if (allCompleted) {
-        // 更新主步骤进度
-        const shootProgress = {...this.data.shootProgress};
-        shootProgress.completedSteps = shootProgress.currentStep;
-        
-        // 如果还有下一步，激活下一步
-        if (shootProgress.currentStep < shootProgress.totalSteps) {
-          shootProgress.currentStep++;
-        }
-        
-        this.setData({
-          shootProgress
-        });
-        
-        // 更新当前步骤的子步骤
-        this.initCurrentStep();
-        
-        wx.showToast({
-          title: `已完成${shootProgress.steps[shootProgress.currentStep-2].name}拍摄`,
-          icon: 'none'
-        });
-      }
+      wx.showToast({
+        title: `已完成${shootProgress.steps[shootProgress.currentStep-2].name}拍摄`,
+        icon: 'none'
+      });
     }
   }
-});
+})
