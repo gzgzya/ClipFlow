@@ -30,7 +30,31 @@
 
     <!-- 摄像头预览区域 -->
     <view class="preview-section">
-      <image class="preview-image" src="{{currentPreviewImage}}" mode="aspectFill"></image>
+      <!-- 默认预览图 -->
+      <image wx:if="{{!showCameraPreview && !selectedMedia.url}}" class="preview-image" src="{{currentPreviewImage}}" mode="aspectFill"></image>
+      
+      <!-- 摄像头实时预览 -->
+      <camera wx:if="{{showCameraPreview}}" class="camera-preview" device-position="{{cameraPosition}}"></camera>
+      
+      <!-- 媒体预览区域 -->
+      <block wx:if="{{selectedMedia.url && !selectedMedia.shouldPlay}}">
+        <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
+        <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}"></video>
+        <!-- 播放按钮覆盖层 -->
+        <view class="play-overlay" bindtap="onPlayMedia">
+          <view class="play-button">
+            <icon wx:if="{{selectedMedia.type === 'video'}}" type="play" size="40" color="#ffffff"></icon>
+            <!-- 图片不需要播放按钮，直接显示图片 -->
+          </view>
+        </view>
+      </block>
+      
+      <!-- 媒体播放区域 -->
+      <block wx:if="{{selectedMedia.url && selectedMedia.shouldPlay}}">
+        <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
+        <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay controls></video>
+      </block>
+      
       <view class="preview-overlay"></view>
       
       <!-- 提示文案 -->
@@ -63,7 +87,8 @@
         <block wx:for="{{currentStepSubSteps}}" wx:key="id">
           <view class="step-item {{item.status}}">
             <view class="step-content">
-              <view class="step-info">
+              <!-- 点击step-info区域查看已完成的媒体内容 -->
+              <view class="step-info" bindtap="onSelectMedia" data-substep-id="{{item.id}}">
                 <view class="step-number {{item.status}} fixed-width">
                   <text class="number-text">{{item.id}}</text>
                 </view>
@@ -72,7 +97,8 @@
                   <text class="desc-subtitle">{{item.subtitle}}</text>
                 </view>
               </view>
-              <button class="step-action {{item.status}}" bindtap="onShoot" data-substep-id="{{item.id}}">{{item.status === 'completed' ? '已完成' : '去拍摄'}}</button>
+              <button wx:if="{{item.status !== 'completed'}}" class="step-action {{item.status}}" bindtap="onShoot" data-substep-id="{{item.id}}">{{item.status === 'completed' ? '已完成' : '去拍摄'}}</button>
+              <text wx:else class="step-completed">已完成</text>
             </view>
           </view>
         </block>
@@ -92,21 +118,24 @@
   </scroll-view>
 
   <!-- 底部拍摄控制条 - 手机相机风格 -->
-  <view class="camera-control-bar">
+  <view wx:if="{{showCameraControls}}" class="camera-control-bar">
     <view class="control-buttons-container">
       <!-- 切换摄像头按钮 -->
       <button class="control-button switch-camera" bindtap="onRotate">
-        <icon class="control-icon" type="refresh" size="16" color="#ffffff"></icon>
+        <icon class="control-icon" type="refresh" size="24" color="#ffffff"></icon>
       </button>
       
       <!-- 录制按钮 -->
-      <button class="record-button" bindtap="onRecord">
+      <button class="record-button" 
+              bindtouchstart="onRecordTouchStart" 
+              bindtouchend="onRecordTouchEnd"
+              bindtouchcancel="onRecordTouchCancel">
         <view class="record-inner"></view>
       </button>
       
       <!-- 相册按钮 -->
-      <button class="control-button album" bindtap="onCapture">
-        <icon class="control-icon" type="pic" size="16" color="#ffffff"></icon>
+      <button class="control-button album" bindtap="onOpenAlbum">
+        <icon class="control-icon" type="pic" size="24" color="#ffffff"></icon>
       </button>
     </view>
   </view>
