@@ -6,19 +6,17 @@ Page({
   data: {
     statusOptions: ['在售', '已售'],
     statusIndex: 0,
-    photos: [
-      { url: '', cover: true },
-      { url: '', cover: false },
-      { url: '', cover: false },
-      { url: '', cover: false }
-    ]
+    photos: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    // 初始化空的图片数组
+    this.setData({
+      photos: []
+    });
   },
 
   /**
@@ -140,9 +138,8 @@ Page({
   },
 
   // 添加照片事件
-  onAddPhoto(e) {
+  onAddPhoto() {
     console.log('添加照片');
-    const index = e.currentTarget.dataset.index;
     
     // 使用微信小程序的API选择图片
     wx.chooseImage({
@@ -153,9 +150,12 @@ Page({
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
         
-        // 更新对应索引的照片
+        // 添加新图片到数组
         const photos = this.data.photos;
-        photos[index].url = tempFilePaths[0];
+        photos.push({ 
+          url: tempFilePaths[0], 
+          cover: photos.length === 0 // 第一张图片设为封面
+        });
         
         this.setData({
           photos: photos
@@ -164,6 +164,24 @@ Page({
       fail: (err) => {
         console.error('选择图片失败', err);
       }
+    });
+  },
+
+  // 删除照片事件
+  onDeletePhoto(e) {
+    const index = e.currentTarget.dataset.index;
+    const photos = this.data.photos;
+    
+    // 从数组中移除指定索引的图片
+    photos.splice(index, 1);
+    
+    // 如果第一张图片被删除且还有其他图片，将新第一张设为封面
+    if (photos.length > 0 && index === 0) {
+      photos[0].cover = true;
+    }
+    
+    this.setData({
+      photos: photos
     });
   },
 

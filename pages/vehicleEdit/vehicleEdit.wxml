@@ -87,15 +87,25 @@
         <scroll-view class="photo-scroll" scroll-x="true">
           <view class="photo-container">
             <block wx:for="{{photos}}" wx:key="index">
-              <view class="photo-item">
-                <image wx:if="{{item.url}}" class="photo-image" src="{{item.url}}" mode="aspectFill"></image>
-                <text wx:if="{{item.cover}}" class="cover-tag">封面</text>
-                <button wx:if="{{!item.url}}" class="photo-add" bindtap="onAddPhoto" data-index="{{index}}">
-                  <icon class="add-icon" type="add" size="32rpx"></icon>
-                  <text class="add-text">添加</text>
-                </button>
+              <view class="photo-item-wrapper" wx:if="{{item.url}}">
+                <view class="photo-item">
+                  <image class="photo-image" src="{{item.url}}" mode="aspectFill"></image>
+                  <text wx:if="{{item.cover}}" class="cover-tag">封面</text>
+                  <!-- 删除按钮 -->
+                  <button class="delete-button" bindtap="onDeletePhoto" data-index="{{index}}">
+                    <icon class="delete-icon" type="clear" size="16rpx"></icon>
+                  </button>
+                </view>
               </view>
             </block>
+            
+            <!-- 添加图片按钮 -->
+            <view class="photo-item-wrapper">
+              <button class="photo-add" bindtap="onAddPhoto">
+                <icon class="add-icon" type="add" size="32rpx"></icon>
+                <text class="add-text">添加</text>
+              </button>
+            </view>
           </view>
         </scroll-view>
       </view>
