@@ -4,26 +4,7 @@
   <view class="content">
     <!-- 步骤进度条 -->
     <view class="progress-section">
-      <view class="progress-header">
-        <text class="header-text">拍摄流程</text>
-        <text class="header-status">已完成 {{shootProgress.completedSteps}}/{{shootProgress.totalSteps}} 步</text>
-      </view>
-      <view class="progress-steps">
-        <block wx:for="{{shootProgress.steps}}" wx:key="id">
-          <view class="step-item">
-            <view class="step-indicator {{item.status}}">
-              <icon wx:if="{{item.status === 'completed'}}" class="step-icon" type="success" size="11" color="#ffffff"></icon>
-              <text wx:else class="step-number">{{item.id}}</text>
-            </view>
-            <view wx:if="{{item.id < shootProgress.totalSteps}}" class="step-line {{item.status}}"></view>
-          </view>
-        </block>
-      </view>
-      <view class="step-labels">
-        <block wx:for="{{shootProgress.steps}}" wx:key="id">
-          <text class="label-text">{{item.name}}</text>
-        </block>
-      </view>
+      <step-progress steps="3" step-index="{{shootProgress.currentStep - 1}}"></step-progress>
     </view>
 
     <!-- 摄像头预览区域 -->

@@ -1,0 +1,12 @@
+<view class="progress-container">
+  <view class="progress-steps">
+    <block wx:for="{{stepArray}}" wx:key="index">
+      <view class="step-item">
+        <view class="step-indicator {{index < stepIndex ? 'completed' : (index === stepIndex ? 'active' : 'pending')}}">
+          <text class="step-number">{{index + 1}}</text>
+        </view>
+        <view wx:if="{{index < stepArray.length - 1}}" class="step-line {{index < stepIndex ? 'completed' : (index === stepIndex ? 'active' : 'pending')}}"></view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,77 @@
+.progress-container {
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-steps {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.step-indicator {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  /* 未开始状态 - 灰色 */
+  background-color: #D1D5DB;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.step-indicator.completed {
+  /* 已完成状态 - 绿色 */
+  background-color: #10B981;
+}
+
+.step-indicator.active {
+  /* 当前状态 - 蓝色 */
+  background-color: #3B82F6;
+  box-shadow: 0 0 8rpx rgba(59, 130, 246, 0.5);
+  border: 4rpx solid #3B82F6;
+}
+
+.step-indicator.pending {
+  /* 未开始状态 - 灰色 */
+  background-color: #D1D5DB;
+}
+
+.step-number {
+  color: #FFFFFF;
+}
+
+.step-line {
+  flex: 1;
+  height: 4rpx;
+  margin: 0 8rpx;
+  /* 未开始状态 - 灰色 */
+  background-color: #D1D5DB;
+}
+
+.step-line.completed {
+  /* 已完成状态 - 绿色 */
+  background-color: #10B981;
+}
+
+.step-line.active {
+  /* 当前状态 - 蓝色 */
+  background-color: #3B82F6;
+}
+
+.step-line.pending {
+  /* 未开始状态 - 灰色 */
+  background-color: #D1D5DB;
+}
