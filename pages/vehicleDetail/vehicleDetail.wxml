@@ -1,31 +1,34 @@
 <!-- 车辆详情页面 -->
 <view class="container">
-  <!-- 状态栏 -->
-  <view class="status-bar">
-    <text class="status-text">9:41</text>
-    <view class="status-icons">
-      <icon class="status-icon" type="success_no_circle" size="10"></icon>
-      <icon class="status-icon" type="info" size="10"></icon>
-      <icon class="status-icon battery" type="success" size="12"></icon>
-    </view>
-  </view>
-
-  <!-- 顶部导航 -->
-  <view class="nav-bar">
-    <button class="nav-button" bindtap="onBack">
-      <icon class="nav-icon" type="arrow-left" size="12"></icon>
-    </button>
-    <view class="nav-title">
-      <text class="title-main">2021 宝马 325Li</text>
-      <text class="title-sub">苏A · 88888</text>
-    </view>
-    <button class="nav-button" bindtap="onEdit">
-      <icon class="nav-icon" type="edit" size="12"></icon>
-    </button>
-  </view>
-
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y="true">
+    <!-- 顶部搜索与统计 -->
+    <view class="top-section">
+      <!-- 状态栏 -->
+      <view class="status-bar">
+        <text class="status-text">9:41</text>
+        <view class="status-icons">
+          <icon class="status-icon" type="success_no_circle" size="10"></icon>
+          <icon class="status-icon" type="info" size="10"></icon>
+          <icon class="status-icon battery" type="success" size="12"></icon>
+        </view>
+      </view>
+
+      <!-- 顶部导航 -->
+      <view class="nav-bar">
+        <button class="nav-button" bindtap="onBack">
+          <icon class="nav-icon" type="arrow-left" size="12"></icon>
+        </button>
+        <view class="nav-title">
+          <text class="title-main">2021 宝马 325Li</text>
+          <text class="title-sub">苏A · 88888</text>
+        </view>
+        <button class="nav-button" bindtap="onEdit">
+          <icon class="nav-icon" type="edit" size="12"></icon>
+        </button>
+      </view>
+    </view>
+
     <!-- 顶部车辆图片轮播 -->
     <view class="banner-section">
       <image class="banner-image" src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=1200" mode="aspectFill"></image>
@@ -33,7 +36,8 @@
       
       <view class="banner-content">
         <view class="banner-info">
-          <view class="status-tag">
+          <!-- 修改车辆状态标签，添加额外的类名以便于样式控制 -->
+          <view class="status-tag vehicle-status">
             <view class="status-dot"></view>
             <text class="status-text">在售</text>
           </view>

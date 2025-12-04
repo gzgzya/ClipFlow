@@ -7,9 +7,9 @@ Page({
     statusOptions: ['在售', '已售'],
     statusIndex: 0,
     photos: [
-      { url: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=400', cover: true },
-      { url: 'https://images.pexels.com/photos/3075526/pexels-photo-3075526.jpeg?auto=compress&cs=tinysrgb&w=400', cover: false },
-      { url: 'https://images.pexels.com/photos/97079/pexels-photo-97079.jpeg?auto=compress&cs=tinysrgb&w=400', cover: false },
+      { url: '', cover: true },
+      { url: '', cover: false },
+      { url: '', cover: false },
       { url: '', cover: false }
     ]
   },
@@ -140,8 +140,31 @@ Page({
   },
 
   // 添加照片事件
-  onAddPhoto() {
+  onAddPhoto(e) {
     console.log('添加照片');
+    const index = e.currentTarget.dataset.index;
+    
+    // 使用微信小程序的API选择图片
+    wx.chooseImage({
+      count: 1, // 最多可以选择的图片张数
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机
+      success: (res) => {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths;
+        
+        // 更新对应索引的照片
+        const photos = this.data.photos;
+        photos[index].url = tempFilePaths[0];
+        
+        this.setData({
+          photos: photos
+        });
+      },
+      fail: (err) => {
+        console.error('选择图片失败', err);
+      }
+    });
   },
 
   // 保存并开始拍摄事件

@@ -7,68 +7,6 @@
   flex-direction: column;
 }
 
-/* 状态栏 */
-.status-bar {
-  height: 40rpx;
-  padding: 0 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 24rpx;
-  color: #f1f5f9;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.status-text {
-  font-weight: 600;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-}
-
-.status-icon {
-  margin-left: 8rpx;
-}
-
-/* 顶部导航 */
-.nav-bar {
-  height: 96rpx;
-  padding: 0 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  color: #f1f5f9;
-}
-
-.back-button {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  background-color: rgba(30, 41, 59, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.back-icon {
-  color: #f1f5f9;
-}
-
-.nav-title {
-  font-size: 32rpx;
-  font-weight: 600;
-}
-
-.save-button {
-  font-size: 28rpx;
-  color: #60a5fa;
-  background: none;
-  border: none;
-}
-
 /* 内容区域 */
 .content {
   flex: 1;
@@ -76,10 +14,14 @@
   padding: 0 12rpx; /* 减小内边距以提供更多空间给表单元素 */
 }
 
+/* 显式的间距视图 */
+.form-spacing {
+  height: 24rpx;
+}
+
 .form {
-  padding-top: 24rpx;
+  /* 移除padding-top，改用显式的间距视图 */
   padding-bottom: 32rpx;
-  /* 移除padding-right以避免影响布局 */
 }
 
 .form-section {
@@ -183,10 +125,15 @@
 }
 
 /* 照片网格 */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16rpx; /* gap-2 */
+.photo-scroll {
+  width: 100%;
+  white-space: nowrap;
+  padding-bottom: 10rpx;
+}
+
+.photo-container {
+  display: inline-flex;
+  padding: 10rpx 0;
 }
 
 .photo-item {
@@ -194,8 +141,14 @@
   border-radius: 16rpx; /* rounded-2xl */
   overflow: hidden;
   height: 128rpx;
+  width: 128rpx;
   background-color: rgba(15, 23, 42, 0.6); /* bg-slate-900/60 */
   border: 1px solid rgba(100, 116, 139, 0.7); /* border-slate-700/70 */
+  margin-right: 16rpx;
+}
+
+.photo-item:last-child {
+  margin-right: 0;
 }
 
 .photo-image {
