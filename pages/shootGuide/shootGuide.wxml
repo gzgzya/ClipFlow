@@ -1,8 +1,8 @@
 <!-- 标准化拍摄页面 -->
-<view class="container">
+<view class="container safe-area-bottom">
   <!-- 内容区域 -->
-  <scroll-view class="content" scroll-y="true">
-    <!-- 步骤进度条 -->
+  <scroll-view class="content safe-area-padding" scroll-y="true">
+    <!-- ==================== 拍摄进度条区域 ==================== -->
     <view class="progress-section">
       <view class="progress-header">
         <text class="header-text">拍摄流程</text>
@@ -28,63 +28,65 @@
       </view>
     </view>
 
-    <!-- 摄像头预览区域 -->
-    <view class="preview-section">
-      <!-- 三种互斥的预览模式 -->
-      
-      <!-- 默认预览模式 -->
-      <view wx:if="{{!showCameraPreview && !selectedMedia.url}}" class="preview-mode default-preview">
-        <image class="preview-image" src="{{currentPreviewImage}}" mode="aspectFill"></image>
-      </view>
-      
-      <!-- 摄像头预览模式 -->
-      <view wx:if="{{showCameraPreview}}" class="preview-mode camera-preview">
-        <camera class="camera-preview" device-position="{{cameraPosition}}"></camera>
-      </view>
-      
-      <!-- 媒体预览模式 -->
-      <view wx:if="{{selectedMedia.url}}" class="preview-mode media-preview">
-        <!-- 媒体预览但未播放状态 -->
-        <block wx:if="{{!selectedMedia.shouldPlay}}">
-          <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-          <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}"></video>
-          <!-- 播放按钮覆盖层 -->
-          <view class="play-overlay" bindtap="onPlayMedia">
-            <view class="play-button">
-              <icon wx:if="{{selectedMedia.type === 'video'}}" type="play" size="40" color="#ffffff"></icon>
-            </view>
-          </view>
-        </block>
+    <!-- ==================== 摄像头预览区域 ==================== -->
+    <view class="preview-section-wrapper">
+      <view class="preview-section">
+        <!-- 三种互斥的预览模式 -->
         
-        <!-- 媒体播放状态 -->
-        <block wx:else>
-          <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-          <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay controls></video>
-        </block>
-      </view>
-      
-      <view class="preview-overlay"></view>
-      
-      <!-- 提示文案 -->
-      <view class="preview-tip">
-        <view class="tip-banner">
-          <icon class="tip-icon" type="lightbulp" size="10" color="#fbbf24"></icon>
-          <text class="tip-text">{{currentTip}}</text>
+        <!-- 默认预览模式 -->
+        <view wx:if="{{!showCameraPreview && !selectedMedia.url}}" class="preview-mode default-preview">
+          <image class="preview-image" src="{{currentPreviewImage}}" mode="aspectFill"></image>
         </view>
-        <text class="tip-title">步骤 {{shootProgress.currentStep}} / {{shootProgress.totalSteps}} · {{shootProgress.steps[shootProgress.currentStep-1].name}} - {{currentSubStepTitle}}</text>
-        <text class="tip-desc">{{currentSubStepDesc}}</text>
-      </view>
+        
+        <!-- 摄像头预览模式 -->
+        <view wx:if="{{showCameraPreview}}" class="preview-mode camera-preview">
+          <camera class="camera-preview" device-position="{{cameraPosition}}"></camera>
+        </view>
+        
+        <!-- 媒体预览模式 -->
+        <view wx:if="{{selectedMedia.url}}" class="preview-mode media-preview">
+          <!-- 媒体预览但未播放状态 -->
+          <block wx:if="{{!selectedMedia.shouldPlay}}">
+            <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}"></video>
+            <!-- 播放按钮覆盖层 -->
+            <view class="play-overlay" bindtap="onPlayMedia">
+              <view class="play-button">
+                <icon wx:if="{{selectedMedia.type === 'video'}}" type="play" size="40" color="#ffffff"></icon>
+              </view>
+            </view>
+          </block>
+          
+          <!-- 媒体播放状态 -->
+          <block wx:else>
+            <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay controls></video>
+          </block>
+        </view>
+        
+        <view class="preview-overlay"></view>
+        
+        <!-- 提示文案 -->
+        <view class="preview-tip">
+          <view class="tip-banner">
+            <icon class="tip-icon" type="lightbulp" size="10" color="#fbbf24"></icon>
+            <text class="tip-text">{{currentTip}}</text>
+          </view>
+          <text class="tip-title">步骤 {{shootProgress.currentStep}} / {{shootProgress.totalSteps}} · {{shootProgress.steps[shootProgress.currentStep-1].name}} - {{currentSubStepTitle}}</text>
+          <text class="tip-desc">{{currentSubStepDesc}}</text>
+        </view>
 
-      <!-- 底部进度与重拍 -->
-      <view class="preview-footer">
-        <view class="fragment-info">
-          <text class="fragment-text">当前片段：{{currentFragmentTime}}s / 建议 {{recommendedFragmentTime}}s</text>
+        <!-- 底部进度与重拍 -->
+        <view class="preview-footer">
+          <view class="fragment-info">
+            <text class="fragment-text">当前片段：{{currentFragmentTime}}s / 建议 {{recommendedFragmentTime}}s</text>
+          </view>
+          <button class="retake-button" bindtap="onRetake">重拍本段</button>
         </view>
-        <button class="retake-button" bindtap="onRetake">重拍本段</button>
       </view>
     </view>
 
-    <!-- 步骤列表 & 说明 -->
+    <!-- ==================== 子步骤列表区域 ==================== -->
     <view class="steps-section">
       <view class="section-header">
         <text class="header-text">当前步骤：{{shootProgress.steps[shootProgress.currentStep-1].name}}</text>
@@ -125,8 +127,8 @@
     </view>
   </scroll-view>
 
-  <!-- 底部拍摄控制条 - 手机相机风格 -->
-  <view wx:if="{{showCameraControls}}" class="camera-control-bar">
+  <!-- ==================== 底部拍摄控制区域 ==================== -->
+  <view wx:if="{{showCameraControls}}" class="camera-control-bar safe-area-padding">
     <view class="control-buttons-container">
       <!-- 切换摄像头按钮 -->
       <button class="control-button switch-camera" bindtap="onRotate">

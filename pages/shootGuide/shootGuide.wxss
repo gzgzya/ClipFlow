@@ -9,6 +9,19 @@
   overflow: hidden;
 }
 
+/* 安全区域适配 */
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-padding {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
 /* 内容区域 */
 .content {
   flex: 1;
@@ -16,6 +29,38 @@
   position: relative;
   padding-bottom: 180rpx;
   height: 100%;
+}
+
+/* 小屏幕设备适配 */
+@media (max-height: 667px) {
+  .preview-section-wrapper {
+    margin: 12rpx 24rpx;
+    border-radius: 36rpx;
+  }
+  
+  .steps-section {
+    padding: 16rpx 32rpx 0;
+  }
+  
+  .step-content {
+    padding: 12rpx 20rpx;
+  }
+}
+
+/* 大屏幕设备适配 */
+@media (min-height: 812px) {
+  .preview-section-wrapper {
+    margin: 20rpx 40rpx;
+    border-radius: 56rpx;
+  }
+  
+  .content {
+    padding-bottom: 220rpx;
+  }
+  
+  .steps-section {
+    padding: 32rpx;
+  }
 }
 
 /* 步骤进度条 */
@@ -61,7 +106,7 @@
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;
-  background-color: #64748b;
+  background-color: #d1d5db; /* 灰色默认状态 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,21 +115,20 @@
 }
 
 .step-indicator.completed {
-  background-color: #10b981;
+  background-color: #10b981; /* 绿色完成状态 */
 }
 
 .step-indicator.active {
-  background-color: #3b82f6;
+  background-color: #3b82f6; /* 蓝色当前状态 */
 }
 
 .step-indicator.pending {
-  border: 1px solid #64748b;
-  background-color: transparent;
+  background-color: #d1d5db; /* 灰色未完成状态 */
 }
 
 .step-number {
   font-size: 22rpx;
-  color: #94a3b8;
+  color: #ffffff; /* 白色数字 */
 }
 
 .step-icon {
@@ -95,16 +139,16 @@
 .step-line {
   flex: 1;
   height: 8rpx;
-  background-color: #64748b;
+  background-color: #d1d5db; /* 灰色默认线条 */
   border-radius: 0;
 }
 
 .step-line.completed {
-  background-color: #10b981;
+  background-color: #10b981; /* 绿色完成线条 */
 }
 
 .step-line.active {
-  background-color: #3b82f6;
+  background-color: #3b82f6; /* 蓝色当前线条 */
 }
 
 .step-labels {
@@ -135,26 +179,6 @@
   flex: 0;
 }
 
-/* 精确对齐标签 */
-.step-indicator {
-  width: 48rpx;
-  height: 48rpx;
-  border-radius: 50%;
-  background-color: #64748b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  flex-shrink: 0;
-}
-
-.step-line {
-  flex: 1;
-  height: 8rpx;
-  background-color: #64748b;
-  border-radius: 0;
-}
-
 .step-labels {
   display: flex;
   align-items: center;
@@ -183,18 +207,29 @@
   text-align: right;
 }
 
-/* 摄像头预览区域 */
-.preview-section {
+/* 摄像头预览区域容器 */
+.preview-section-wrapper {
   margin: 16rpx 32rpx;
   border-radius: 48rpx;
   overflow: hidden;
   border: 1px solid #1e293b;
-  height: 512rpx;
   position: relative;
+}
+
+/* 摄像头预览区域 */
+.preview-section {
+  position: relative;
+  width: 100%;
+  /* 使用padding-top实现正方形比例 */
+  height: 0;
+  padding-top: 100%; /* 1:1 正方形比例 */
 }
 
 /* 三种预览模式样式 */
 .preview-mode {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }
@@ -504,6 +539,39 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* 底部控制条屏幕适配 */
+@media (max-height: 667px) {
+  .camera-control-bar {
+    padding: 10rpx 0;
+  }
+  
+  .control-button {
+    width: 70rpx;
+    height: 70rpx;
+  }
+  
+  .record-button {
+    width: 85rpx;
+    height: 85rpx;
+  }
+}
+
+@media (min-height: 812px) {
+  .camera-control-bar {
+    padding: 25rpx 0;
+  }
+  
+  .control-button {
+    width: 90rpx;
+    height: 90rpx;
+  }
+  
+  .record-button {
+    width: 110rpx;
+    height: 110rpx;
+  }
 }
 
 .control-buttons-container {
