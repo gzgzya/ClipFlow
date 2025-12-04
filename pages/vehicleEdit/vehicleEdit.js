@@ -152,9 +152,11 @@ Page({
         
         // 添加新图片到数组
         const photos = this.data.photos;
+        const isFirst = photos.length === 0; // 如果是第一张图片，则设为封面
+        
         photos.push({ 
           url: tempFilePaths[0], 
-          cover: photos.length === 0 // 第一张图片设为封面
+          cover: isFirst
         });
         
         this.setData({
@@ -169,6 +171,9 @@ Page({
 
   // 删除照片事件
   onDeletePhoto(e) {
+    // 阻止事件冒泡
+    e.stopPropagation();
+    
     const index = e.currentTarget.dataset.index;
     const photos = this.data.photos;
     
@@ -178,6 +183,30 @@ Page({
     // 如果第一张图片被删除且还有其他图片，将新第一张设为封面
     if (photos.length > 0 && index === 0) {
       photos[0].cover = true;
+    }
+    
+    this.setData({
+      photos: photos
+    });
+  },
+
+  // 设置封面图片
+  onSetCover(e) {
+    const url = e.currentTarget.dataset.url;
+    const photos = this.data.photos;
+    
+    // 如果点击的是添加按钮或无效图片，则不处理
+    if (!url) return;
+    
+    // 重置所有图片的封面标记
+    photos.forEach(photo => {
+      photo.cover = false;
+    });
+    
+    // 设置当前点击的图片为封面
+    const clickedPhoto = photos.find(photo => photo.url === url);
+    if (clickedPhoto) {
+      clickedPhoto.cover = true;
     }
     
     this.setData({

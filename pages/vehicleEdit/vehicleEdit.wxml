@@ -87,12 +87,12 @@
         <scroll-view class="photo-scroll" scroll-x="true">
           <view class="photo-container">
             <block wx:for="{{photos}}" wx:key="index">
-              <view class="photo-item-wrapper" wx:if="{{item.url}}">
+              <view class="photo-item-wrapper {{item.cover ? 'cover' : ''}}" data-index="{{index}}" bindtap="onSetCover" data-url="{{item.url}}">
                 <view class="photo-item">
                   <image class="photo-image" src="{{item.url}}" mode="aspectFill"></image>
                   <text wx:if="{{item.cover}}" class="cover-tag">封面</text>
                   <!-- 删除按钮 -->
-                  <button class="delete-button" bindtap="onDeletePhoto" data-index="{{index}}">
+                  <button class="delete-button" bindtap="onDeletePhoto" data-index="{{index}}" catchtap="onDeletePhoto">
                     <icon class="delete-icon" type="clear" size="16rpx"></icon>
                   </button>
                 </view>
@@ -111,7 +111,7 @@
       </view>
 
       <!-- 默认拍摄模板配置 -->
-      <view class="form-section">
+      <view class="form-section template-section">
         <view class="form-header">
           <text class="form-label">拍摄模板</text>
           <text class="template-link">管理模板</text>
