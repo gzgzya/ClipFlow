@@ -115,15 +115,7 @@
       </view>
 
       <!-- 下一个主步骤提示 -->
-      <view wx:if="{{shootProgress.currentStep < shootProgress.totalSteps}}" class="next-step">
-        <view class="next-content">
-          <view class="next-info">
-            <text class="info-title">下一步：{{shootProgress.steps[shootProgress.currentStep].name}}讲解</text>
-            <text class="info-desc">选择 2-3 个最能打动客户的亮点，AI 将自动生成话术。</text>
-          </view>
-          <button class="next-button" bindtap="onNextStep">跳转</button>
-        </view>
-      </view>
+      <!-- 已根据需求移除此部分 -->
     </view>
   </scroll-view>
 

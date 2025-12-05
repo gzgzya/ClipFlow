@@ -96,6 +96,16 @@ class StepManager {
         title: `已完成${shootProgress.steps[shootProgress.currentStep-2].name}拍摄`,
         icon: 'none'
       });
+      
+      // 检查是否所有步骤都已完成，如果是则跳转到下一个流程
+      if (shootProgress.completedSteps >= shootProgress.totalSteps) {
+        // 所有步骤完成，自动跳转到下一个流程
+        setTimeout(() => {
+          wx.navigateTo({
+            url: '/pages/editPreview/editPreview'
+          });
+        }, 1500);
+      }
     }
   }
 }
@@ -374,56 +384,6 @@ Page({
       title: '开始拍摄...',
       icon: 'none'
     });
-  },
-
-  /**
-   * 跳转到下一步事件
-   */
-  onNextStep() {
-    // 防抖处理
-    const currentTime = Date.now();
-    if (currentTime - this.data.lastClickTime < DEBOUNCE_TIME) {
-      console.log('操作过于频繁，已阻止');
-      return;
-    }
-    
-    const shootProgress = {...this.data.shootProgress};
-    
-    // 如果正在录制，不允许切换步骤
-    if (this.data.isRecording) {
-      wx.showToast({
-        title: '请先停止当前录制',
-        icon: 'none'
-      });
-      return;
-    }
-    
-    // 直接跳转到下一步
-    if (shootProgress.currentStep < shootProgress.totalSteps) {
-      // 标记当前步骤为完成
-      shootProgress.completedSteps = shootProgress.currentStep;
-      shootProgress.currentStep++;
-      
-      this.setData({
-        shootProgress,
-        // 重置媒体选择状态
-        selectedMedia: {
-          url: "",
-          type: MEDIA_TYPE.IMAGE,
-          shouldPlay: false
-        },
-        showCameraPreview: false,
-        lastClickTime: currentTime  // 更新上次点击时间
-      });
-      
-      // 更新当前步骤的子步骤
-      this.initCurrentStep();
-      
-      wx.showToast({
-        title: `进入${shootProgress.steps[shootProgress.currentStep-1].name}拍摄`,
-        icon: 'none'
-      });
-    }
   },
 
   // 旋转镜头事件
