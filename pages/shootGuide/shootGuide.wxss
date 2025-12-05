@@ -31,6 +31,18 @@
   height: 100%;
 }
 
+/* 滑动指示器 */
+.swipe-indicator {
+  display: flex;
+  justify-content: center;
+  padding: 10rpx 0;
+}
+
+.swipe-text {
+  font-size: 20rpx;
+  color: #94a3b8;
+}
+
 /* 小屏幕设备适配 */
 @media (max-height: 667px) {
   .preview-section-wrapper {
@@ -232,6 +244,16 @@
   left: 0;
   width: 100%;
   height: 100%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 页面切换动画 */
+.preview-mode.slide-left {
+  transform: translateX(-100%);
+}
+
+.preview-mode.slide-right {
+  transform: translateX(100%);
 }
 
 .default-preview .preview-image,

@@ -1,7 +1,15 @@
 <!-- 标准化拍摄页面 -->
 <view class="container safe-area-bottom">
   <!-- 内容区域 -->
-  <scroll-view class="content safe-area-padding" scroll-y="true">
+  <scroll-view class="content safe-area-padding" scroll-y="true" 
+               bindtouchstart="onTouchStart" 
+               bindtouchmove="onTouchMove" 
+               bindtouchend="onTouchEnd">
+    <!-- ==================== 滑动指示器 ==================== -->
+    <view class="swipe-indicator">
+      <text class="swipe-text">左右滑动切换步骤</text>
+    </view>
+    
     <!-- ==================== 拍摄进度条区域 ==================== -->
     <view class="progress-section">
       <view class="progress-header">

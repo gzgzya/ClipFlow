@@ -20,6 +20,10 @@ const CAMERA_POSITION = {
 // 防抖时间（毫秒）
 const DEBOUNCE_TIME = 500;
 
+// 滑动相关常量
+const SWIPE_THRESHOLD = 50; // 滑动阈值（像素）
+const SWIPE_FORBIDDEN_CLASS = 'no-swipe'; // 禁止滑动的元素类名
+
 /**
  * 步骤管理器
  * 统一管理主步骤和子步骤的状态
@@ -65,6 +69,27 @@ class StepManager {
     this.page.setData({
       currentStepSubSteps: subSteps
     });
+  }
+  
+  /**
+   * 切换到指定步骤
+   * @param {number} step - 目标步骤编号
+   */
+  switchToStep(step) {
+    // 边界检查
+    if (step < 1 || step > this.page.data.shootProgress.totalSteps) {
+      return;
+    }
+    
+    const shootProgress = {...this.page.data.shootProgress};
+    shootProgress.currentStep = step;
+    
+    this.page.setData({
+      shootProgress
+    });
+    
+    // 更新当前步骤的子步骤
+    this.initCurrentStep();
   }
   
   /**
@@ -197,7 +222,12 @@ Page({
     },
     
     // 防抖相关
-    lastClickTime: 0  // 上次点击时间
+    lastClickTime: 0,  // 上次点击时间
+    
+    // 滑动相关数据
+    touchStartX: 0,
+    touchStartY: 0,
+    isSwiping: false
   },
 
   /**
@@ -716,5 +746,74 @@ Page({
     const updatedSubSteps = this.data.currentStepSubSteps;
     // 检查是否所有子步骤都已完成
     stepManager.checkAndProceedToNextStep(updatedSubSteps);
+  },
+  
+  /**
+   * 触摸开始事件 - 记录起始位置
+   */
+  onTouchStart(e) {
+    const touch = e.touches[0];
+    this.setData({
+      touchStartX: touch.clientX,
+      touchStartY: touch.clientY,
+      isSwiping: false
+    });
+  },
+  
+  /**
+   * 触摸移动事件 - 判断是否为滑动操作
+   */
+  onTouchMove(e) {
+    // 如果已经在滑动中，不再处理
+    if (this.data.isSwiping) return;
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - this.data.touchStartX;
+    const deltaY = touch.clientY - this.data.touchStartY;
+    
+    // 判断是否为水平滑动（水平位移大于垂直位移且超过阈值）
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+      this.setData({
+        isSwiping: true
+      });
+    }
+  },
+  
+  /**
+   * 触摸结束事件 - 处理滑动切换
+   */
+  onTouchEnd(e) {
+    // 如果不是滑动操作，不处理
+    if (!this.data.isSwiping) return;
+    
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - this.data.touchStartX;
+    
+    // 滑动距离需要超过阈值才触发切换
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+      const currentStep = this.data.shootProgress.currentStep;
+      
+      // 向左滑动（deltaX为负）切换到下一步
+      if (deltaX < 0 && currentStep < this.data.shootProgress.totalSteps) {
+        stepManager.switchToStep(currentStep + 1);
+        wx.showToast({
+          title: `切换到${this.data.shootProgress.steps[currentStep].name}`,
+          icon: 'none'
+        });
+      } 
+      // 向右滑动（deltaX为正）切换到上一步
+      else if (deltaX > 0 && currentStep > 1) {
+        stepManager.switchToStep(currentStep - 1);
+        wx.showToast({
+          title: `切换到${this.data.shootProgress.steps[currentStep-2].name}`,
+          icon: 'none'
+        });
+      }
+    }
+    
+    // 重置滑动状态
+    this.setData({
+      isSwiping: false
+    });
   }
 })
