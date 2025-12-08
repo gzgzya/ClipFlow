@@ -41,14 +41,6 @@
         </view>
         <view class="current-tag">当前车辆</view>
       </view>
-      
-      <view class="smart-recognition-card">
-        <view class="smart-recognition-info">
-          <text class="smart-recognition-title">智能识别车牌/车型</text>
-          <text class="smart-recognition-description">可自动识别视频中的车牌、车型，批量素材按不同车辆自动归类。</text>
-        </view>
-        <switch class="smart-recognition-switch" checked="{{enableSmartRecognition}}" bindchange="toggleSmartRecognition" />
-      </view>
     </view>
 
     <!-- 归类规则 -->

@@ -34,10 +34,15 @@
             </button>
           </block>
         </view>
-        <button class="sort-button" bindtap="onSortChange">
-          <icon class="sort-icon" type="sort" size="20rpx"></icon>
-          <text>按时间</text>
-        </button>
+        <!-- 排序下拉菜单 -->
+        <view class="sort-dropdown">
+          <picker mode="selector" range="{{sortOptions}}" range-key="name" bindchange="onSortChange">
+            <view class="sort-button">
+              <icon class="sort-icon" type="sort" size="20rpx"></icon>
+              <text>{{currentSort.name}}</text>
+            </view>
+          </picker>
+        </view>
       </view>
 
       <!-- 平台筛选 Chips -->

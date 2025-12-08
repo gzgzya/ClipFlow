@@ -4,6 +4,12 @@ Page({
     searchKeyword: '',
     activeTab: 'all',
     activeSort: 'time',
+    currentSort: { id: 'time', name: '按时间' }, // 当前选中的排序方式
+    sortOptions: [ // 排序选项
+      { id: 'time', name: '按时间' },
+      { id: 'popular', name: '按热度' },
+      { id: 'duration', name: '按时长' }
+    ],
     activePlatform: 'all',
     showBackButton: false, // 是否显示返回按钮
     
@@ -15,7 +21,7 @@ Page({
     ],
     
     platforms: [
-      { id: 'all', name: '全部平台' },
+      //{ id: 'all', name: '全部平台' },  // 移除"全部平台"选项
       { id: 'douyin', name: '抖音', icon: 'video_fill', iconClass: 'douyin' },
       { id: 'kuaishou', name: '快手', icon: 'video_fill', iconClass: 'kuaishou' },
       { id: 'shipinhao', name: '视频号', icon: 'video_fill', iconClass: 'weixin' },
@@ -103,9 +109,16 @@ Page({
     });
   },
 
-  onSortChange() {
+  onSortChange(e) {
     // 排序功能
-    console.log('排序功能');
+    const selectedIndex = e.detail.value;
+    const selectedSort = this.data.sortOptions[selectedIndex];
+    
+    this.setData({
+      currentSort: selectedSort
+    });
+    
+    console.log('排序方式改变:', selectedSort);
   },
 
   onPlatformChange(e) {

@@ -40,7 +40,7 @@
 /* 搜索区域 */
 .search-section {
   padding: 24rpx 32rpx 16rpx;
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* 参考首页字体大小 */
   display: flex;
   flex-direction: column;
   gap: 16rpx;
@@ -69,9 +69,9 @@
 .search-input {
   flex: 1;
   padding: 16rpx 32rpx 16rpx 72rpx;
-  border-radius: 40rpx; /* rounded-2xl */
+  border-radius: 40rpx; /* rounded-2xl 统一圆角大小参考首页 */
   background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* 参考首页字体大小 */
   color: #f1f5f9; /* text-slate-100 */
   border: 1rpx solid rgba(100, 116, 139, 0.8); /* border-slate-700/80 */
 }
@@ -82,14 +82,18 @@
 
 .filter-button {
   padding: 12rpx 24rpx;
-  border-radius: 40rpx; /* rounded-2xl */
+  border-radius: 40rpx; /* rounded-2xl 统一圆角大小参考首页 */
   background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
-  font-size: 24rpx; /* text-xs */
+  font-size: 28rpx; /* 参考首页字体大小 */
   color: #f1f5f9; /* text-slate-100 */
   display: flex;
   align-items: center;
+  justify-content: center; /* 文本水平居中 */
   gap: 8rpx;
   border: 1rpx solid rgba(100, 116, 139, 0.8); /* border-slate-700/80 */
+  min-width: 120rpx; /* 设置最小宽度以确保按钮大小一致 */
+  height: fit-content; /* 高度自适应内容 */
+  box-sizing: border-box;
 }
 
 .filter-icon {
@@ -110,11 +114,17 @@
 
 .tab-item {
   padding: 12rpx 24rpx;
-  border-radius: 40rpx; /* rounded-2xl */
-  font-size: 24rpx; /* text-xs */
+  border-radius: 40rpx; /* rounded-2xl 统一圆角大小参考首页 */
+  font-size: 28rpx; /* 参考首页字体大小 */
   background-color: #1e293b; /* bg-slate-900 */
   color: #f1f5f9; /* text-slate-100 */
   border: none;
+  min-width: 120rpx; /* 设置最小宽度以确保按钮大小一致 */
+  height: fit-content; /* 高度自适应内容 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 文本水平居中 */
+  box-sizing: border-box;
 }
 
 .tab-item.active {
@@ -122,16 +132,25 @@
   color: white;
 }
 
+/* 排序下拉菜单 */
+.sort-dropdown {
+  position: relative;
+}
+
 .sort-button {
   padding: 12rpx 16rpx;
-  border-radius: 40rpx; /* rounded-2xl */
+  border-radius: 40rpx; /* rounded-2xl 统一圆角大小参考首页 */
   background-color: #1e293b; /* bg-slate-900 */
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   color: #f1f5f9; /* text-slate-100 */
   display: flex;
   align-items: center;
+  justify-content: center; /* 文本水平居中 */
   gap: 4rpx;
   border: 1rpx solid #334155; /* border-slate-800 */
+  min-width: 120rpx; /* 设置最小宽度以确保按钮大小一致 */
+  height: fit-content; /* 高度自适应内容 */
+  box-sizing: border-box;
 }
 
 .sort-icon {
@@ -144,7 +163,7 @@
   align-items: center;
   gap: 16rpx; /* space-x-2 */
   color: #94a3b8; /* text-slate-400 */
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
 }
 
 .chips-label {
@@ -154,14 +173,18 @@
 
 .chip-item {
   padding: 8rpx 16rpx;
-  border-radius: 32rpx; /* rounded-full */
+  border-radius: 32rpx; /* rounded-full 统一圆角大小参考首页 */
   background-color: #1e293b; /* bg-slate-900 */
   display: flex;
   align-items: center;
+  justify-content: center; /* 文本水平居中 */
   gap: 4rpx;
   border: 1rpx solid rgba(100, 116, 139, 0.8); /* border-slate-700/80 */
   color: #f1f5f9; /* text-slate-100 */
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
+  min-width: 120rpx; /* 设置最小宽度以确保按钮大小一致 */
+  height: fit-content; /* 高度自适应内容 */
+  box-sizing: border-box;
 }
 
 .chip-item.active {
@@ -194,7 +217,7 @@
 
 /* 成片卡片 */
 .clip-card {
-  border-radius: 16rpx; /* rounded-2xl */
+  border-radius: 40rpx; /* 统一圆角大小参考首页 */
   background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
   border: 1rpx solid #334155; /* border-slate-800 */
   overflow: hidden;
@@ -246,9 +269,9 @@
   position: absolute;
   bottom: 8rpx; /* bottom-1 * 8 */
   left: 8rpx; /* left-1 * 8 */
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   padding: 4rpx 12rpx; /* px-1.5 py-0.5 */
-  border-radius: 32rpx; /* rounded-full */
+  border-radius: 32rpx; /* rounded-full 统一圆角大小参考首页 */
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
 }
@@ -257,9 +280,9 @@
   position: absolute;
   top: 8rpx; /* top-1 * 8 */
   left: 8rpx; /* left-1 * 8 */
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   padding: 4rpx 12rpx; /* px-1.5 py-0.5 */
-  border-radius: 32rpx; /* rounded-full */
+  border-radius: 32rpx; /* rounded-full 统一圆角大小参考首页 */
   color: #fff;
 }
 
@@ -292,7 +315,7 @@
 }
 
 .clip-title {
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 28rpx; /* 参考首页字体大小 */
   color: #f1f5f9; /* text-slate-100 */
   flex: 1;
   overflow: hidden;
@@ -303,12 +326,12 @@
 }
 
 .clip-time {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   color: #94a3b8; /* text-slate-500 */
 }
 
 .clip-description {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   color: #94a3b8; /* text-slate-400 */
   margin-top: 4rpx; /* mt-0.5 */
   overflow: hidden;
@@ -332,9 +355,9 @@
 }
 
 .status-tag {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   padding: 4rpx 12rpx; /* px-1.5 py-0.5 */
-  border-radius: 32rpx; /* rounded-full */
+  border-radius: 32rpx; /* rounded-full 统一圆角大小参考首页 */
   border: 1rpx solid;
 }
 
@@ -356,7 +379,7 @@
   display: flex;
   align-items: center;
   gap: 4rpx;
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   color: #94a3b8; /* text-slate-500 */
 }
 
@@ -371,10 +394,16 @@
 }
 
 .action-button {
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   padding: 4rpx 12rpx; /* px-2 py-0.5 或 px-2.5 py-0.5 */
-  border-radius: 32rpx; /* rounded-full */
+  border-radius: 32rpx; /* rounded-full 统一圆角大小参考首页 */
   border: none;
+  min-width: 120rpx; /* 设置最小宽度以确保按钮大小一致 */
+  height: fit-content; /* 高度自适应内容 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 文本水平居中 */
+  box-sizing: border-box;
 }
 
 .action-button.copy {
@@ -403,7 +432,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20rpx; /* text-[10px] */
+  font-size: 24rpx; /* 参考首页字体大小 */
   color: #94a3b8; /* text-slate-400 */
 }
 
@@ -420,7 +449,7 @@
 }
 
 .platform-icon {
-  font-size: 20rpx;
+  font-size: 24rpx; /* 参考首页字体大小 */
 }
 
 .platform-status-item .published {
@@ -442,10 +471,10 @@
 /* 底部提示 */
 .footer-tip {
   padding: 16rpx;
-  border-radius: 16rpx; /* rounded-2xl */
+  border-radius: 40rpx; /* rounded-2xl 统一圆角大小参考首页 */
   background-color: rgba(30, 41, 59, 0.6); /* bg-slate-900/60 */
   border: 1rpx dashed #475569; /* border-dashed border-slate-700 */
-  font-size: 22rpx; /* text-[11px] */
+  font-size: 26rpx; /* 参考首页字体大小 */
   color: #94a3b8; /* text-slate-500 */
   display: flex;
   align-items: center;

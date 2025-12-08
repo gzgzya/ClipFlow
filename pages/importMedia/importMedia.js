@@ -105,13 +105,139 @@ Page({
   onFinish() {
     // 完成导入
     console.log('完成导入');
+    wx.showToast({
+      title: '开始导入素材',
+      icon: 'success'
+    });
   },
 
   onSelectSource(e) {
     const sourceId = e.currentTarget.dataset.id;
+    
+    // 根据不同的导入源执行不同的操作
+    switch (sourceId) {
+      case 'album':
+        this.selectFromAlbum();
+        break;
+      case 'wechat':
+        this.selectFromWeChat();
+        break;
+      case 'local':
+        this.selectFromLocal();
+        break;
+      default:
+        // 更新选中状态
+        const importSources = this.data.importSources.map(source => ({
+          ...source,
+          active: source.id === sourceId
+        }));
+        
+        this.setData({
+          importSources
+        });
+    }
+  },
+
+  // 从手机相册选择素材
+  selectFromAlbum() {
+    wx.chooseMedia({
+      count: 9,
+      mediaType: ['video'],
+      sourceType: ['album'],
+      maxDuration: 60,
+      camera: 'back',
+      success: (res) => {
+        console.log('从相册选择的素材:', res.tempFiles);
+        wx.showToast({
+          title: `选择了${res.tempFiles.length}个素材`,
+          icon: 'success'
+        });
+        // 在实际应用中，这里会更新mediaItems列表
+        // this.updateMediaList(res.tempFiles);
+      },
+      fail: (err) => {
+        console.error('选择素材失败:', err);
+        wx.showToast({
+          title: '选择素材失败',
+          icon: 'error'
+        });
+      }
+    });
+    
+    // 更新选中状态
     const importSources = this.data.importSources.map(source => ({
       ...source,
-      active: source.id === sourceId
+      active: source.id === 'album'
+    }));
+    
+    this.setData({
+      importSources
+    });
+  },
+
+  // 从微信聊天记录选择素材
+  selectFromWeChat() {
+    wx.chooseMessageFile({
+      count: 10,
+      type: 'video',
+      extension: ['mp4', 'mov', 'avi'],
+      success: (res) => {
+        console.log('从微信选择的素材:', res.tempFiles);
+        wx.showToast({
+          title: `选择了${res.tempFiles.length}个素材`,
+          icon: 'success'
+        });
+        // 在实际应用中，这里会更新mediaItems列表
+        // this.updateMediaList(res.tempFiles);
+      },
+      fail: (err) => {
+        console.error('选择微信素材失败:', err);
+        wx.showToast({
+          title: '选择微信素材失败',
+          icon: 'error'
+        });
+      }
+    });
+    
+    // 更新选中状态
+    const importSources = this.data.importSources.map(source => ({
+      ...source,
+      active: source.id === 'wechat'
+    }));
+    
+    this.setData({
+      importSources
+    });
+  },
+
+  // 从本地文件选择素材
+  selectFromLocal() {
+    wx.chooseMessageFile({
+      count: 10,
+      type: 'video',
+      extension: ['mp4', 'mov', 'avi'],
+      success: (res) => {
+        console.log('从本地选择的素材:', res.tempFiles);
+        wx.showToast({
+          title: `选择了${res.tempFiles.length}个素材`,
+          icon: 'success'
+        });
+        // 在实际应用中，这里会更新mediaItems列表
+        // this.updateMediaList(res.tempFiles);
+      },
+      fail: (err) => {
+        console.error('选择本地素材失败:', err);
+        wx.showToast({
+          title: '选择本地素材失败',
+          icon: 'error'
+        });
+      }
+    });
+    
+    // 更新选中状态
+    const importSources = this.data.importSources.map(source => ({
+      ...source,
+      active: source.id === 'local'
     }));
     
     this.setData({
@@ -122,26 +248,47 @@ Page({
   switchVehicle() {
     // 切换车辆
     console.log('切换车辆');
+    wx.showToast({
+      title: '切换车辆功能待实现',
+      icon: 'none'
+    });
   },
 
   toggleSmartRecognition() {
     this.setData({
       enableSmartRecognition: !this.data.enableSmartRecognition
     });
+    
+    wx.showToast({
+      title: this.data.enableSmartRecognition ? '已开启智能识别' : '已关闭智能识别',
+      icon: 'none'
+    });
   },
 
   removeMedia(e) {
     const mediaId = e.currentTarget.dataset.id;
     console.log('移除素材:', mediaId);
+    wx.showToast({
+      title: '移除素材功能待实现',
+      icon: 'none'
+    });
   },
 
   modifyOwnership(e) {
     const mediaId = e.currentTarget.dataset.id;
     console.log('修改归属:', mediaId);
+    wx.showToast({
+      title: '修改归属功能待实现',
+      icon: 'none'
+    });
   },
 
   markAsAlternative(e) {
     const mediaId = e.currentTarget.dataset.id;
     console.log('标记为备选:', mediaId);
+    wx.showToast({
+      title: '标记为备选功能待实现',
+      icon: 'none'
+    });
   }
 });

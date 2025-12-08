@@ -132,7 +132,7 @@
   border: 1rpx solid #334155; /* border-slate-800 */
   border-radius: 40rpx; /* rounded-2xl */
   padding: 12rpx;
-  margin-bottom: 12rpx;
+  /* 移除了margin-bottom，因为之前智能识别卡片被移除 */
 }
 
 .vehicle-info {
@@ -398,38 +398,4 @@
   height: 20rpx;
 }
 
-/* 智能识别 */
-.smart-recognition-card {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: rgba(15, 23, 42, 0.9); /* bg-slate-900/90 */
-  border: 1rpx solid #334155; /* border-slate-800 */
-  border-radius: 40rpx; /* rounded-2xl */
-  padding: 12rpx 16rpx;
-  margin-top: 12rpx;
-}
-
-.smart-recognition-info {
-  flex: 1;
-  margin-right: 16rpx;
-}
-
-.smart-recognition-title {
-  font-size: 28rpx; /* text-[12px] -> 增大字体，参考登录页面 */
-  color: #f1f5f9; /* text-slate-100 */
-  display: block;
-  margin-bottom: 4rpx;
-}
-
-.smart-recognition-description {
-  font-size: 24rpx; /* text-[10px] -> 增大字体，参考登录页面 */
-  color: #94a3b8; /* text-slate-400 */
-  display: block;
-  line-height: 1.4;
-}
-
-.smart-recognition-switch {
-  transform: scale(0.8);
-  margin: 0;
-}
+/* 删除智能识别卡片相关样式 */
