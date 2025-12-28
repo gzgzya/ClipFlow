@@ -4,11 +4,6 @@
 
   <!-- 内容区域 -->
   <view class="content">
-    <view class="top-back-button">
-      <button class="back-button" bindtap="onBack">
-        <icon class="back-icon" type="arrow-left" size="16"></icon>
-      </button>
-    </view>
     <!-- 顶部搜索与已选提示 -->
     <view class="search-section">
       <view class="search-bar">

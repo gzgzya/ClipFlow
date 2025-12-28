@@ -7,78 +7,9 @@
   flex-direction: column;
 }
 
-/* 状态栏 */
-.status-bar {
-  height: 40rpx;
-  padding: 0 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 20rpx;
-  color: #f1f5f9;
-  background-color: rgba(0, 0, 0, 0.8);
-}
 
-.status-text {
-  font-weight: 600;
-}
 
-.status-icons {
-  display: flex;
-  align-items: center;
-}
 
-.status-icon {
-  margin-left: 8rpx;
-}
-
-/* 顶部导航 */
-.nav-bar {
-  height: 96rpx;
-  padding: 0 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  color: #f1f5f9;
-}
-
-.nav-button {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  background-color: rgba(30, 41, 59, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-icon {
-  color: #f1f5f9;
-}
-
-.nav-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.title-main {
-  font-size: 28rpx;
-  font-weight: 600;
-}
-
-.title-sub {
-  font-size: 20rpx;
-  color: #94a3b8;
-}
-
-.select-all-button {
-  font-size: 24rpx;
-  color: #60a5fa;
-  background: none;
-  border: none;
-}
 
 /* 内容区域 */
 .content {
@@ -88,32 +19,11 @@
   position: relative;
 }
 
-/* 顶部返回按钮 */
-.top-back-button {
-  padding-top: 20rpx;
-  padding-bottom: 16rpx;
-  display: flex;
-  justify-content: flex-start;
-}
 
-.back-button {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  background-color: rgba(30, 41, 59, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-}
-
-.back-icon {
-  color: #f1f5f9;
-}
 
 /* 搜索区域 */
 .search-section {
-  padding-top: 24rpx;
+  padding-top: 0rpx;
   padding-bottom: 16rpx;
 }
 
