@@ -1,10 +1,6 @@
 <!-- 车辆选择项组件 -->
-<label class="vehicle-item {{vehicle.selected ? 'selected' : ''}}" bindtap="onSelect">
-  <view class="checkbox-container">
-    <radio class="vehicle-radio" checked="{{vehicle.selected}}" bindchange="onRadioChange" wx:if="{{selectSingle}}" />
-    <checkbox class="vehicle-checkbox" checked="{{vehicle.selected}}" bindchange="onCheckboxChange" wx:else />
-  </view>
-  <view class="vehicle-content">
+<view class="vehicle-item {{vehicle.selected ? 'selected' : ''}}">
+  <view class="vehicle-content" bindtap="onSelect">
     <view class="image-container">
       <image class="vehicle-image" src="{{vehicle.imageUrl}}" mode="aspectFill"></image>
     </view>
@@ -28,10 +24,15 @@
             成片 {{vehicle.clips}}
           </text>
         </view>
-        <text class="queue-status {{vehicle.inQueue ? 'in-queue' : 'not-in-queue'}}">
-          {{vehicle.inQueue ? '✓ 已加入队列' : '未加入'}}
-        </text>
+        <view class="queue-status-container">
+          <text class="queue-status {{vehicle.inQueue ? 'in-queue' : 'not-in-queue'}}">
+            {{vehicle.inQueue ? '✓ 已加入队列' : '未加入'}}
+          </text>
+          <button class="select-button" bindtap="onSelect">
+            <text class="select-text">{{vehicle.selected ? '已选择' : '选择'}}</text>
+          </button>
+        </view>
       </view>
     </view>
   </view>
-</label>
+</view>

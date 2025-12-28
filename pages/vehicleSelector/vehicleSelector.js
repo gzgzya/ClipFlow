@@ -150,16 +150,16 @@ Page({
     const vehicleId = e.detail.id;
     
     if (this.data.mode === 'selectSingle') {
-      // 单选模式：只选择一个车辆
-      const updatedVehicles = this.data.vehicles.map(vehicle => ({
-        ...vehicle,
-        selected: vehicle.id === vehicleId
-      }));
-      
-      this.setData({
-        vehicles: updatedVehicles,
-        selectedVehicleId: vehicleId
-      });
+      // 单选模式：只选择一个车辆并立即返回
+      const selectedVehicle = this.data.vehicles.find(v => v.id === vehicleId);
+      if (selectedVehicle) {
+        // 返回数据给上一个页面
+        const eventChannel = this.getOpenerEventChannel();
+        eventChannel.emit('acceptDataFromOpenedPage', {
+          selectedVehicle: selectedVehicle
+        });
+        wx.navigateBack();
+      }
     } else {
       // 多选模式：切换选择状态
       const updatedVehicles = this.data.vehicles.map(vehicle => {
@@ -179,43 +179,5 @@ Page({
     }
   },
 
-  // 取消事件
-  onCancel() {
-    console.log('取消选择');
-    wx.navigateBack();
-  },
 
-  // 确认事件
-  onConfirm() {
-    console.log('确认选择');
-    
-    if (this.data.mode === 'selectSingle') {
-      // 单选模式：返回选中的车辆
-      const selectedVehicle = this.data.vehicles.find(v => v.selected);
-      if (selectedVehicle) {
-        // 返回数据给上一个页面
-        const eventChannel = this.getOpenerEventChannel();
-        eventChannel.emit('acceptDataFromOpenedPage', {
-          selectedVehicle: selectedVehicle
-        });
-        wx.navigateBack();
-      } else {
-        wx.showToast({
-          title: '请选择一个车辆',
-          icon: 'none'
-        });
-      }
-    } else {
-      // 多选模式：返回所有选中的车辆
-      const selectedVehicles = this.data.vehicles.filter(v => v.selected);
-      console.log('选中的车辆:', selectedVehicles);
-      
-      // 这里可以根据需要返回数据
-      const eventChannel = this.getOpenerEventChannel();
-      eventChannel.emit('acceptDataFromOpenedPage', {
-        selectedVehicles: selectedVehicles
-      });
-      wx.navigateBack();
-    }
-  }
 });

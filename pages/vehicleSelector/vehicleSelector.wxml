@@ -41,13 +41,4 @@
       </view>
     </scroll-view>
   </view>
-
-  <!-- 底部操作栏 -->
-  <view class="bottom-bar">
-    <button class="cancel-button" bindtap="onCancel">取消</button>
-    <button class="confirm-button" bindtap="onConfirm">
-      <text class="confirm-text">确认选择</text>
-      <text wx:if="{{mode !== 'selectSingle'}}" class="count-badge">{{selectedCount}} 台</text>
-    </button>
-  </view>
 </view>

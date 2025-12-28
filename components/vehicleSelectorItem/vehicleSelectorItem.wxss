@@ -8,22 +8,11 @@
   overflow: hidden;
   margin-bottom: 24rpx;
   cursor: pointer;
+  position: relative;
 }
 
 .vehicle-item.selected {
   border-color: rgba(59, 130, 246, 0.5);
-}
-
-.checkbox-container {
-  padding: 32rpx 24rpx;
-  display: flex;
-  align-items: center;
-}
-
-.vehicle-checkbox {
-  width: 40rpx;
-  height: 40rpx;
-  border-radius: 8rpx;
 }
 
 .vehicle-content {
@@ -91,7 +80,7 @@
 
 .bottom-section {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   margin-top: 8rpx;
 }
@@ -128,4 +117,30 @@
 
 .queue-status.not-in-queue {
   color: #64748b;
+}
+
+.queue-status-container {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.select-button {
+  padding: 8rpx 16rpx;
+  border-radius: 32rpx;
+  background-color: #3b82f6;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-button:active {
+  background-color: #2563eb;
+}
+
+.select-text {
+  font-size: 20rpx;
+  color: #ffffff;
+  font-weight: 500;
 }
