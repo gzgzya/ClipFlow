@@ -247,10 +247,24 @@ Page({
 
   switchVehicle() {
     // 切换车辆
-    console.log('切换车辆');
-    wx.showToast({
-      title: '切换车辆功能待实现',
-      icon: 'none'
+    wx.navigateTo({
+      url: '../vehicleSelector/vehicleSelector?mode=selectSingle',
+      events: {
+        // 为页面参数接收一个回调函数
+        acceptDataFromOpenedPage: function(data) {
+          console.log('从车辆选择页面返回的数据:', data);
+          if (data && data.selectedVehicle) {
+            this.setData({
+              currentVehicle: {
+                image: data.selectedVehicle.imageUrl,
+                name: data.selectedVehicle.model.split(' ')[1] || '车辆',
+                plate: data.selectedVehicle.plate,
+                description: '将导入的素材默认归属到此车辆'
+              }
+            });
+          }
+        }.bind(this)
+      }
     });
   },
 

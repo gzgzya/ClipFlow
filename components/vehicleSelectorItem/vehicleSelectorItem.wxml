@@ -1,7 +1,8 @@
 <!-- 车辆选择项组件 -->
 <label class="vehicle-item {{vehicle.selected ? 'selected' : ''}}" bindtap="onSelect">
   <view class="checkbox-container">
-    <checkbox class="vehicle-checkbox" checked="{{vehicle.selected}}" bindchange="onCheckboxChange"></checkbox>
+    <radio class="vehicle-radio" checked="{{vehicle.selected}}" bindchange="onRadioChange" wx:if="{{selectSingle}}" />
+    <checkbox class="vehicle-checkbox" checked="{{vehicle.selected}}" bindchange="onCheckboxChange" wx:else />
   </view>
   <view class="vehicle-content">
     <view class="image-container">

@@ -4,7 +4,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    selectedCount: 3,
+    selectedCount: 1,
+    selectedVehicleId: null,
+    mode: 'multi', // 默认多选模式，'selectSingle' 为单选模式
     vehicles: [
       {
         id: 1,
@@ -15,7 +17,7 @@ Page({
         materials: 12,
         clips: 3,
         imageUrl: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=800',
-        selected: true,
+        selected: false,
         inQueue: true
       },
       {
@@ -27,7 +29,7 @@ Page({
         materials: 8,
         clips: 2,
         imageUrl: 'https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=800',
-        selected: true,
+        selected: false,
         inQueue: true
       },
       {
@@ -39,7 +41,7 @@ Page({
         materials: 4,
         clips: 1,
         imageUrl: 'https://images.pexels.com/photos/3075526/pexels-photo-3075526.jpeg?auto=compress&cs=tinysrgb&w=800',
-        selected: true,
+        selected: false,
         inQueue: true
       },
       {
@@ -61,7 +63,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    // 检查传入的模式参数
+    if (options.mode === 'selectSingle') {
+      this.setData({
+        mode: 'selectSingle'
+      });
+    }
   },
 
   /**
@@ -141,16 +148,74 @@ Page({
   // 车辆选择事件
   onVehicleSelect(e) {
     const vehicleId = e.detail.id;
-    console.log('车辆选择:', vehicleId);
+    
+    if (this.data.mode === 'selectSingle') {
+      // 单选模式：只选择一个车辆
+      const updatedVehicles = this.data.vehicles.map(vehicle => ({
+        ...vehicle,
+        selected: vehicle.id === vehicleId
+      }));
+      
+      this.setData({
+        vehicles: updatedVehicles,
+        selectedVehicleId: vehicleId
+      });
+    } else {
+      // 多选模式：切换选择状态
+      const updatedVehicles = this.data.vehicles.map(vehicle => {
+        if (vehicle.id === vehicleId) {
+          return { ...vehicle, selected: !vehicle.selected };
+        }
+        return vehicle;
+      });
+      
+      // 计算选中的数量
+      const selectedCount = updatedVehicles.filter(v => v.selected).length;
+      
+      this.setData({
+        vehicles: updatedVehicles,
+        selectedCount: selectedCount
+      });
+    }
   },
 
   // 取消事件
   onCancel() {
     console.log('取消选择');
+    wx.navigateBack();
   },
 
   // 确认事件
   onConfirm() {
     console.log('确认选择');
+    
+    if (this.data.mode === 'selectSingle') {
+      // 单选模式：返回选中的车辆
+      const selectedVehicle = this.data.vehicles.find(v => v.selected);
+      if (selectedVehicle) {
+        // 返回数据给上一个页面
+        const eventChannel = this.getOpenerEventChannel();
+        eventChannel.emit('acceptDataFromOpenedPage', {
+          selectedVehicle: selectedVehicle
+        });
+        wx.navigateBack();
+      } else {
+        wx.showToast({
+          title: '请选择一个车辆',
+          icon: 'none'
+        });
+      }
+    } else {
+      // 多选模式：返回所有选中的车辆
+      const selectedVehicles = this.data.vehicles.filter(v => v.selected);
+      console.log('选中的车辆:', selectedVehicles);
+      
+      // 这里可以根据需要返回数据
+      const eventChannel = this.getOpenerEventChannel();
+      eventChannel.emit('acceptDataFromOpenedPage', {
+        selectedVehicles: selectedVehicles
+      });
+      wx.navigateBack();
+    }
   }
 });

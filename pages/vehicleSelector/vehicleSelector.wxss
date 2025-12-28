@@ -88,6 +88,29 @@
   position: relative;
 }
 
+/* 顶部返回按钮 */
+.top-back-button {
+  padding-top: 20rpx;
+  padding-bottom: 16rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: rgba(30, 41, 59, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.back-icon {
+  color: #f1f5f9;
+}
+
 /* 搜索区域 */
 .search-section {
   padding-top: 24rpx;

@@ -10,6 +10,10 @@ Component({
     vehicle: {
       type: Object,
       value: {}
+    },
+    selectSingle: {
+      type: Boolean,
+      value: false
     }
   },
 
@@ -31,6 +35,13 @@ Component({
 
     // 复选框变化事件
     onCheckboxChange(e) {
+      // 阻止事件冒泡
+      e.stopPropagation();
+      this.triggerEvent('select', { id: this.properties.vehicle.id });
+    },
+    
+    // 单选按钮变化事件
+    onRadioChange(e) {
       // 阻止事件冒泡
       e.stopPropagation();
       this.triggerEvent('select', { id: this.properties.vehicle.id });
