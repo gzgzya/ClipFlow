@@ -87,7 +87,7 @@
                   <text class="media-source">来源：{{item.source}} · {{item.time}}</text>
                 </view>
                 <button class="remove-button" bindtap="removeMedia" data-id="{{item.id}}">
-                  <icon type="close" size="20rpx"></icon>
+                  <text class="remove-icon">×</text>
                 </button>
               </view>
               

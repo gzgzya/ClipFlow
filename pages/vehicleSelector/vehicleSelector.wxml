@@ -31,7 +31,7 @@
     <!-- 车辆列表 -->
     <scroll-view class="vehicle-list" scroll-y="true">
       <block wx:for="{{vehicles}}" wx:key="id">
-        <vehicle-selector-item vehicle="{{item}}" selectSingle="{{mode === 'selectSingle'}}" bind:select="onVehicleSelect"></vehicle-selector-item>
+        <vehicle-selector-item vehicle="{{item}}" selectSingle="{{mode === 'selectSingle'}}" currentVehiclePlate="{{currentVehiclePlate}}" bind:select="onVehicleSelect"></vehicle-selector-item>
       </block>
 
       <!-- 更多车辆提示 -->

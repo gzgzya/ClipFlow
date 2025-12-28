@@ -6,6 +6,7 @@ Page({
   data: {
     selectedCount: 1,
     selectedVehicleId: null,
+    currentVehiclePlate: '', // 当前车辆的车牌号
     mode: 'multi', // 默认多选模式，'selectSingle' 为单选模式
     vehicles: [
       {
@@ -67,6 +68,28 @@ Page({
     if (options.mode === 'selectSingle') {
       this.setData({
         mode: 'selectSingle'
+      });
+    }
+    
+    // 如果传入了当前车辆信息，设置当前车辆的车牌
+    if (options.currentVehiclePlate) {
+      this.setData({
+        currentVehiclePlate: options.currentVehiclePlate
+      });
+      
+      // 找到当前车辆并将其设置为选中状态
+      const updatedVehicles = this.data.vehicles.map(vehicle => ({
+        ...vehicle,
+        selected: vehicle.plate === options.currentVehiclePlate
+      }));
+      
+      // 获取当前选中车辆的ID
+      const currentVehicle = this.data.vehicles.find(v => v.plate === options.currentVehiclePlate);
+      const selectedVehicleId = currentVehicle ? currentVehicle.id : null;
+      
+      this.setData({
+        vehicles: updatedVehicles,
+        selectedVehicleId: selectedVehicleId
       });
     }
   },
@@ -150,9 +173,18 @@ Page({
     const vehicleId = e.detail.id;
     
     if (this.data.mode === 'selectSingle') {
-      // 单选模式：只选择一个车辆并立即返回
+      // 单选模式：选择一个车辆
       const selectedVehicle = this.data.vehicles.find(v => v.id === vehicleId);
       if (selectedVehicle) {
+        // 检查是否是当前车辆，如果是则不执行任何操作
+        if (selectedVehicle.plate === this.data.currentVehiclePlate) {
+          wx.showToast({
+            title: '已是当前车辆',
+            icon: 'none'
+          });
+          return;
+        }
+        
         // 返回数据给上一个页面
         const eventChannel = this.getOpenerEventChannel();
         eventChannel.emit('acceptDataFromOpenedPage', {

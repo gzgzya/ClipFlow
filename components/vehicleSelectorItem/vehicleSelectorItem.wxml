@@ -28,8 +28,8 @@
           <text class="queue-status {{vehicle.inQueue ? 'in-queue' : 'not-in-queue'}}">
             {{vehicle.inQueue ? '✓ 已加入队列' : '未加入'}}
           </text>
-          <button class="select-button" bindtap="onSelect">
-            <text class="select-text">{{vehicle.selected ? '已选择' : '选择'}}</text>
+          <button class="select-button {{vehicle.plate === currentVehiclePlate && vehicle.selected ? 'current-vehicle' : ''}}" bindtap="onSelectButtonClick">
+            <text class="select-text">{{vehicle.plate === currentVehiclePlate && vehicle.selected ? '当前车辆' : (vehicle.selected ? '已选择' : '选择')}}</text>
           </button>
         </view>
       </view>

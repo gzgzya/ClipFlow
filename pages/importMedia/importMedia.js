@@ -71,7 +71,8 @@ Page({
         classification: '外观',
         classificationColor: 'blue',
         targetVehicle: '宝马 325Li',
-        action: '修改归属'
+        action: '修改归属',
+        size: 0.22
       },
       {
         id: 2,
@@ -83,7 +84,8 @@ Page({
         classification: '内饰',
         classificationColor: 'emerald',
         suggestion: 'AI 建议保留 · 清晰度高',
-        action: '标记为备选'
+        action: '标记为备选',
+        size: 0.18
       }
     ],
     
@@ -248,7 +250,7 @@ Page({
   switchVehicle() {
     // 切换车辆
     wx.navigateTo({
-      url: '../vehicleSelector/vehicleSelector?mode=selectSingle',
+      url: `../vehicleSelector/vehicleSelector?mode=selectSingle&currentVehiclePlate=${encodeURIComponent(this.data.currentVehicle.plate)}`,
       events: {
         // 为页面参数接收一个回调函数
         acceptDataFromOpenedPage: function(data) {
@@ -282,9 +284,29 @@ Page({
   removeMedia(e) {
     const mediaId = e.currentTarget.dataset.id;
     console.log('移除素材:', mediaId);
+    
+    // 从mediaItems中移除指定id的素材
+    const updatedMediaItems = this.data.mediaItems.filter(item => item.id !== mediaId);
+    
+    // 计算移除素材后的总大小
+    const totalSize = updatedMediaItems.reduce((total, item) => {
+      return total + (item.size || 0.2); // 默认每段0.2GB
+    }, 0);
+    
+    // 更新summary信息
+    const updatedSummary = {
+      count: updatedMediaItems.length,
+      size: totalSize.toFixed(1) + 'GB'
+    };
+    
+    this.setData({
+      mediaItems: updatedMediaItems,
+      summary: updatedSummary
+    });
+    
     wx.showToast({
-      title: '移除素材功能待实现',
-      icon: 'none'
+      title: '素材已移除',
+      icon: 'success'
     });
   },
 
@@ -304,5 +326,7 @@ Page({
       title: '标记为备选功能待实现',
       icon: 'none'
     });
-  }
+  },
+  
+
 });

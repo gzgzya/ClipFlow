@@ -135,6 +135,14 @@
   justify-content: center;
 }
 
+.select-button.current-vehicle {
+  background-color: #cbd5e1; /* 置灰背景 */
+}
+
+.select-button.current-vehicle:active {
+  background-color: #94a3b8; /* 置灰按下状态 */
+}
+
 .select-button:active {
   background-color: #2563eb;
 }

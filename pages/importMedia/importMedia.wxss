@@ -327,6 +327,15 @@
   align-items: center;
   justify-content: center;
   color: #cbd5e1; /* text-slate-300 */
+  border: none;
+  padding: 0;
+}
+
+.remove-icon {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #cbd5e1;
+  line-height: 1;
 }
 
 .action-row {
