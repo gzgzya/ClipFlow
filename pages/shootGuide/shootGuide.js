@@ -178,7 +178,7 @@ class StepManager {
     if (allCompleted) {
       // 更新主步骤进度
       const shootProgress = {...this.page.data.shootProgress};
-      shootProgress.completedSteps = shootProgress.currentStep;
+      shootProgress.completedSteps = shootProgress.currentStep - 1;
       
       // 如果还有下一步，激活下一步
       if (shootProgress.currentStep < shootProgress.totalSteps) {
