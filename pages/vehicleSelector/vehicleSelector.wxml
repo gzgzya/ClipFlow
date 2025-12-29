@@ -40,5 +40,7 @@
         <text class="more-text">下拉加载更多车辆...</text>
       </view>
     </scroll-view>
+    
+
   </view>
 </view>

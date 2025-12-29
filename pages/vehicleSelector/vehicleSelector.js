@@ -71,27 +71,38 @@ Page({
       });
     }
     
-    // 如果传入了当前车辆信息，设置当前车辆的车牌
-    if (options.currentVehiclePlate) {
-      this.setData({
-        currentVehiclePlate: options.currentVehiclePlate
-      });
+    // 监听从上一个页面传来的数据
+    this.getOpenerEventChannel().on('acceptDataFromOpenerPage', (data) => {
+      // 如果传入了当前车辆信息，设置当前车辆的车牌
+      if (data.currentVehiclePlate) {
+        this.setData({
+          currentVehiclePlate: data.currentVehiclePlate
+        });
+      }
       
-      // 找到当前车辆并将其设置为选中状态
-      const updatedVehicles = this.data.vehicles.map(vehicle => ({
-        ...vehicle,
-        selected: vehicle.plate === options.currentVehiclePlate
-      }));
-      
-      // 获取当前选中车辆的ID
-      const currentVehicle = this.data.vehicles.find(v => v.plate === options.currentVehiclePlate);
-      const selectedVehicleId = currentVehicle ? currentVehicle.id : null;
-      
-      this.setData({
-        vehicles: updatedVehicles,
-        selectedVehicleId: selectedVehicleId
-      });
-    }
+      // 如果传入了当前车辆队列数据，将队列中的车辆标记为已选择
+      if (data.currentVehicles && Array.isArray(data.currentVehicles)) {
+        const currentVehicleIds = data.currentVehicles.map(vehicle => vehicle.id);
+        
+        // 更新车辆列表，将已经在队列中的车辆标记为已选择
+        const updatedVehicles = this.data.vehicles.map(vehicle => {
+          const isInCurrentQueue = currentVehicleIds.includes(vehicle.id);
+          return {
+            ...vehicle,
+            selected: isInCurrentQueue,
+            inQueue: isInCurrentQueue
+          };
+        });
+        
+        // 计算当前选中数量
+        const selectedCount = updatedVehicles.filter(v => v.selected).length;
+        
+        this.setData({
+          vehicles: updatedVehicles,
+          selectedCount: selectedCount
+        });
+      }
+    });
   },
 
   /**
@@ -208,8 +219,19 @@ Page({
         vehicles: updatedVehicles,
         selectedCount: selectedCount
       });
+      
+      // 如果是多选模式，直接将选中的车辆返回给上一个页面
+      const selectedVehicles = updatedVehicles.filter(vehicle => vehicle.selected);
+      if (selectedVehicles.length > 0) {
+        const eventChannel = this.getOpenerEventChannel();
+        eventChannel.emit('acceptDataFromOpenedPage', {
+          selectedVehicles: selectedVehicles
+        });
+        wx.navigateBack();
+      }
     }
   },
+  
 
 
 });

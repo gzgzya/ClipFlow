@@ -11,8 +11,8 @@ Page({
         title: '30s 爆款竖屏',
         subtitle: '推荐 · 快速出片',
         description: '每车 1 条 · 外观+内饰+亮点',
-        bgColor: 'blue',
-        active: true
+        bgColor: 'slate',
+        active: false
       },
       {
         id: 2,
@@ -121,7 +121,8 @@ Page({
   },
 
   selectTemplate(e) {
-    const templateId = e.currentTarget.dataset.id;
+    const templateId = parseInt(e.currentTarget.dataset.id);
+    
     const templates = this.data.templates.map(template => ({
       ...template,
       active: template.id === templateId
@@ -134,12 +135,74 @@ Page({
 
   onSelectVehicles() {
     // 从车库选择车辆
-    console.log('从车库选择车辆');
+    wx.navigateTo({
+      url: '/pages/vehicleSelector/vehicleSelector',
+      events: {
+        // 监听车辆选择页面传回的数据
+        acceptDataFromOpenedPage: (data) => {
+          if (data.selectedVehicles && Array.isArray(data.selectedVehicles)) {
+            // 将选中的车辆添加到现有车辆列表中
+            const newVehicles = data.selectedVehicles.map(vehicle => ({
+              id: vehicle.id,
+              image: vehicle.imageUrl,
+              name: vehicle.model,
+              plate: vehicle.plate,
+              status: '素材充足 · 外观/内饰/亮点已完成',
+              materials: vehicle.materials || 0,
+              clips: vehicle.clips || 0,
+              estimatedTime: '18s',
+              recommendation: '推荐加入',
+              actionType: 'remove'
+            }));
+            
+            const updatedVehicles = [...this.data.vehicles, ...newVehicles];
+            
+            // 更新摘要信息
+            const summary = {
+              vehiclesCount: updatedVehicles.length,
+              clipsCount: updatedVehicles.length,
+              estimatedMinutes: Math.ceil(updatedVehicles.length * 18 / 60) // 假设每辆车需要18秒
+            };
+            
+            this.setData({
+              vehicles: updatedVehicles,
+              summary: summary
+            });
+          }
+        }
+      },
+      success: (res) => {
+        // 传递当前模式为多选模式和当前车辆队列
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          mode: 'multi',
+          currentVehicles: this.data.vehicles
+        });
+      }
+    });
   },
 
   onRemoveVehicle(e) {
     const vehicleId = e.currentTarget.dataset.id;
-    console.log('移除车辆:', vehicleId);
+    
+    // 从车辆列表中移除指定车辆
+    const updatedVehicles = this.data.vehicles.filter(vehicle => vehicle.id !== vehicleId);
+    
+    // 更新摘要信息
+    const summary = {
+      vehiclesCount: updatedVehicles.length,
+      clipsCount: updatedVehicles.length,
+      estimatedMinutes: Math.ceil(updatedVehicles.length * 18 / 60) // 假设每辆车需要18秒
+    };
+    
+    this.setData({
+      vehicles: updatedVehicles,
+      summary: summary
+    });
+    
+    wx.showToast({
+      title: '车辆已移除',
+      icon: 'success'
+    });
   },
 
   onAdjustStrategy(e) {

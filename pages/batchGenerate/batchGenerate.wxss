@@ -121,7 +121,22 @@
 }
 
 .template-card.active {
+  background-color: #3b82f6 !important; /* bg-blue-600 - 选中时背景为蓝色 */
   border: 2rpx solid #3b82f6; /* border-blue-600 */
+  color: white;
+  position: relative;
+}
+
+.template-card.active::after {
+  content: '';
+  position: absolute;
+  top: -2rpx;
+  left: -2rpx;
+  right: -2rpx;
+  bottom: -2rpx;
+  border: 2rpx solid #3b82f6;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .template-subtitle {
@@ -183,8 +198,9 @@
   background-color: rgba(30, 41, 59, 0.8); /* bg-slate-800/80 - 参考首页样式 */
   border: 1rpx solid rgba(100, 116, 139, 0.6); /* border-slate-700/60 - 参考首页样式 */
   border-radius: 40rpx; /* rounded-2xl -> 增大圆角，参考首页样式 */
-  padding: 24rpx; /* px-3 py-2 * 8 */
+  padding: 16rpx; /* 减小内边距以降低高度 */
   margin-bottom: 16rpx;
+  position: relative;
 }
 
 .card-content {
@@ -198,12 +214,13 @@
 }
 
 .image-container {
-  width: 72rpx; /* w-9 * 8 */
-  height: 72rpx; /* h-9 * 8 */
+  width: 64rpx; /* 减小宽度 */
+  height: 64rpx; /* 减小高度 */
   border-radius: 12rpx; /* rounded-xl */
   overflow: hidden;
   border: 1rpx solid #475569; /* border-slate-700 */
   margin-right: 16rpx; /* space-x-2 */
+  position: relative;
 }
 
 .vehicle-image {
@@ -218,21 +235,28 @@
 }
 
 .vehicle-name {
-  font-size: 28rpx; /* text-[12px] -> 增大字体，参考首页样式 */
+  font-size: 26rpx; /* 减小字体 */
   color: #f1f5f9; /* text-slate-100 */
-  margin-bottom: 8rpx; /* mb-1 */
+  margin-bottom: 4rpx; /* 减小间距 */
 }
 
 .vehicle-status {
-  font-size: 24rpx; /* text-[10px] -> 增大字体，参考首页样式 */
+  font-size: 22rpx; /* 减小字体 */
   color: #64748b; /* text-slate-500 */
-  margin-bottom: 8rpx; /* mb-1 */
+  margin-bottom: 4rpx; /* 减小间距 */
 }
 
 .vehicle-details {
   display: flex;
   flex-direction: column;
   gap: 4rpx; /* space-y-1 */
+}
+
+.details-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  align-items: center;
 }
 
 .detail-item {
@@ -315,6 +339,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #cbd5e1; /* text-slate-300 */
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  z-index: 1;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.remove-icon {
+  font-size: 20rpx;
+  line-height: 1;
   color: #cbd5e1; /* text-slate-300 */
 }
 

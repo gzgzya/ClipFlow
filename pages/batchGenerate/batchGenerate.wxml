@@ -85,6 +85,9 @@
       <view class="vehicles-list">
         <block wx:for="{{vehicles}}" wx:key="id">
           <view class="vehicle-card">
+            <button class="remove-button" bindtap="onRemoveVehicle" data-id="{{item.id}}">
+              <text class="remove-icon">×</text>
+            </button>
             <view class="card-content">
               <view class="vehicle-info">
                 <view class="image-container">
@@ -94,32 +97,34 @@
                   <text class="vehicle-name">{{item.name}} · {{item.plate}}</text>
                   <text class="vehicle-status">{{item.status}}</text>
                   <view class="vehicle-details">
-                    <text class="detail-item">
-                      <icon type="video" size="24rpx" class="detail-icon blue"></icon>
-                      素材 {{item.materials}}
-                    </text>
-                    <block wx:if="{{item.clips}}">
+                    <view class="details-row">
                       <text class="detail-item">
-                        <icon type="video_fill" size="24rpx" class="detail-icon green"></icon>
-                        历史成片 {{item.clips}}
+                        <icon type="video" size="24rpx" class="detail-icon blue"></icon>
+                        素材 {{item.materials}}
                       </text>
-                    </block>
-                    <block wx:if="{{item.warning}}">
-                      <text class="detail-item warning">
-                        <icon type="warn" size="24rpx" class="detail-icon amber"></icon>
-                        {{item.warning}}
+                      <block wx:if="{{item.clips}}">
+                        <text class="detail-item">
+                          <icon type="video_fill" size="24rpx" class="detail-icon green"></icon>
+                          历史成片 {{item.clips}}
+                        </text>
+                      </block>
+                      <text class="detail-item">
+                        <icon type="time" size="24rpx" class="detail-icon gray"></icon>
+                        预计生成 {{item.estimatedTime}}
                       </text>
-                    </block>
-                    <block wx:if="{{item.feature}}">
-                      <text class="detail-item feature">
-                        <icon type="magic" size="24rpx" class="detail-icon green"></icon>
-                        {{item.feature}}
-                      </text>
-                    </block>
-                    <text class="detail-item">
-                      <icon type="time" size="24rpx" class="detail-icon gray"></icon>
-                      预计生成 {{item.estimatedTime}}
-                    </text>
+                      <block wx:if="{{item.warning}}">
+                        <text class="detail-item warning">
+                          <icon type="warn" size="24rpx" class="detail-icon amber"></icon>
+                          {{item.warning}}
+                        </text>
+                      </block>
+                      <block wx:if="{{item.feature}}">
+                        <text class="detail-item feature">
+                          <icon type="magic" size="24rpx" class="detail-icon green"></icon>
+                          {{item.feature}}
+                        </text>
+                      </block>
+                    </view>
                   </view>
                 </view>
               </view>
@@ -131,9 +136,6 @@
                 <block wx:if="{{item.actionText}}">
                   <button class="action-button {{item.actionType}}" size="mini">{{item.actionText}}</button>
                 </block>
-                <button class="remove-button" bindtap="onRemoveVehicle" data-id="{{item.id}}">
-                  <icon type="close" size="20rpx"></icon>
-                </button>
               </view>
             </view>
           </view>
