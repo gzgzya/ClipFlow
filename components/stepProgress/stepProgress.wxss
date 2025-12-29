@@ -1,8 +1,9 @@
 .progress-container {
-  height: 80rpx;
+  height: 120rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .progress-steps {
@@ -49,6 +50,12 @@
   background-color: #D1D5DB;
 }
 
+.step-icon {
+  color: #FFFFFF;
+  font-size: 20rpx;
+  font-weight: bold;
+}
+
 .step-number {
   color: #FFFFFF;
 }
@@ -74,4 +81,39 @@
 .step-line.pending {
   /* 未开始状态 - 灰色 */
   background-color: #D1D5DB;
+}
+
+/* 步骤标签 */
+.step-labels {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+
+.label-text {
+  font-size: 24rpx;
+  color: #6B7280;
+  flex: 1;
+  text-align: center;
+}
+
+.label-text.left {
+  text-align: left;
+}
+
+.label-text.right {
+  text-align: right;
+}
+
+.label-text.center {
+  text-align: center;
+}
+
+.label-text.active {
+  color: #3B82F6;
+}
+
+.label-text.completed {
+  color: #10B981;
 }

@@ -54,8 +54,12 @@ class StepManager {
       }
     });
     
+    // 同步更新步骤状态数组
+    const stepStatuses = shootProgress.steps.map(step => step.status);
+    
     this.page.setData({
-      shootProgress
+      shootProgress,
+      stepStatuses
     });
   }
   
@@ -154,6 +158,10 @@ Page({
         { id: 3, name: '亮点', status: STEP_STATUS.PENDING }
       ]
     },
+    
+    // 步骤状态数组（用于传递给 stepProgress 组件）
+    stepStatuses: ['active', 'pending', 'pending'],
+    stepLabels: ['外观', '内饰', '亮点'],
     
     // 当前子步骤
     currentSubStep: 1,

@@ -5,35 +5,13 @@
                bindtouchstart="onTouchStart" 
                bindtouchmove="onTouchMove" 
                bindtouchend="onTouchEnd">
-    <!-- ==================== 滑动指示器 ==================== -->
-    <view class="swipe-indicator">
-      <text class="swipe-text">左右滑动切换步骤</text>
-    </view>
-    
-    <!-- ==================== 拍摄进度条区域 ==================== -->
-    <view class="progress-section">
-      <view class="progress-header">
-        <text class="header-text">拍摄流程</text>
-        <text class="header-status">已完成 {{shootProgress.completedSteps}}/{{shootProgress.totalSteps}} 步</text>
+    <!-- ==================== 拍摄进度信息行 ==================== -->
+    <view class="progress-header">
+      <text class="header-text">拍摄流程</text>
+      <view class="swipe-indicator">
+        <text class="swipe-text">左右滑动切换步骤</text>
       </view>
-      <view class="progress-container">
-        <view class="progress-steps">
-          <block wx:for="{{shootProgress.steps}}" wx:key="id">
-            <view class="step-wrapper {{item.status}}" data-step="{{item.id}}">
-              <view class="step-indicator {{item.status}}">
-                <icon wx:if="{{item.status === 'completed'}}" class="step-icon" type="success" size="11" color="#ffffff"></icon>
-                <text wx:else class="step-number">{{item.id}}</text>
-              </view>
-              <view wx:if="{{item.id < shootProgress.totalSteps}}" class="step-line {{item.status}}"></view>
-            </view>
-          </block>
-        </view>
-        <view class="step-labels">
-          <text class="label-text left">外观</text>
-          <text class="label-text center">内饰</text>
-          <text class="label-text right">亮点</text>
-        </view>
-      </view>
+      <text class="header-status">已完成 {{shootProgress.completedSteps}}/{{shootProgress.totalSteps}} 步</text>
     </view>
 
     <!-- ==================== 摄像头预览区域 ==================== -->

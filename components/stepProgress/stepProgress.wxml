@@ -2,11 +2,21 @@
   <view class="progress-steps">
     <block wx:for="{{stepArray}}" wx:key="index">
       <view class="step-item">
-        <view class="step-indicator {{index < stepIndex ? 'completed' : (index === stepIndex ? 'active' : 'pending')}}">
-          <text class="step-number">{{index + 1}}</text>
+        <view class="step-indicator {{getStepStatus(index)}}">
+          <text wx:if="{{getStepStatus(index) === 'completed'}}" class="step-icon">✓</text>
+          <text wx:else class="step-number">{{getStepLabel(index)}}</text>
         </view>
-        <view wx:if="{{index < stepArray.length - 1}}" class="step-line {{index < stepIndex ? 'completed' : (index === stepIndex ? 'active' : 'pending')}}"></view>
+        <view wx:if="{{index < stepArray.length - 1}}" class="step-line {{index <= stepIndex ? 'completed' : 'pending'}}"></view>
       </view>
+    </block>
+  </view>
+  
+  <!-- 步骤标签 -->
+  <view class="step-labels">
+    <block wx:for="{{stepArray}}" wx:key="index">
+      <text class="label-text {{index === 0 ? 'left' : (index === stepArray.length - 1 ? 'right' : 'center')}}">
+        {{getStepLabel(index)}}
+      </text>
     </block>
   </view>
 </view>

@@ -29,18 +29,36 @@
   position: relative;
   padding-bottom: 180rpx;
   height: 100%;
+  padding-top: 0;
 }
 
 /* 滑动指示器 */
 .swipe-indicator {
   display: flex;
   justify-content: center;
-  padding: 10rpx 0;
+  flex: 1;
+  padding: 0 20rpx;
 }
 
 .swipe-text {
   font-size: 24rpx; /* 参考首页字体大小 */
   color: #94a3b8;
+}
+
+/* 拍摄进度信息行 */
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 32rpx 8rpx 32rpx;
+  font-size: 28rpx; /* 参考首页字体大小 */
+  color: #94a3b8;
+  min-height: 44rpx;
+}
+
+.header-status {
+  color: #f1f5f9;
+  flex-shrink: 0;
 }
 
 /* 小屏幕设备适配 */
@@ -73,150 +91,6 @@
   .steps-section {
     padding: 32rpx;
   }
-}
-
-/* 步骤进度条 */
-.progress-section {
-  padding: 24rpx 32rpx 16rpx 32rpx;
-}
-
-.progress-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 28rpx; /* 参考首页字体大小 */
-  color: #94a3b8;
-  margin-bottom: 16rpx;
-}
-
-.header-status {
-  color: #f1f5f9;
-}
-
-.progress-container {
-  width: 100%;
-}
-
-.progress-steps {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-bottom: 16rpx;
-}
-
-.step-wrapper {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-
-.step-wrapper:last-child {
-  flex: 0;
-}
-
-.step-indicator {
-  width: 48rpx;
-  height: 48rpx;
-  border-radius: 50%;
-  background-color: #d1d5db; /* 灰色默认状态 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  flex-shrink: 0;
-}
-
-.step-indicator.completed {
-  background-color: #10b981; /* 绿色完成状态 */
-}
-
-.step-indicator.active {
-  background-color: #3b82f6; /* 蓝色当前状态 */
-}
-
-.step-indicator.pending {
-  background-color: #d1d5db; /* 灰色未完成状态 */
-}
-
-.step-number {
-  font-size: 22rpx;
-  color: #ffffff; /* 白色数字 */
-}
-
-.step-icon {
-  width: 11px;
-  height: 11px;
-}
-
-.step-line {
-  flex: 1;
-  height: 8rpx;
-  background-color: #d1d5db; /* 灰色默认线条 */
-  border-radius: 0;
-}
-
-.step-line.completed {
-  background-color: #10b981; /* 绿色完成线条 */
-}
-
-.step-line.active {
-  background-color: #3b82f6; /* 蓝色当前线条 */
-}
-
-.step-labels {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 26rpx; /* 参考首页字体大小 */
-  color: #94a3b8;
-  padding: 0 24rpx;
-}
-
-.label-text {
-  flex: 1;
-  text-align: center;
-  white-space: nowrap;
-  position: relative;
-  top: 0;
-  transform: translateX(0);
-}
-
-.step-wrapper {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-
-.step-wrapper:last-child {
-  flex: 0;
-}
-
-.step-labels {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 26rpx; /* 参考首页字体大小 */
-  color: #94a3b8;
-  padding: 0 24rpx;
-  margin-top: 8rpx;
-}
-
-.label-text {
-  flex: 1;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.label-text.left {
-  text-align: left;
-}
-
-.label-text.center {
-  text-align: center;
-}
-
-.label-text.right {
-  text-align: right;
 }
 
 /* 摄像头预览区域容器 */
@@ -380,6 +254,7 @@
 .header-text {
   font-size: 28rpx; /* 参考首页字体大小 */
   color: #94a3b8;
+  flex-shrink: 0;
 }
 
 .header-subtext {
