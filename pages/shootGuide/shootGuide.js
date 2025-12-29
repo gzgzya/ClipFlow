@@ -287,6 +287,9 @@ Page({
     // 摄像头位置（前置/后置）
     cameraPosition: CAMERA_POSITION.BACK,
     
+    // 拍摄模式
+    mode: 'photo', // 'photo' | 'video'
+    
     // 录制状态
     isRecording: false,
     
@@ -673,6 +676,7 @@ Page({
       currentTip: newTip,
       currentSubStepTitle: newSubStepTitle,
       currentSubStepDesc: newSubStepDesc,
+      mode: 'video', // 进入拍摄模式后切换到录像模式
       lastClickTime: currentTime  // 更新上次点击时间
     });
     
@@ -706,8 +710,11 @@ Page({
 
   // 录制按钮触摸开始 - 支持长按录制
   onRecordTouchStart() {
-    // 如果已经处于录制状态，不做任何操作
-    if (this.data.isRecording) return;
+    // 如果已经处于录制状态，停止录制
+    if (this.data.isRecording) {
+      this.stopRecording();
+      return;
+    }
     
     const timer = setTimeout(() => {
       // 长按触发录制
@@ -731,9 +738,6 @@ Page({
       // 如果没有开始录制，则执行拍照
       if (!this.data.isRecording) {
         this.takePicture();
-      } else {
-        // 如果正在录制，则停止录制
-        this.stopRecording();
       }
     }
   },
@@ -787,9 +791,58 @@ Page({
     });
   },
   
+  // 拍照功能
+  takePicture() {
+    console.log('拍照');
+    
+    // 拍照
+    this.cameraContext.takePhoto({
+      quality: 'high',
+      success: (res) => {
+        console.log('拍照成功', res);
+        
+        // 触发震动反馈
+        wx.vibrateShort({
+          type: 'light',
+          success: () => {
+            console.log('拍照震动反馈成功');
+          },
+          fail: (err) => {
+            console.warn('震动反馈失败:', err);
+          }
+        });
+        
+        wx.showToast({
+          title: '拍照完成',
+          icon: 'success'
+        });
+        
+        // 统一媒体数据结构
+        const mediaData = {
+          url: res.tempImagePath,
+          type: MEDIA_TYPE.IMAGE,
+          shouldPlay: false
+        };
+        
+        // 保存媒体并完成拍摄流程
+        this.saveMediaAndProcess(mediaData);
+      },
+      fail: (err) => {
+        console.error('拍照失败', err);
+        wx.showToast({
+          title: '拍照失败',
+          icon: 'none'
+        });
+        
+        // 错误恢复处理
+        this.handleErrorRecovery();
+      }
+    });
+  },
+  
   // 媒体输入驱动流程
   // 统一处理拍照、录制、相册选择三种媒体输入方式
-  takePicture() {
+  
     console.log('拍照');
     
     // 拍照
@@ -1051,7 +1104,8 @@ Page({
     this.setData({
       showCameraControls: false,     // 隐藏相机控制栏
       showCameraPreview: false,      // 隐藏相机预览
-      activeSubStepId: null          // 重置活动子步骤ID
+      activeSubStepId: null,         // 重置活动子步骤ID
+      mode: 'photo'                  // 重置为拍照模式
     });
   },
   

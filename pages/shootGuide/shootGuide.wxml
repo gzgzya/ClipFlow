@@ -34,7 +34,7 @@
           <!-- 媒体预览但未播放状态 -->
           <block wx:if="{{!selectedMedia.shouldPlay}}">
             <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}"></video>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}" show-play-btn="{{true}}" controls="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
             <!-- 播放按钮覆盖层 -->
             <view class="play-overlay" bindtap="onPlayMedia">
               <view class="play-button">
@@ -46,7 +46,7 @@
           <!-- 媒体播放状态 -->
           <block wx:else>
             <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay controls></video>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay="{{true}}" controls="{{true}}" show-center-play-btn="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
           </block>
         </view>
         
@@ -112,15 +112,20 @@
     <view class="control-buttons-container">
       <!-- 切换摄像头按钮 -->
       <button class="control-button switch-camera {{isRecording ? 'disabled' : ''}}" bindtap="onRotate" disabled="{{isRecording}}">
-        <icon class="control-icon" type="refresh" size="24" color="#ffffff"></icon>
+        <image class="icon-image" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTAuNSAxMi41TDcgOU03IDlMMTAuNSA1LjVNNSA5SDEzQzE0LjY1NjkgOSAxNiAxMC4zNDMxIDE2IDEyTTIxLjUgMTkuNUwyNSAyM00yNSAyM0wyMS41IDI2LjVNMjUgMjNIMTlDMTcuMzQzMSAyMyAxNiAyMS42NTY5IDE2IDIwTTkgMTZDOSAxNy42NTY5IDEwLjM0MzEgMTkgMTIgMTlDMTMuNjU2OSAxOSAxNSAxNy42NTY5IDE1IDE2QzE1IDE0LjM0MzEgMTMuNjU2OSAxMyAxMiAxM0MxMC4zNDMxIDEzIDkgMTQuMzQzMSA5IDE2WiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1vcGFjaXR5PSIwLjkiLz4KPC9zdmc+" mode="aspectFit" />
       </button>
       
       <!-- 录制按钮 -->
-      <button class="record-button {{isRecording ? 'recording' : ''}}" 
+      <button class="record-button {{isRecording ? 'recording' : ''}} {{mode == 'photo' ? 'photo-mode' : 'video-mode'}}" 
               bindtouchstart="onRecordTouchStart" 
               bindtouchend="onRecordTouchEnd"
               bindtouchcancel="onRecordTouchCancel">
-        <view class="record-inner {{isRecording ? 'recording' : ''}}"></view>
+        <!-- 拍照模式：白色实心圆 -->
+        <view wx:if="{{mode == 'photo'}}" class="record-inner photo-inner"></view>
+        <!-- 录像模式：红色圆点 -->
+        <view wx:elif="{{mode == 'video' && !isRecording}}" class="record-inner video-inner"></view>
+        <!-- 录像进行中：红色圆角方块 + 呼吸动画 -->
+        <view wx:elif="{{isRecording}}" class="record-inner recording-inner"></view>
         <!-- 录制进度环 -->
         <view class="record-progress-ring" style="background: conic-gradient(rgba(239, 68, 68, 0.8) {{recordingDuration * 360 / maxRecordingDuration}}deg, transparent 0deg);"></view>
         <!-- 录制时长显示 -->
@@ -131,7 +136,7 @@
       
       <!-- 相册按钮 -->
       <button class="control-button album {{isRecording ? 'disabled' : ''}}" bindtap="onOpenAlbum" disabled="{{isRecording}}">
-        <icon class="control-icon" type="pic" size="24" color="#ffffff"></icon>
+        <image class="icon-image" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB4PSI1IiB5PSI4IiB3aWR0aD0iMjIiIGhlaWdodD0iMTYiIHJ4PSIyIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjkiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjE2IiByPSIyIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjkiLz4KICA8cGF0aCBkPSJNNSAyNEwxMiAxOEwxNiAyMUwyMSAxNkwyNyAyNCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1vcGFjaXR5PSIwLjkiLz4KPC9zdmc+" mode="aspectFit" />
       </button>
     </view>
   </view>
