@@ -94,6 +94,77 @@ class StepManager {
     
     // 更新当前步骤的子步骤
     this.initCurrentStep();
+    
+    // 更新提示信息为当前步骤的第一个子步骤
+    const currentSubSteps = this.page.data.stepSubSteps[step] || [];
+    if (currentSubSteps.length > 0) {
+      const firstSubStep = currentSubSteps[0];
+      let newTip = "";
+      let newSubStepTitle = `步骤 ${step} / ${this.page.data.shootProgress.totalSteps} · ${this.page.data.shootProgress.steps[step-1].name} · ${firstSubStep.title}`;
+      let newSubStepDesc = "";
+      
+      if (step === 1) { // 外观步骤
+        switch(firstSubStep.id) {
+          case 1: // 车头 45° 远景
+            newTip = "建议：车头 45° 远景，保证光线充足";
+            newSubStepDesc = "对准车头与前脸标志，稍微侧一点角度拍摄，\n尽量避免逆光，画面保持稳定。";
+            break;
+          case 2: // 侧面环绕拍摄
+            newTip = "建议：沿车身侧面缓慢移动，展示整体线条";
+            newSubStepDesc = "从车头向车尾缓慢平移，保持镜头高度一致，\n突出车身比例与轮毂。";
+            break;
+          case 3: // 车尾特写
+            newTip = "建议：近距离拍摄车尾，突出尾灯与设计细节";
+            newSubStepDesc = "靠近车尾拍摄，对准尾灯与品牌标识，\n画面尽量居中。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
+      } else if (step === 2) { // 内饰步骤
+        switch(firstSubStep.id) {
+          case 1: // 主驾视角 · 中控&方向盘
+            newTip = "建议：主驾视角拍摄中控与方向盘";
+            newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
+            break;
+          case 2: // 后排空间 & 地台
+            newTip = "建议：拍摄后排腿部空间与地台高度";
+            newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
+            break;
+          case 3: // 细节 & 配置展示
+            newTip = "建议：拍摄常用配置与细节设计";
+            newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
+      } else if (step === 3) { // 亮点步骤
+        switch(firstSubStep.id) {
+          case 1: // 动力系统展示
+            newTip = "建议：展示发动机舱或启动过程";
+            newSubStepDesc = "打开发动机舱或拍摄启动车辆过程，\n镜头保持固定，记录真实声音与细节。";
+            break;
+          case 2: // 科技配置演示
+            newTip = "建议：演示科技配置功能";
+            newSubStepDesc = "展示辅助驾驶与智能互联功能，\n确保功能正常运行并记录操作过程。";
+            break;
+          case 3: // 安全配置展示
+            newTip = "建议：展示安全配置或相关功能";
+            newSubStepDesc = "拍摄安全气囊标识、雷达、摄像头等，\n画面清晰即可，无需复杂运镜。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
+      }
+      
+      this.page.setData({
+        currentTip: newTip,
+        currentSubStepTitle: newSubStepTitle,
+        currentSubStepDesc: newSubStepDesc
+      });
+    }
   }
   
   /**
@@ -174,12 +245,12 @@ Page({
         { id: 3, title: '车尾特写', subtitle: '重点展示尾灯与排气设计', status: STEP_STATUS.PENDING, mediaUrl: '' }
       ],
       2: [ // 内饰步骤
-        { id: 1, title: '主驾视角 · 中控&方向盘', subtitle: '建议突出液晶仪表、中控大屏', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 1, title: '主驾视角 · 中控&方向盘', subtitle: '建议拍摄中控与方向盘', status: STEP_STATUS.PENDING, mediaUrl: '' },
         { id: 2, title: '后排空间 & 地台', subtitle: '建议拍摄腿部空间、地台凸起情况', status: STEP_STATUS.PENDING, mediaUrl: '' },
         { id: 3, title: '细节 & 配置展示', subtitle: '方向盘、座椅、音响、氛围灯等高频关注点', status: STEP_STATUS.PENDING, mediaUrl: '' }
       ],
       3: [ // 亮点步骤
-        { id: 1, title: '动力系统展示', subtitle: '发动机舱与启动声浪演示', status: STEP_STATUS.PENDING, mediaUrl: '' },
+        { id: 1, title: '动力系统展示', subtitle: '发动机舱或启动过程演示', status: STEP_STATUS.PENDING, mediaUrl: '' },
         { id: 2, title: '科技配置演示', subtitle: '辅助驾驶与智能互联功能', status: STEP_STATUS.PENDING, mediaUrl: '' },
         { id: 3, title: '安全配置展示', subtitle: '主动安全与被动安全配置', status: STEP_STATUS.PENDING, mediaUrl: '' }
       ]
@@ -369,6 +440,74 @@ Page({
         title: '已选中媒体内容，请点击播放按钮',
         icon: 'none'
       });
+    } else if (subStep) {
+      // 如果是未完成的步骤，更新提示信息
+      const currentStep = this.data.shootProgress.currentStep;
+      let newTip = "";
+      let newSubStepTitle = `步骤 ${currentStep} / ${this.data.shootProgress.totalSteps} · ${this.data.shootProgress.steps[currentStep-1].name} · ${subStep.title}`;
+      let newSubStepDesc = "";
+      
+      if (currentStep === 1) { // 外观步骤
+        switch(subStepId) {
+          case 1: // 车头 45° 远景
+            newTip = "建议：车头 45° 远景，保证光线充足";
+            newSubStepDesc = "对准车头与前脸标志，稍微侧一点角度拍摄，\n尽量避免逆光，画面保持稳定。";
+            break;
+          case 2: // 侧面环绕拍摄
+            newTip = "建议：沿车身侧面缓慢移动，展示整体线条";
+            newSubStepDesc = "从车头向车尾缓慢平移，保持镜头高度一致，\n突出车身比例与轮毂。";
+            break;
+          case 3: // 车尾特写
+            newTip = "建议：近距离拍摄车尾，突出尾灯与设计细节";
+            newSubStepDesc = "靠近车尾拍摄，对准尾灯与品牌标识，\n画面尽量居中。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
+      } else if (currentStep === 2) { // 内饰步骤
+        switch(subStepId) {
+          case 1: // 主驾视角 · 中控&方向盘
+            newTip = "建议：主驾视角拍摄中控与方向盘";
+            newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
+            break;
+          case 2: // 后排空间 & 地台
+            newTip = "建议：拍摄后排腿部空间与地台高度";
+            newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
+            break;
+          case 3: // 细节 & 配置展示
+            newTip = "建议：拍摄常用配置与细节设计";
+            newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
+      } else if (currentStep === 3) { // 亮点步骤
+        switch(subStepId) {
+          case 1: // 动力系统展示
+            newTip = "建议：展示发动机舱或启动过程";
+            newSubStepDesc = "打开发动机舱或拍摄启动车辆过程，\n镜头保持固定，记录真实声音与细节。";
+            break;
+          case 2: // 科技配置演示
+            newTip = "建议：演示科技配置功能";
+            newSubStepDesc = "展示辅助驾驶与智能互联功能，\n确保功能正常运行并记录操作过程。";
+            break;
+          case 3: // 安全配置展示
+            newTip = "建议：展示安全配置或相关功能";
+            newSubStepDesc = "拍摄安全气囊标识、雷达、摄像头等，\n画面清晰即可，无需复杂运镜。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
+      }
+      
+      this.setData({
+        currentTip: newTip,
+        currentSubStepTitle: newSubStepTitle,
+        currentSubStepDesc: newSubStepDesc
+      });
     }
   },
 
@@ -405,6 +544,93 @@ Page({
       return;
     }
     
+    // 获取当前步骤和子步骤信息
+    const currentStep = this.data.shootProgress.currentStep;
+    const currentSubSteps = this.data.stepSubSteps[currentStep] || [];
+    const currentSubStep = currentSubSteps.find(step => step.id === subStepId);
+    
+    // 根据子步骤更新提示信息
+    let newTip = "";
+    let newSubStepTitle = `步骤 ${currentStep} / ${this.data.shootProgress.totalSteps} · ${this.data.shootProgress.steps[currentStep-1].name} · ${currentSubStep ? currentSubStep.title : '' }`;
+    let newSubStepDesc = "";
+    
+    if (currentStep === 1) { // 外观步骤
+      switch(subStepId) {
+        case 1: // 车头 45° 远景
+          newTip = "建议：车头 45° 远景，保证光线充足";
+          newSubStepDesc = "对准车头与前脸标志，稍微侧一点角度拍摄，\n尽量避免逆光，画面保持稳定。";
+          break;
+        case 2: // 侧面环绕拍摄
+          newTip = "建议：沿车身侧面缓慢移动，展示整体线条";
+          newSubStepDesc = "从车头向车尾缓慢平移，保持镜头高度一致，\n突出车身比例与轮毂。";
+          break;
+        case 3: // 车尾特写
+          newTip = "建议：近距离拍摄车尾，突出尾灯与设计细节";
+          newSubStepDesc = "靠近车尾拍摄，对准尾灯与品牌标识，画面尽量居中。";
+          break;
+        default:
+          newTip = "建议：按要求拍摄";
+          newSubStepDesc = "请按照拍摄要求进行拍摄";
+      }
+    } else if (currentStep === 2) { // 内饰步骤
+      switch(subStepId) {
+        case 1: // 主驾视角 · 中控&方向盘
+          newTip = "建议：主驾视角拍摄中控与方向盘";
+          newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
+          break;
+        case 2: // 后排空间 & 地台
+          newTip = "建议：拍摄后排腿部空间与地台高度";
+          newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
+          break;
+        case 3: // 细节 & 配置展示
+          newTip = "建议：拍摄常用配置与细节设计";
+          newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
+          break;
+        default:
+          newTip = "建议：按要求拍摄";
+          newSubStepDesc = "请按照拍摄要求进行拍摄";
+      }
+    } else if (currentStep === 2) { // 内饰步骤
+      switch(subStepId) {
+        case 1: // 主驾视角 · 中控&方向盘
+          newTip = "建议：主驾视角拍摄中控与方向盘";
+          newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
+          break;
+        case 2: // 后排空间 & 地台
+          newTip = "建议：拍摄后排腿部空间与地台高度";
+          newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
+          break;
+        case 3: // 细节 & 配置展示
+          newTip = "建议：拍摄常用配置与细节设计";
+          newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
+          break;
+        default:
+          newTip = "建议：按要求拍摄";
+          newSubStepDesc = "请按照拍摄要求进行拍摄";
+      }
+    } else if (currentStep === 3) { // 亮点步骤
+      switch(subStepId) {
+        case 1: // 动力系统展示
+          newTip = "建议：展示发动机舱或启动过程";
+          newSubStepDesc = "打开发动机舱或拍摄启动车辆过程，\n镜头保持固定，记录真实声音与细节。";
+          break;
+        case 2: // 科技配置演示
+          newTip = "建议：演示科技配置功能";
+          newSubStepDesc = "展示辅助驾驶与智能互联功能，\n确保功能正常运行并记录操作过程。";
+          break;
+        case 3: // 安全配置展示
+          newTip = "建议：展示安全配置或相关功能";
+          newSubStepDesc = "拍摄安全气囊标识、雷达、摄像头等，\n画面清晰即可，无需复杂运镜。";
+          break;
+        default:
+          newTip = "建议：按要求拍摄";
+          newSubStepDesc = "请按照拍摄要求进行拍摄";
+      }
+    } else {
+      newTip = this.data.currentTip;
+      newSubStepDesc = this.data.currentSubStepDesc;
+    }
+    
     // 显示底部相机控制栏和摄像头预览
     this.setData({
       showCameraControls: true,
@@ -415,6 +641,9 @@ Page({
         shouldPlay: false
       }, // 清除选中的媒体
       activeSubStepId: subStepId,
+      currentTip: newTip,
+      currentSubStepTitle: newSubStepTitle,
+      currentSubStepDesc: newSubStepDesc,
       lastClickTime: currentTime  // 更新上次点击时间
     });
     
