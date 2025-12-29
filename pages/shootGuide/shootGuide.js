@@ -100,7 +100,7 @@ class StepManager {
     if (currentSubSteps.length > 0) {
       const firstSubStep = currentSubSteps[0];
       let newTip = "";
-      let newSubStepTitle = `步骤 ${step} / ${this.page.data.shootProgress.totalSteps} · ${this.page.data.shootProgress.steps[step-1].name} · ${firstSubStep.title}`;
+      let newSubStepTitle = `步骤 ${firstSubStep.id} / ${currentSubSteps.length} · ${this.page.data.shootProgress.steps[step-1].name} · ${firstSubStep.title}`;
       let newSubStepDesc = "";
       
       if (step === 1) { // 外观步骤
@@ -268,7 +268,7 @@ Page({
     currentSubStepDesc: "对准车头与前脸标志，稍微侧一点角度拍摄，\n尽量避免逆光，画面保持稳定。",
     
     // 片段时间信息
-    currentFragmentTime: "10",
+    currentFragmentTime: "0",
     recommendedFragmentTime: "12",
     
     // 总时长信息
@@ -444,7 +444,7 @@ Page({
       // 如果是未完成的步骤，更新提示信息
       const currentStep = this.data.shootProgress.currentStep;
       let newTip = "";
-      let newSubStepTitle = `步骤 ${currentStep} / ${this.data.shootProgress.totalSteps} · ${this.data.shootProgress.steps[currentStep-1].name} · ${subStep.title}`;
+      let newSubStepTitle = `步骤 ${subStepId} / ${this.data.currentStepSubSteps.length} · ${this.data.shootProgress.steps[currentStep-1].name} · ${subStep.title}`;
       let newSubStepDesc = "";
       
       if (currentStep === 1) { // 外观步骤
@@ -551,7 +551,7 @@ Page({
     
     // 根据子步骤更新提示信息
     let newTip = "";
-    let newSubStepTitle = `步骤 ${currentStep} / ${this.data.shootProgress.totalSteps} · ${this.data.shootProgress.steps[currentStep-1].name} · ${currentSubStep ? currentSubStep.title : '' }`;
+    let newSubStepTitle = `步骤 ${subStepId} / ${currentSubSteps.length} · ${this.data.shootProgress.steps[currentStep-1].name} · ${currentSubStep ? currentSubStep.title : '' }`;
     let newSubStepDesc = "";
     
     if (currentStep === 1) { // 外观步骤
