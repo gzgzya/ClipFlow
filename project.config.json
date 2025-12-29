@@ -24,12 +24,16 @@
     "disableSWC": true
   },
   "compileType": "miniprogram",
+  "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [],
     "include": []
   },
   "appid": "wxbb047936c9e28a00",
-  "editorSetting": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
   "libVersion": "3.11.3"
 }

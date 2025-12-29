@@ -16,6 +16,9 @@
     "showES6CompileOption": false,
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true,
-    "bigPackageSizeSupport": false
-  }
+    "bigPackageSizeSupport": false,
+    "packNpmManually": false
+  },
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {}
 }
