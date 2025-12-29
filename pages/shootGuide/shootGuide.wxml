@@ -58,8 +58,10 @@
             <icon class="tip-icon" type="lightbulp" size="10" color="#fbbf24"></icon>
             <text class="tip-text">{{currentTip}}</text>
           </view>
-          <text class="tip-title">步骤 {{shootProgress.currentStep}} / {{shootProgress.totalSteps}} · {{shootProgress.steps[shootProgress.currentStep-1].name}} - {{currentSubStepTitle}}</text>
-          <text class="tip-desc">{{currentSubStepDesc}}</text>
+          <view class="tip-content">
+            <text class="tip-title">{{currentSubStepTitle}}</text>
+            <text class="tip-desc">{{currentSubStepDesc}}</text>
+          </view>
         </view>
 
         <!-- 底部进度与重拍 -->

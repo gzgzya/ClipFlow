@@ -193,8 +193,8 @@ Page({
 
     // 当前提示信息
     currentTip: "建议：车头 45° 远景，保证光线充足",
-    currentSubStepTitle: "主驾视角",
-    currentSubStepDesc: "对准中控与方向盘，缓慢平移，避免晃动。",
+    currentSubStepTitle: "步骤 1 / 3 · 外观 · 车头",
+    currentSubStepDesc: "对准车头与前脸标志，稍微侧一点角度拍摄，\n尽量避免逆光，画面保持稳定。",
     
     // 片段时间信息
     currentFragmentTime: "10",

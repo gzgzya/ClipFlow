@@ -179,6 +179,13 @@
   color: #f1f5f9;
 }
 
+.tip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  margin-top: 8rpx;
+}
+
 .tip-banner {
   display: inline-flex;
   align-items: center;
@@ -197,15 +204,18 @@
 }
 
 .tip-title {
-  margin-top: 16rpx;
+  margin-top: 4rpx;
   color: #e2e8f0;
   font-size: 28rpx; /* 参考首页字体大小 */
+  line-height: 1.4;
 }
 
 .tip-desc {
   font-size: 24rpx; /* 参考首页字体大小 */
   color: #cbd5e1;
   margin-top: 8rpx;
+  line-height: 1.5;
+  white-space: pre-line;
 }
 
 .preview-footer {
