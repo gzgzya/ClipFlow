@@ -111,7 +111,7 @@
   <view wx:if="{{showCameraControls}}" class="camera-control-bar safe-area-padding">
     <view class="control-buttons-container">
       <!-- 切换摄像头按钮 -->
-      <button class="control-button switch-camera" bindtap="onRotate">
+      <button class="control-button switch-camera {{isRecording ? 'disabled' : ''}}" bindtap="onRotate" disabled="{{isRecording}}">
         <icon class="control-icon" type="refresh" size="24" color="#ffffff"></icon>
       </button>
       
@@ -120,11 +120,17 @@
               bindtouchstart="onRecordTouchStart" 
               bindtouchend="onRecordTouchEnd"
               bindtouchcancel="onRecordTouchCancel">
-        <view class="record-inner"></view>
+        <view class="record-inner {{isRecording ? 'recording' : ''}}"></view>
+        <!-- 录制进度环 -->
+        <view class="record-progress-ring" style="background: conic-gradient(rgba(239, 68, 68, 0.8) {{recordingDuration * 360 / maxRecordingDuration}}deg, transparent 0deg);"></view>
+        <!-- 录制时长显示 -->
+        <view wx:if="{{isRecording}}" class="recording-duration">
+          <text>{{recordingDuration}}</text>
+        </view>
       </button>
       
       <!-- 相册按钮 -->
-      <button class="control-button album" bindtap="onOpenAlbum">
+      <button class="control-button album {{isRecording ? 'disabled' : ''}}" bindtap="onOpenAlbum" disabled="{{isRecording}}">
         <icon class="control-icon" type="pic" size="24" color="#ffffff"></icon>
       </button>
     </view>

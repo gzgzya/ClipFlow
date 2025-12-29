@@ -490,8 +490,8 @@
 }
 
 .control-button {
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.2);
   display: flex;
@@ -509,13 +509,13 @@
 }
 
 .control-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .record-button {
-  width: 100rpx;
-  height: 100rpx;
+  width: 110rpx;
+  height: 110rpx;
   border-radius: 50%;
   background-color: #ef4444;
   display: flex;
@@ -527,6 +527,27 @@
 
 .record-button.recording {
   animation: pulse 1.5s infinite;
+}
+
+/* 呼吸动画 */
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 录制中呼吸动画 */
+.record-inner.recording {
+  animation: breathe 2s infinite ease-in-out;
 }
 
 @keyframes pulse {
@@ -542,11 +563,43 @@
 }
 
 .record-inner {
-  width: 48rpx;
-  height: 48rpx;
+  width: 54rpx;
+  height: 54rpx;
   border-radius: 50%;
   background-color: rgba(239, 68, 68, 0.8);
   border: 1rpx solid rgba(255, 255, 255, 0.4);
+}
+
+/* 录制进度环 */
+.record-progress-ring {
+  position: absolute;
+  top: -8rpx;
+  left: -8rpx;
+  width: calc(100% + 16rpx);
+  height: calc(100% + 16rpx);
+  border-radius: 50%;
+  background: conic-gradient(rgba(239, 68, 68, 0.8) 0deg, transparent 0deg);
+  z-index: -1;
+}
+
+/* 录制时长显示 */
+.recording-duration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: bold;
+  z-index: 2;
+  background-color: transparent;
+}
+
+/* 禁用状态按钮 */
+.control-button.disabled {
+  opacity: 0.4;
+  background-color: rgba(30, 41, 59, 0.4) !important;
+  pointer-events: none;
 }
 
 /* 解决重复定义的问题 */

@@ -290,6 +290,11 @@ Page({
     // 录制状态
     isRecording: false,
     
+    // 录制时长
+    recordingDuration: 0,
+    maxRecordingDuration: 15, // 最大录制时长15秒
+    recordingTimer: null,
+    
     // 长按定时器
     longPressTimer: null,
     
@@ -344,7 +349,10 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-
+    // 页面隐藏时如果正在录制，则停止录制
+    if (this.data.isRecording) {
+      this.stopRecording();
+    }
   },
 
   /**
@@ -354,6 +362,11 @@ Page({
     // 清理定时器
     if (this.data.longPressTimer) {
       clearTimeout(this.data.longPressTimer);
+    }
+    
+    // 清理录制定时器
+    if (this.data.recordingTimer) {
+      clearInterval(this.data.recordingTimer);
     }
     
     // 确保录制被正确停止
@@ -385,7 +398,23 @@ Page({
 
   // 返回事件
   onBack() {
-    wx.navigateBack();
+    // 如果正在录制，提示用户并确认是否返回
+    if (this.data.isRecording) {
+      wx.showModal({
+        title: '提示',
+        content: '正在录制中，确定要返回吗？',
+        confirmText: '确定返回',
+        cancelText: '继续录制',
+        success: (res) => {
+          if (res.confirm) {
+            this.stopRecording();
+            wx.navigateBack();
+          }
+        }
+      });
+    } else {
+      wx.navigateBack();
+    }
   },
 
   // 素材管理事件
@@ -725,6 +754,39 @@ Page({
     }
   },
 
+  // 开始录制计时器
+  startRecordingTimer() {
+    // 清理旧的定时器
+    if (this.data.recordingTimer) {
+      clearInterval(this.data.recordingTimer);
+    }
+    
+    // 创建新的定时器
+    const timer = setInterval(() => {
+      let newDuration = this.data.recordingDuration + 1;
+      
+      this.setData({
+        recordingDuration: newDuration
+      });
+      
+      // 检查是否达到最大录制时长
+      if (newDuration >= this.data.maxRecordingDuration) {
+        wx.showToast({
+          title: '已达到最大录制时长',
+          icon: 'none'
+        });
+        
+        // 自动停止录制
+        this.stopRecording();
+      }
+    }, 1000); // 每秒更新一次
+    
+    // 保存定时器ID到data中
+    this.setData({
+      recordingTimer: timer
+    });
+  },
+  
   // 媒体输入驱动流程
   // 统一处理拍照、录制、相册选择三种媒体输入方式
   takePicture() {
@@ -765,8 +827,23 @@ Page({
 
   // 录制流程: startRecord → stopRecord → 保存 → 更新状态 → 退出相机模式
   startRecording() {
+    // 防止重复开始录制
+    if (this.data.isRecording) return;
+    
     this.setData({
-      isRecording: true
+      isRecording: true,
+      recordingDuration: 0
+    });
+    
+    // 触发短震动反馈
+    wx.vibrateShort({
+      type: 'light',
+      success: () => {
+        console.log('震动反馈成功');
+      },
+      fail: (err) => {
+        console.warn('震动反馈失败:', err);
+      }
     });
     
     wx.showToast({
@@ -778,12 +855,21 @@ Page({
     this.cameraContext.startRecord({
       success: (res) => {
         console.log('开始录制成功', res);
+        
+        // 开始计时器更新录制时长
+        this.startRecordingTimer();
       },
       fail: (err) => {
         console.error('开始录制失败', err);
         wx.showToast({
           title: '录制失败',
           icon: 'none'
+        });
+        
+        // 重置录制状态
+        this.setData({
+          isRecording: false,
+          recordingDuration: 0
         });
         
         // 错误恢复处理
@@ -796,6 +882,14 @@ Page({
   stopRecording() {
     // 如果未在录制状态，不做任何操作
     if (!this.data.isRecording) return;
+    
+    // 清理录制定时器
+    if (this.data.recordingTimer) {
+      clearInterval(this.data.recordingTimer);
+      this.setData({
+        recordingTimer: null
+      });
+    }
     
     this.setData({
       isRecording: false
@@ -949,6 +1043,11 @@ Page({
    * 隐藏相机预览和控制栏，重置活动子步骤ID
    */
   exitCameraMode() {
+    // 如果正在录制，先停止录制
+    if (this.data.isRecording) {
+      this.stopRecording();
+    }
+    
     this.setData({
       showCameraControls: false,     // 隐藏相机控制栏
       showCameraPreview: false,      // 隐藏相机预览
@@ -961,9 +1060,19 @@ Page({
    * 在发生错误时重置相关状态，恢复UI
    */
   handleErrorRecovery() {
+    // 清理录制定时器
+    if (this.data.recordingTimer) {
+      clearInterval(this.data.recordingTimer);
+      this.setData({
+        recordingTimer: null,
+        recordingDuration: 0
+      });
+    }
+    
     // 重置录制状态
     this.setData({
       isRecording: false,
+      recordingDuration: 0,
       showCameraControls: false,
       showCameraPreview: false,
       activeSubStepId: null
