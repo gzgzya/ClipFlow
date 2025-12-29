@@ -515,6 +515,24 @@ Page({
             newTip = "建议：按要求拍摄";
             newSubStepDesc = "请按照拍摄要求进行拍摄";
         }
+      } else if (currentStep === 2) { // 内饰步骤
+        switch(subStepId) {
+          case 1: // 主驾视角 · 中控&方向盘
+            newTip = "建议：主驾视角拍摄中控与方向盘";
+            newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
+            break;
+          case 2: // 后排空间 & 地台
+            newTip = "建议：拍摄后排腿部空间与地台高度";
+            newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
+            break;
+          case 3: // 细节 & 配置展示
+            newTip = "建议：拍摄常用配置与细节设计";
+            newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
+            break;
+          default:
+            newTip = "建议：按要求拍摄";
+            newSubStepDesc = "请按照拍摄要求进行拍摄";
+        }
       } else if (currentStep === 3) { // 亮点步骤
         switch(subStepId) {
           case 1: // 动力系统展示
@@ -546,10 +564,33 @@ Page({
   // 点击预览区域的播放按钮
   onPlayMedia() {
     if (this.data.selectedMedia.url) {
+      // 确保视频文件路径正确
+      const url = this.data.selectedMedia.url;
       this.setData({
         'selectedMedia.shouldPlay': true
       });
+      
+      // 延迟一点时间确保UI更新后再播放
+      setTimeout(() => {
+        if (this.data.selectedMedia.type === 'video' && this.data.selectedMedia.shouldPlay) {
+          console.log('播放视频:', url);
+        }
+      }, 100);
     }
+  },
+  
+  // 视频播放事件
+  onVideoPlay(e) {
+    console.log('视频开始播放', e);
+  },
+  
+  // 视频错误事件
+  onVideoError(e) {
+    console.error('视频播放错误', e);
+    wx.showToast({
+      title: '视频加载失败',
+      icon: 'none'
+    });
   },
 
   /**

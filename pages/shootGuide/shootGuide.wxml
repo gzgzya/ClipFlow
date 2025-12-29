@@ -34,7 +34,7 @@
           <!-- 媒体预览但未播放状态 -->
           <block wx:if="{{!selectedMedia.shouldPlay}}">
             <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}" show-play-btn="{{true}}" controls="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}" show-center-play-btn="{{true}}" controls="{{false}}" show-play-btn="{{false}}" enable-play-gesture="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
             <!-- 播放按钮覆盖层 -->
             <view class="play-overlay" bindtap="onPlayMedia">
               <view class="play-button">
@@ -46,7 +46,7 @@
           <!-- 媒体播放状态 -->
           <block wx:else>
             <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay="{{true}}" controls="{{true}}" show-center-play-btn="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay="{{true}}" controls="{{true}}" show-center-play-btn="{{false}}" enable-play-gesture="{{true}}" object-fit="contain" bindplay="onVideoPlay" binderror="onVideoError"></video>
           </block>
         </view>
         
