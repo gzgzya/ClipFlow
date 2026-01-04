@@ -41,38 +41,152 @@ class StepManager {
    * 更新进度显示
    */
   updateProgress() {
-    const shootProgress = {...this.page.data.shootProgress};
-    
-    // 根据已完成步骤数量更新状态
-    shootProgress.steps.forEach((step, index) => {
-      if (index < shootProgress.completedSteps) {
-        step.status = STEP_STATUS.COMPLETED;
-      } else if (index === shootProgress.completedSteps) {
-        step.status = STEP_STATUS.ACTIVE;
-      } else {
-        step.status = STEP_STATUS.PENDING;
-      }
-    });
-    
-    // 同步更新步骤状态数组
-    const stepStatuses = shootProgress.steps.map(step => step.status);
-    
-    this.page.setData({
-      shootProgress,
-      stepStatuses
-    });
+    try {
+      const shootProgress = {...this.page.data.shootProgress};
+      
+      // 根据已完成步骤数量更新状态
+      shootProgress.steps.forEach((step, index) => {
+        if (index < shootProgress.completedSteps) {
+          step.status = STEP_STATUS.COMPLETED;
+        } else if (index === shootProgress.completedSteps) {
+          step.status = STEP_STATUS.ACTIVE;
+        } else {
+          step.status = STEP_STATUS.PENDING;
+        }
+      });
+      
+      // 同步更新步骤状态数组
+      const stepStatuses = shootProgress.steps.map(step => step.status);
+      
+      this.page.setData({
+        shootProgress,
+        stepStatuses
+      });
+    } catch (error) {
+      console.error('updateProgress方法执行失败:', error);
+      console.error('错误堆栈:', error.stack);
+      wx.showToast({
+        title: '更新进度失败',
+        icon: 'none'
+      });
+    }
   }
   
   /**
    * 初始化当前步骤
    */
   initCurrentStep() {
-    const currentStep = this.page.data.shootProgress.currentStep;
-    const subSteps = this.page.data.stepSubSteps[currentStep] || [];
-    
-    this.page.setData({
-      currentStepSubSteps: subSteps
-    });
+    try {
+      const currentStep = this.page.data.shootProgress.currentStep;
+      // 从全局缓存中获取已保存的子步骤数据
+      const app = getApp();
+      const cache = app.globalData.shootGuideMediaCache;
+      
+      // 获取当前步骤的子步骤列表
+      let subSteps = this.page.data.stepSubSteps[currentStep] || [];
+      
+      // 如果缓存中有数据，恢复已完成的子步骤状态
+      if (cache && cache[currentStep]) {
+        const cachedStepData = cache[currentStep];
+        subSteps = subSteps.map((subStep, index) => {
+          const cachedSubStep = cachedStepData[index + 1];
+          if (cachedSubStep) {
+            // 如果缓存中有该子步骤的数据，恢复其状态
+            return {
+              ...subStep,
+              mediaUrl: cachedSubStep.mediaUrl,
+              mediaType: cachedSubStep.mediaType,
+              status: cachedSubStep.status || (cachedSubStep.mediaUrl ? STEP_STATUS.COMPLETED : subStep.status)  // 优先使用缓存中的状态，如果缓存中没有状态但有媒体URL，则设置为完成状态
+            };
+          }
+          return subStep;
+        });
+      }
+      
+      this.page.setData({
+        currentStepSubSteps: subSteps
+      });
+      
+      // 同时更新进度显示
+      this.updateProgress();
+      
+      // 确保当前步骤标题等信息也被正确设置
+      if (subSteps.length > 0) {
+        const firstSubStep = subSteps[0];
+        let newTip = "";
+        let newSubStepTitle = `步骤 ${firstSubStep.id} / ${subSteps.length} · ${this.page.data.shootProgress.steps[currentStep-1].name} · ${firstSubStep.title}`;
+        let newSubStepDesc = "";
+        
+        if (currentStep === 1) { // 外观步骤
+          switch(firstSubStep.id) {
+            case 1: // 车头 45° 远景
+              newTip = "建议：车头 45° 远景，保证光线充足";
+              newSubStepDesc = "对准车头与前脸标志，稍微侧一点角度拍摄，\n尽量避免逆光，画面保持稳定。";
+              break;
+            case 2: // 侧面环绕拍摄
+              newTip = "建议：沿车身侧面缓慢移动，展示整体线条";
+              newSubStepDesc = "从车头向车尾缓慢平移，保持镜头高度一致，\n突出车身比例与轮毂。";
+              break;
+            case 3: // 车尾特写
+              newTip = "建议：近距离拍摄车尾，突出尾灯与设计细节";
+              newSubStepDesc = "靠近车尾拍摄，对准尾灯与品牌标识，\n画面尽量居中。";
+              break;
+            default:
+              newTip = "建议：按要求拍摄";
+              newSubStepDesc = "请按照拍摄要求进行拍摄";
+          }
+        } else if (currentStep === 2) { // 内饰步骤
+          switch(firstSubStep.id) {
+            case 1: // 主驾视角 · 中控&方向盘
+              newTip = "建议：主驾视角拍摄中控与方向盘";
+              newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
+              break;
+            case 2: // 后排空间 & 地台
+              newTip = "建议：拍摄后排腿部空间与地台高度";
+              newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
+              break;
+            case 3: // 细节 & 配置展示
+              newTip = "建议：拍摄常用配置与细节设计";
+              newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
+              break;
+            default:
+              newTip = "建议：按要求拍摄";
+              newSubStepDesc = "请按照拍摄要求进行拍摄";
+          }
+        } else if (currentStep === 3) { // 亮点步骤
+          switch(firstSubStep.id) {
+            case 1: // 动力系统展示
+              newTip = "建议：展示发动机舱或启动过程";
+              newSubStepDesc = "打开发动机舱或拍摄启动车辆过程，\n镜头保持固定，记录真实声音与细节。";
+              break;
+            case 2: // 科技配置演示
+              newTip = "建议：演示科技配置功能";
+              newSubStepDesc = "展示辅助驾驶与智能互联功能，\n确保功能正常运行并记录操作过程。";
+              break;
+            case 3: // 安全配置展示
+              newTip = "建议：展示安全配置或相关功能";
+              newSubStepDesc = "拍摄安全气囊标识、雷达、摄像头等，\n画面清晰即可，无需复杂运镜。";
+              break;
+            default:
+              newTip = "建议：按要求拍摄";
+              newSubStepDesc = "请按照拍摄要求进行拍摄";
+          }
+        }
+        
+        this.page.setData({
+          currentTip: newTip,
+          currentSubStepTitle: newSubStepTitle,
+          currentSubStepDesc: newSubStepDesc
+        });
+      }
+    } catch (error) {
+      console.error('initCurrentStep方法执行失败:', error);
+      console.error('错误堆栈:', error.stack);
+      wx.showToast({
+        title: '初始化步骤失败',
+        icon: 'none'
+      });
+    }
   }
   
   /**
@@ -84,6 +198,10 @@ class StepManager {
     if (step < 1 || step > this.page.data.shootProgress.totalSteps) {
       return;
     }
+    
+    // 在切换步骤前，先保存当前步骤的数据到缓存
+    // 使用页面实例调用saveShootDataToCache方法
+    this.page.saveShootDataToCache();
     
     const shootProgress = {...this.page.data.shootProgress};
     shootProgress.currentStep = step;
@@ -176,6 +294,10 @@ class StepManager {
     const allCompleted = updatedSubSteps.every(step => step.status === STEP_STATUS.COMPLETED);
     
     if (allCompleted) {
+      // 在切换步骤前，先保存当前步骤的数据到缓存
+      // 使用页面实例调用saveShootDataToCache方法
+      this.page.saveShootDataToCache();
+      
       // 更新主步骤进度
       const shootProgress = {...this.page.data.shootProgress};
       shootProgress.completedSteps = shootProgress.currentStep - 1;
@@ -321,14 +443,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // 创建步骤管理器实例
-    stepManager = new StepManager(this);
-    
-    // 初始化当前步骤的子步骤
-    stepManager.initCurrentStep();
-    
-    // 在页面加载时检查相机权限
-    this.checkCameraPermission();
+    console.log('shootGuide 页面加载', options);
+    try {
+      // 创建步骤管理器实例
+      stepManager = new StepManager(this);
+      
+      // 从全局缓存恢复拍摄数据（先恢复缓存数据）
+      this.restoreShootDataFromCache();
+      
+      // 初始化当前步骤的子步骤（这会根据当前步骤和缓存数据设置数据）
+      stepManager.initCurrentStep();
+      
+      // 在页面加载时检查相机权限
+      this.checkCameraPermission();
+      
+      console.log('shootGuide 页面初始化成功');
+    } catch (error) {
+      console.error('shootGuide 页面初始化失败:', error);
+      console.error('错误堆栈:', error.stack);
+      wx.showToast({
+        title: '页面初始化失败',
+        icon: 'none'
+      });
+    }
   },
   
   // 检查相机权限
@@ -362,7 +499,91 @@ Page({
       }
     });
   },
-
+  
+  // 从全局缓存恢复拍摄数据
+  restoreShootDataFromCache() {
+    try {
+      // 获取全局缓存
+      const app = getApp();
+      const cache = app.globalData.shootGuideMediaCache;
+      
+      // 如果有缓存数据，则恢复
+      if (cache && Object.keys(cache).length > 0) {
+        console.log('从全局缓存恢复拍摄数据:', cache);
+        
+        // 创建新的 stepSubSteps 对象副本
+        const newStepSubSteps = JSON.parse(JSON.stringify(this.data.stepSubSteps));
+        
+        // 更新所有步骤的子步骤数据
+        for (let stepIndex in newStepSubSteps) {
+          const cachedStepData = cache[stepIndex];
+          if (cachedStepData) {
+            for (let subStepIndex in cachedStepData) {
+              const cachedSubStep = cachedStepData[subStepIndex];
+              if (cachedSubStep && newStepSubSteps[stepIndex] && newStepSubSteps[stepIndex][subStepIndex - 1]) {
+                newStepSubSteps[stepIndex][subStepIndex - 1].mediaUrl = cachedSubStep.mediaUrl;
+                newStepSubSteps[stepIndex][subStepIndex - 1].mediaType = cachedSubStep.mediaType;
+                // 优先使用缓存中的状态，如果缓存中没有状态但有媒体URL，则设置为完成状态
+                newStepSubSteps[stepIndex][subStepIndex - 1].status = cachedSubStep.status || (cachedSubStep.mediaUrl ? STEP_STATUS.COMPLETED : newStepSubSteps[stepIndex][subStepIndex - 1].status);
+              }
+            }
+          }
+        }
+        
+        // 更新 stepSubSteps 数据
+        this.setData({
+          stepSubSteps: newStepSubSteps
+        });
+        
+        // 重新设置当前步骤的子步骤
+        const currentStep = this.data.shootProgress.currentStep;
+        const currentSubSteps = newStepSubSteps[currentStep] || [];
+        this.setData({
+          currentStepSubSteps: [...currentSubSteps]
+        });
+        
+        // 更新进度
+        stepManager.updateProgress();
+      }
+    } catch (error) {
+      console.error('从全局缓存恢复拍摄数据失败:', error);
+      console.error('错误堆栈:', error.stack);
+      wx.showToast({
+        title: '恢复缓存数据失败',
+        icon: 'none'
+      });
+    }
+  },
+  
+  // 保存拍摄数据到全局缓存
+  saveShootDataToCache() {
+    try {
+      const app = getApp();
+      
+      // 构建缓存数据结构
+      const cache = {};
+      
+      for (let stepIndex in this.data.stepSubSteps) {
+        cache[stepIndex] = {};
+        const subSteps = this.data.stepSubSteps[stepIndex];
+        
+        subSteps.forEach((subStep, index) => {
+          cache[stepIndex][index + 1] = {
+            mediaUrl: subStep.mediaUrl,
+            mediaType: subStep.mediaType,
+            status: subStep.status  // 保存子步骤状态
+          };
+        });
+      }
+      
+      // 保存到全局缓存
+      app.globalData.shootGuideMediaCache = cache;
+      console.log('保存拍摄数据到全局缓存:', cache);
+    } catch (error) {
+      console.error('保存拍摄数据到全局缓存失败:', error);
+      console.error('错误堆栈:', error.stack);
+    }
+  },
 
 
   /**
@@ -376,8 +597,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // 页面显示时更新数据
-    stepManager.updateProgress();
+    console.log('shootGuide 页面显示');
+    try {
+      // 页面显示时更新数据
+      stepManager.updateProgress();
+      
+      // 从全局缓存恢复拍摄数据（以防在其他页面进行了操作）
+      this.restoreShootDataFromCache();
+      
+      console.log('shootGuide 页面显示更新完成');
+    } catch (error) {
+      console.error('shootGuide 页面显示更新失败:', error);
+      console.error('错误堆栈:', error.stack);
+      wx.showToast({
+        title: '页面显示失败',
+        icon: 'none'
+      });
+    }
   },
 
   /**
@@ -388,12 +624,18 @@ Page({
     if (this.data.isRecording) {
       this.stopRecording();
     }
+    
+    // 保存拍摄数据到全局缓存
+    this.saveShootDataToCache();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
+    // 保存拍摄数据到全局缓存
+    this.saveShootDataToCache();
+    
     // 清理定时器
     if (this.data.longPressTimer) {
       clearTimeout(this.data.longPressTimer);
@@ -464,24 +706,6 @@ Page({
     console.log('查看拍摄规范');
   },
 
-  // 重拍本段事件
-  onRetake() {
-    console.log('重拍当前片段');
-    wx.showToast({
-      title: '重新拍摄当前片段',
-      icon: 'none'
-    });
-    
-    // 重置媒体选择状态
-    this.setData({
-      selectedMedia: {
-        url: "",
-        type: MEDIA_TYPE.IMAGE,
-        shouldPlay: false
-      },
-      showCameraPreview: true
-    });
-  },
 
   // 查看已完成的媒体内容（点击step-info区域）
   onSelectMedia(e) {
@@ -494,14 +718,14 @@ Page({
         selectedMedia: {
           url: subStep.mediaUrl,
           type: subStep.mediaType || MEDIA_TYPE.IMAGE,
-          shouldPlay: false // 默认不播放，需要点击播放按钮
+          shouldPlay: subStep.mediaType === MEDIA_TYPE.VIDEO ? true : false // 视频默认尝试播放，图片则不需要
         },
         showCameraPreview: false, // 确保不显示摄像头预览
         showCameraControls: false // 隐藏相机控制栏
       });
       
       wx.showToast({
-        title: '已选中媒体内容，请点击播放按钮',
+        title: subStep.mediaType === MEDIA_TYPE.VIDEO ? '正在播放视频...' : '已选中图片',
         icon: 'none'
       });
     } else if (subStep) {
@@ -577,19 +801,14 @@ Page({
 
   // 点击预览区域的播放按钮
   onPlayMedia() {
-    if (this.data.selectedMedia.url) {
+    if (this.data.selectedMedia.url && this.data.selectedMedia.type === 'video') {
       // 确保视频文件路径正确
       const url = this.data.selectedMedia.url;
       this.setData({
         'selectedMedia.shouldPlay': true
       });
       
-      // 延迟一点时间确保UI更新后再播放
-      setTimeout(() => {
-        if (this.data.selectedMedia.type === 'video' && this.data.selectedMedia.shouldPlay) {
-          console.log('播放视频:', url);
-        }
-      }, 100);
+      console.log('播放视频:', url);
     }
   },
   
@@ -666,42 +885,6 @@ Page({
         case 3: // 车尾特写
           newTip = "建议：近距离拍摄车尾，突出尾灯与设计细节";
           newSubStepDesc = "靠近车尾拍摄，对准尾灯与品牌标识，画面尽量居中。";
-          break;
-        default:
-          newTip = "建议：按要求拍摄";
-          newSubStepDesc = "请按照拍摄要求进行拍摄";
-      }
-    } else if (currentStep === 2) { // 内饰步骤
-      switch(subStepId) {
-        case 1: // 主驾视角 · 中控&方向盘
-          newTip = "建议：主驾视角拍摄中控与方向盘";
-          newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
-          break;
-        case 2: // 后排空间 & 地台
-          newTip = "建议：拍摄后排腿部空间与地台高度";
-          newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
-          break;
-        case 3: // 细节 & 配置展示
-          newTip = "建议：拍摄常用配置与细节设计";
-          newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
-          break;
-        default:
-          newTip = "建议：按要求拍摄";
-          newSubStepDesc = "请按照拍摄要求进行拍摄";
-      }
-    } else if (currentStep === 2) { // 内饰步骤
-      switch(subStepId) {
-        case 1: // 主驾视角 · 中控&方向盘
-          newTip = "建议：主驾视角拍摄中控与方向盘";
-          newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
-          break;
-        case 2: // 后排空间 & 地台
-          newTip = "建议：拍摄后排腿部空间与地台高度";
-          newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
-          break;
-        case 3: // 细节 & 配置展示
-          newTip = "建议：拍摄常用配置与细节设计";
-          newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
           break;
         default:
           newTip = "建议：按要求拍摄";
@@ -1099,6 +1282,7 @@ Page({
    */
   updateSubStepWithMedia(mediaData) {
     const subStepId = this.data.activeSubStepId;
+    const currentStep = this.data.shootProgress.currentStep;
     if (subStepId) {
       // 更新指定子步骤的状态和媒体信息
       const updatedSubSteps = this.data.currentStepSubSteps.map(step => {
@@ -1113,10 +1297,18 @@ Page({
         return step;
       });
       
+      // 更新 stepSubSteps 中对应步骤的数据
+      const updatedStepSubSteps = { ...this.data.stepSubSteps };
+      updatedStepSubSteps[currentStep] = updatedSubSteps;
+      
       // 更新页面数据
       this.setData({
-        currentStepSubSteps: updatedSubSteps
+        currentStepSubSteps: updatedSubSteps,
+        stepSubSteps: updatedStepSubSteps
       });
+      
+      // 同时更新全局缓存
+      this.saveShootDataToCache();
     }
   },
   
@@ -1178,6 +1370,37 @@ Page({
   },
   
   /**
+   * 保存拍摄数据到全局缓存（供StepManager调用）
+   */
+  saveShootDataToCache() {
+    try {
+      const app = getApp();
+      
+      // 构建缓存数据结构
+      const cache = {};
+      
+      for (let stepIndex in this.data.stepSubSteps) {
+        cache[stepIndex] = {};
+        const subSteps = this.data.stepSubSteps[stepIndex];
+        
+        subSteps.forEach((subStep, index) => {
+          cache[stepIndex][index + 1] = {
+            mediaUrl: subStep.mediaUrl,
+            mediaType: subStep.mediaType,
+            status: subStep.status  // 保存子步骤状态
+          };
+        });
+      }
+      
+      // 保存到全局缓存
+      app.globalData.shootGuideMediaCache = cache;
+      console.log('保存拍摄数据到全局缓存:', cache);
+    } catch (error) {
+      console.error('保存拍摄数据到全局缓存失败:', error);
+    }
+  },
+  
+  /**
    * 触摸开始事件 - 记录起始位置
    */
   onTouchStart(e) {
@@ -1187,56 +1410,64 @@ Page({
       touchStartY: touch.clientY,
       isSwiping: false
     });
+      
+    // 阻止默认事件，防止scroll-view滚动
+    e.preventDefault && e.preventDefault();
+    e.stopPropagation && e.stopPropagation();
   },
-  
+    
   /**
    * 触摸移动事件 - 判断是否为滑动操作
    */
   onTouchMove(e) {
-    // 如果已经在滑动中，不再处理
-    if (this.data.isSwiping) return;
-    
     const touch = e.touches[0];
     const deltaX = touch.clientX - this.data.touchStartX;
     const deltaY = touch.clientY - this.data.touchStartY;
-    
-    // 判断是否为水平滑动（水平位移大于垂直位移且超过阈值）
+      
+    // 如果水平滑动距离超过垂直滑动距离且超过阈值，则认为是水平滑动
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
       this.setData({
         isSwiping: true
       });
+        
+      // 阻止默认事件，防止scroll-view滚动
+      e.preventDefault && e.preventDefault();
+      e.stopPropagation && e.stopPropagation();
+    } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 10) {
+      // 如果是垂直滑动，不阻止scroll-view滚动
+      // 不设置isSwiping，让scroll-view正常处理垂直滚动
     }
   },
-  
+    
   /**
    * 触摸结束事件 - 处理滑动切换
    */
   onTouchEnd(e) {
-    // 如果不是滑动操作，不处理
-    if (!this.data.isSwiping) return;
-    
-    const touch = e.changedTouches[0];
-    const deltaX = touch.clientX - this.data.touchStartX;
-    
-    // 滑动距离需要超过阈值才触发切换
-    if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
-      const currentStep = this.data.shootProgress.currentStep;
+    // 如果是滑动操作，处理切换
+    if (this.data.isSwiping) {
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - this.data.touchStartX;
       
-      // 向左滑动（deltaX为负）切换到下一步
-      if (deltaX < 0 && currentStep < this.data.shootProgress.totalSteps) {
-        stepManager.switchToStep(currentStep + 1);
-        wx.showToast({
-          title: `切换到${this.data.shootProgress.steps[currentStep].name}`,
-          icon: 'none'
-        });
-      } 
-      // 向右滑动（deltaX为正）切换到上一步
-      else if (deltaX > 0 && currentStep > 1) {
-        stepManager.switchToStep(currentStep - 1);
-        wx.showToast({
-          title: `切换到${this.data.shootProgress.steps[currentStep-2].name}`,
-          icon: 'none'
-        });
+      // 滑动距离需要超过阈值才触发切换
+      if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+        const currentStep = this.data.shootProgress.currentStep;
+        
+        // 向左滑动（deltaX为负）切换到下一步
+        if (deltaX < 0 && currentStep < this.data.shootProgress.totalSteps) {
+          stepManager.switchToStep(currentStep + 1);
+          wx.showToast({
+            title: `切换到${this.data.shootProgress.steps[currentStep].name}`,
+            icon: 'none'
+          });
+        } 
+        // 向右滑动（deltaX为正）切换到上一步
+        else if (deltaX > 0 && currentStep > 1) {
+          stepManager.switchToStep(currentStep - 1);
+          wx.showToast({
+            title: `切换到${this.data.shootProgress.steps[currentStep-2].name}`,
+            icon: 'none'
+          });
+        }
       }
     }
     
@@ -1244,5 +1475,21 @@ Page({
     this.setData({
       isSwiping: false
     });
+  },
+  
+  // 为scroll-view添加的触摸事件处理函数，以解决滑动冲突
+  onScrollTouchStart(e) {
+    // 将事件传递给主触摸处理函数
+    this.onTouchStart(e);
+  },
+  
+  onScrollTouchMove(e) {
+    // 将事件传递给主触摸处理函数
+    this.onTouchMove(e);
+  },
+  
+  onScrollTouchEnd(e) {
+    // 将事件传递给主触摸处理函数
+    this.onTouchEnd(e);
   }
 })

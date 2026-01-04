@@ -1,10 +1,14 @@
 <!-- 标准化拍摄页面 -->
 <view class="container safe-area-bottom">
   <!-- 内容区域 -->
-  <scroll-view class="content safe-area-padding" scroll-y="true" 
-               bindtouchstart="onTouchStart" 
-               bindtouchmove="onTouchMove" 
-               bindtouchend="onTouchEnd">
+  <scroll-view class="content safe-area-padding" scroll-y="true" enable-back-to-top="false" show-scrollbar="{{false}}"
+               bindtouchstart="onScrollTouchStart" bindtouchmove="onScrollTouchMove" bindtouchend="onScrollTouchEnd">
+    <!-- 滑动切换区域覆盖层 -->
+    <view class="swipe-overlay"
+         bindtouchstart="onTouchStart" 
+         bindtouchmove="onTouchMove" 
+         bindtouchend="onTouchEnd">
+    </view>
     <!-- ==================== 拍摄进度信息行 ==================== -->
     <view class="progress-header">
       <text class="header-text">拍摄流程</text>
@@ -34,7 +38,7 @@
           <!-- 媒体预览但未播放状态 -->
           <block wx:if="{{!selectedMedia.shouldPlay}}">
             <image wx:if="{{selectedMedia.type === 'image'}}" class="media-preview" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-preview" src="{{selectedMedia.url}}" show-center-play-btn="{{true}}" controls="{{false}}" show-play-btn="{{false}}" enable-play-gesture="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player media-preview" src="{{selectedMedia.url}}" show-center-play-btn="{{false}}" controls="{{false}}" show-play-btn="{{false}}" enable-play-gesture="{{false}}" bindplay="onVideoPlay" binderror="onVideoError"></video>
             <!-- 播放按钮覆盖层 -->
             <view class="play-overlay" bindtap="onPlayMedia">
               <view class="play-button">
@@ -42,11 +46,11 @@
               </view>
             </view>
           </block>
-          
+              
           <!-- 媒体播放状态 -->
           <block wx:else>
             <image wx:if="{{selectedMedia.type === 'image'}}" class="media-player" src="{{selectedMedia.url}}" mode="aspectFill"></image>
-            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay="{{true}}" controls="{{true}}" show-center-play-btn="{{false}}" enable-play-gesture="{{true}}" object-fit="contain" bindplay="onVideoPlay" binderror="onVideoError"></video>
+            <video wx:if="{{selectedMedia.type === 'video'}}" class="media-player" src="{{selectedMedia.url}}" autoplay="{{selectedMedia.shouldPlay}}" controls="{{true}}" show-center-play-btn="{{true}}" enable-play-gesture="{{true}}" object-fit="contain" bindplay="onVideoPlay" binderror="onVideoError"></video>
           </block>
         </view>
         
@@ -66,10 +70,6 @@
 
         <!-- 底部进度与重拍 -->
         <view class="preview-footer">
-          <view class="fragment-info">
-            <text class="fragment-text">当前片段：{{currentFragmentTime}}s / 建议 {{recommendedFragmentTime}}s</text>
-          </view>
-          <button class="retake-button" bindtap="onRetake">重拍本段</button>
         </view>
       </view>
     </view>
@@ -95,7 +95,7 @@
                   <text class="desc-subtitle">{{item.subtitle}}</text>
                 </view>
               </view>
-              <button wx:if="{{item.status !== 'completed'}}" class="step-action {{item.status}}" bindtap="onShoot" data-substep-id="{{item.id}}">{{item.status === 'completed' ? '已完成' : '去拍摄'}}</button>
+              <button wx:if="{{item.status !== 'completed'}}" class="step-action {{item.status}}" bindtap="onShoot" data-substep-id="{{item.id}}">去拍摄</button>
               <text wx:else class="step-completed">已完成</text>
             </view>
           </view>
