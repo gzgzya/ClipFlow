@@ -266,21 +266,29 @@ Page({
 
   // 车辆卡片操作按钮点击事件
   onVehicleActionTap(e) {
+    console.log('车辆操作点击事件:', e);
     const vehicle = e.detail;
+    console.log('点击的车辆:', vehicle);
     const vehicleData = this.data.vehicleList.find(item => item.id === vehicle.id);
+    console.log('找到的车辆数据:', vehicleData);
     
     if (vehicleData) {
+      console.log('车辆状态:', vehicleData.status);
       if (vehicleData.status === '在售') {
         // 继续拍摄 - 跳转到标准化拍摄引导页面
+        console.log('准备跳转到拍摄页面');
         wx.navigateTo({
           url: '/pages/shootGuide/shootGuide'
         });
       } else {
         // 查看记录 - 跳转到成片中心页面
+        console.log('准备跳转到成片页面');
         wx.switchTab({
           url: '/pages/clips/clips'
         });
       }
+    } else {
+      console.error('未找到对应车辆数据:', vehicle);
     }
   }
 });

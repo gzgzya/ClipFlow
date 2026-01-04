@@ -26,7 +26,7 @@
         
         <!-- 摄像头预览模式 -->
         <view wx:if="{{showCameraPreview}}" class="preview-mode camera-preview">
-          <camera class="camera-preview" device-position="{{cameraPosition}}"></camera>
+          <camera class="camera-preview" device-position="{{cameraPosition}}" binderror="onCameraError"></camera>
         </view>
         
         <!-- 媒体预览模式 -->

@@ -327,8 +327,40 @@ Page({
     // 初始化当前步骤的子步骤
     stepManager.initCurrentStep();
     
+    // 在页面加载时检查相机权限
+    this.checkCameraPermission();
+  },
+  
+  // 检查相机权限
+  checkCameraPermission() {
     // 创建相机上下文
     this.cameraContext = wx.createCameraContext();
+    
+    // 尝试触发相机授权
+    wx.getSetting({
+      success: (res) => {
+        if (!res.authSetting['scope.camera']) {
+          // 如果没有相机权限，请求授权
+          wx.authorize({
+            scope: 'scope.camera',
+            success: () => {
+              console.log('相机权限授权成功');
+            },
+            fail: () => {
+              console.log('用户拒绝了相机权限');
+              wx.showModal({
+                title: '提示',
+                content: '需要相机权限才能进行拍摄，请在设置中开启相机权限',
+                showCancel: false
+              });
+            }
+          });
+        }
+      },
+      fail: () => {
+        console.error('获取设置失败');
+      }
+    });
   },
 
 
@@ -515,24 +547,6 @@ Page({
             newTip = "建议：按要求拍摄";
             newSubStepDesc = "请按照拍摄要求进行拍摄";
         }
-      } else if (currentStep === 2) { // 内饰步骤
-        switch(subStepId) {
-          case 1: // 主驾视角 · 中控&方向盘
-            newTip = "建议：主驾视角拍摄中控与方向盘";
-            newSubStepDesc = "坐在驾驶位，对准方向盘与中控屏，\n轻微左右平移，避免快速晃动。";
-            break;
-          case 2: // 后排空间 & 地台
-            newTip = "建议：拍摄后排腿部空间与地台高度";
-            newSubStepDesc = "镜头放在后排中间位置，对准座椅与腿部空间，\n展示真实乘坐感受。";
-            break;
-          case 3: // 细节 & 配置展示
-            newTip = "建议：拍摄常用配置与细节设计";
-            newSubStepDesc = "选择方向盘、座椅、音响或氛围灯，\n逐个特写拍摄，每个画面保持 2–3 秒。";
-            break;
-          default:
-            newTip = "建议：按要求拍摄";
-            newSubStepDesc = "请按照拍摄要求进行拍摄";
-        }
       } else if (currentStep === 3) { // 亮点步骤
         switch(subStepId) {
           case 1: // 动力系统展示
@@ -591,6 +605,18 @@ Page({
       title: '视频加载失败',
       icon: 'none'
     });
+  },
+  
+  // 相机错误事件
+  onCameraError(e) {
+    console.error('相机初始化错误', e);
+    wx.showToast({
+      title: '相机初始化失败',
+      icon: 'none'
+    });
+    
+    // 退出相机模式，避免页面卡死
+    this.exitCameraMode();
   },
 
   /**
@@ -853,44 +879,6 @@ Page({
           }
         });
         
-        wx.showToast({
-          title: '拍照完成',
-          icon: 'success'
-        });
-        
-        // 统一媒体数据结构
-        const mediaData = {
-          url: res.tempImagePath,
-          type: MEDIA_TYPE.IMAGE,
-          shouldPlay: false
-        };
-        
-        // 保存媒体并完成拍摄流程
-        this.saveMediaAndProcess(mediaData);
-      },
-      fail: (err) => {
-        console.error('拍照失败', err);
-        wx.showToast({
-          title: '拍照失败',
-          icon: 'none'
-        });
-        
-        // 错误恢复处理
-        this.handleErrorRecovery();
-      }
-    });
-  },
-  
-  // 媒体输入驱动流程
-  // 统一处理拍照、录制、相册选择三种媒体输入方式
-  
-    console.log('拍照');
-    
-    // 拍照
-    this.cameraContext.takePhoto({
-      quality: 'high',
-      success: (res) => {
-        console.log('拍照成功', res);
         wx.showToast({
           title: '拍照完成',
           icon: 'success'
