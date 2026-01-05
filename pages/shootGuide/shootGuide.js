@@ -445,6 +445,9 @@ Page({
   onLoad(options) {
     console.log('shootGuide 页面加载', options);
     try {
+      // 创建相机上下文
+      this.cameraContext = wx.createCameraContext();
+      
       // 创建步骤管理器实例
       stepManager = new StepManager(this);
       
